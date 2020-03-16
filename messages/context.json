@@ -1,0 +1,8 @@
+{
+  "editor.base-store-component.title": "Title of IO Base App component",
+  "editor.base-store-component.description": "Description of IO Base App component",
+  "editor.base-store-component.title.title": "Title of title property",
+  "editor.base-store-component.title.description": "Description of title property",
+  "base.title": "Base title message to be shown when title is not provided via CMS",
+  "base.change-value": "Text to be shown beside input component typed value"
+}
