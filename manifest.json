@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
-  "name": "base-store-component",
-  "version": "0.2.2",
+  "name": "condition-layout",
+  "version": "0.0.1",
   "title": "IO Base Component",
   "description": "IO Base component",
   "defaultLocale": "pt-BR",
@@ -16,7 +16,8 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
-    "vtex.styleguide": "9.x"
+    "vtex.styleguide": "9.x",
+    "vtex.product-context": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

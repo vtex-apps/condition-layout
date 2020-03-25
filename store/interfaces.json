@@ -1,5 +1,9 @@
 {
-  "base-store-component": {
-    "component": "Example"
+  "condition-layout": {
+    "component": "Noop"
+  },
+  "condition-layout.product": {
+    "component": "Product",
+    "composition": "children"
   }
 }
