@@ -1,9 +1,9 @@
-type GenericSubjects = {
-  [T: string]: GenericSubject
-}
-
 type GenericSubject = {
   type: string
+}
+
+type GenericSubjects = {
+  [T: string]: GenericSubject
 }
 
 interface ValueSubject extends GenericSubject {
@@ -17,36 +17,29 @@ interface ArraySubject extends GenericSubject {
 
 type Matching = 'any' | 'all' | 'none'
 
-type Conditions<Subjects> = Condition<Subjects, keyof Subjects>[]
-
 type Condition<Subjects = GenericSubjects> =
   | ValueCondition<Subjects>
   | ArrayCondition<Subjects>
+
+type Conditions<Subjects> = Array<Condition<Subjects>>
 
 type ValueSubjectKeys<Subjects> = FilterKeys<Subjects, ValueSubject>
 type ArraySubjectKeys<Subjects> = FilterKeys<Subjects, ArraySubject>
 
 type ConditionObject = string | number | null | undefined
 
-interface ValueCondition<Subjects = null> {
-  subject: Subjects extends null
-    ? string
-    : ValueSubjectKeys<Subjects>
+interface ValueCondition {
+  subject: string
   verb: 'is' | 'is-not'
   object: ConditionObject
 }
 
-interface ArrayCondition<Subjects = null> {
-  subject: Subjects extends null
-    ? string
-    : ArraySubjectKeys<Subjects>
+interface ArrayCondition {
+  subject: string
   verb: 'contains' | 'does-not-contain'
   object: ConditionObject
 }
 
-// TODO: properly type Values (this type is not correct and can be removed)
-type Values<Subjects> = {
-  [P in keyof Subjects]: Subjects[P] extends ValueSubject
-    ? string | number
-    : { id: string }[]
+type Values<T> = {
+  [P in keyof T]: string | number | Array<{ [key: string]: unknown }>
 }

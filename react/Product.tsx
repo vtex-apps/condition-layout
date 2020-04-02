@@ -1,30 +1,31 @@
-import React, { FC, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
-import { testConditions } from './modules/conditions'
-import pick from 'ramda/es/pick'
+// import pick from 'ramda/es/pick'
 
-const SUBJECTS = { 
+import { testConditions } from './modules/conditions'
+
+const SUBJECTS = {
   productId: {
-    type: 'value'
+    type: 'value',
   },
   categoryId: {
-    type: 'value'
+    type: 'value',
   },
   brandId: {
-    type: 'value'
+    type: 'value',
   },
   productClusters: {
     type: 'array',
-    id: 'id'
+    id: 'id',
   },
   categoryTree: {
     type: 'array',
-    id: 'id'
+    id: 'id',
   },
   selectedItemId: {
-    type: 'value'
-  }
- } as const
+    type: 'value',
+  },
+} as const
 
 type Subjects = typeof SUBJECTS
 
@@ -34,7 +35,7 @@ interface Props {
 }
 
 const Product: FC<Props> = ({ children, conditions, matching = 'all' }) => {
-  const { product , selectedItem} = useProduct()
+  const { product, selectedItem } = useProduct() as any
 
   const values = {
     productId: product.productId,
@@ -45,7 +46,18 @@ const Product: FC<Props> = ({ children, conditions, matching = 'all' }) => {
     selectedItemId: selectedItem.itemId,
   }
 
-  console.log({ values })
+  const matches = useMemo(() => {
+    if (!conditions) return null
+
+    // eslint-disable-next-line no-shadow
+    const { matches } = testConditions({
+      availableSubjects: SUBJECTS,
+      conditions,
+      matching,
+      values,
+    })
+    return matches
+  }, [conditions, matching, values])
 
   if (!conditions) {
     // TODO: Handle error better
@@ -53,26 +65,11 @@ const Product: FC<Props> = ({ children, conditions, matching = 'all' }) => {
     return null
   }
 
-  const matches = useMemo(() => {
-    const { matches } = testConditions(
-      SUBJECTS,
-      conditions,
-      matching,
-      values
-    )
-    return matches
-  }, [
-    SUBJECTS,
-    conditions,
-    matching,
-    values
-  ])
-
   if (!matches) {
-    return <div>nao deu match</div>
+    return null
   }
 
-  return <div className="ba b--red">oi{children}</div>
+  return (children as any) ?? null
 }
 
 export default Product

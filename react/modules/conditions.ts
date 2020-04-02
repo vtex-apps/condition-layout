@@ -1,75 +1,137 @@
-const isValueCondition = <T extends GenericSubjects>(
-  subjects: T,
-  condition: Condition<T>
-): condition is ValueCondition<T> =>
-  subjects[condition.subject]?.type === 'value'
+const VERB_OPERATORS: Record<string, Record<string, 1>> = {
+  value: {
+    is: 1,
+    'is-not': 1,
+  },
+  array: {
+    contains: 1,
+    'does-not-contain': 1,
+  },
+}
 
-const isArrayCondition = <T extends GenericSubjects>(
-  subjects: T,
-  condition: Condition<T>
-): condition is ArrayCondition<T> =>
-  subjects[condition.subject]?.type === 'array'
+const isValueCondition = (subject: GenericSubject): subject is ValueSubject =>
+  subject?.type === 'value'
 
-const validateConditions = <T>(
-  availableSubjects: T,
-  conditions: Conditions<T>
-) => conditions.every(condition => condition.subject in availableSubjects)
+const isArrayCondition = (subject: GenericSubject): subject is ArraySubject =>
+  subject?.type === 'array'
 
-const testValueCondition = <T extends GenericSubjects>(values: any, condition: ValueCondition<T>) => {
+const testValueCondition = (
+  values: Record<string, string | number>,
+  condition: ValueCondition
+) => {
   const value = values[condition.subject]
   const matches = String(value) === String(condition.object)
+
   // TODO: error messages on wrong verbs
   return (condition.verb === 'is' || !condition.verb) === matches
 }
 
-const testArrayCondition = <T extends GenericSubjects>(values: Values<T>, condition: ArrayCondition<T>) => {
-  // TODO prevent potential errors here w invalid subject
-  type A = typeof values['productClusters']
-  const ids = values[condition.subject].map((item: any) => String(item.id))
+const testArrayCondition = (
+  subject: ArraySubject,
+  values: Record<string, any[]>,
+  condition: ArrayCondition
+) => {
+  // TODO: prevent potential errors here w invalid subject
+
+  const subjectId = subject.id ?? 'id'
+  const ids = values[condition.subject].map(item => String(item[subjectId]))
   const matches = ids.includes(String(condition.object))
+
   // TODO: error messages on wrong verbs
   return (condition.verb === 'contains' || !condition.verb) === matches
 }
 
-const testCondition = <T extends GenericSubjects>(
-  availableSubjects: T,
-  values: any,
+export const testCondition = <T extends GenericSubjects>({
+  availableSubjects,
+  values,
+  condition,
+}: {
+  availableSubjects: T
+  values: Record<string, any>
   condition: Condition<T>
-) => {
-  if (isValueCondition(availableSubjects, condition)) {
-    testValueCondition(values, condition)
+}) => {
+  const subject = availableSubjects[condition.subject]
+
+  if (isValueCondition(subject)) {
+    return testValueCondition(values, condition)
   }
 
-  if (isArrayCondition(availableSubjects, condition)) {
-    testArrayCondition(values, condition)
+  if (isArrayCondition(subject)) {
+    return testArrayCondition(subject, values, condition)
   }
 
-  // TODO add error
+  // TODO: add error
   return false
 }
 
-export const testConditions = <T extends GenericSubjects>(
+export const validateConditions = <T extends GenericSubjects>(
   availableSubjects: T,
-  conditions: Conditions<T>,
-  matching: Matching,
-  values: any
+  conditions: Conditions<T>
 ) => {
-  // TODO: validate conditions
+  const valid: Array<Condition<T>> = []
+  const invalid: Array<Condition<T>> = []
 
-  const results = conditions.map(condition =>
-    testCondition(availableSubjects, values, condition)
+  conditions.forEach(condition => {
+    const subject = availableSubjects[condition.subject]
+
+    // nullish verb defaults to the default subject type operator (is/contains)
+    const isOperatorValid =
+      condition.verb == null || condition.verb in VERB_OPERATORS[subject.type]
+
+    const isValid = subject && isOperatorValid
+
+    if (isValid) {
+      valid.push(condition)
+    } else {
+      invalid.push(condition)
+    }
+  })
+
+  return { valid, invalid }
+}
+
+export const testConditions = <T extends GenericSubjects>({
+  availableSubjects,
+  conditions,
+  matching,
+  values,
+}: {
+  availableSubjects: T
+  conditions: Conditions<T>
+  matching: Matching
+  values: Values<T>
+}) => {
+  const {
+    valid: validConditions,
+    invalid: invalidConditions,
+  } = validateConditions(availableSubjects, conditions)
+
+  if (invalidConditions.length > 0) {
+    console.error(
+      `[condition-layout] One or more invalid conditions were provided: ${invalidConditions
+        .map(({ subject }) => `"${subject}"`)
+        .join(', ')}`
+    )
+    return { matches: null }
+  }
+
+  const results = validConditions.map(condition =>
+    testCondition({ availableSubjects, values, condition })
   )
 
-  let matches = results.reduce((acc: boolean | null, condition) => {
+  let matches = results.reduce((acc: boolean | null, conditionMatch) => {
     if (matching === 'all') {
-      return (acc ?? true) && condition
+      return (acc ?? true) && conditionMatch
     }
+
     if (matching === 'any') {
-      return (acc ?? false) || condition
+      return (acc ?? false) || conditionMatch
     }
+
     if (matching === 'none') {
-      return (acc ?? true) && !condition
+      return (acc ?? true) && !conditionMatch
     }
+
     return null
   }, null)
 
