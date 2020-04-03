@@ -1,5 +1,10 @@
 import { createContext, useContext } from 'react'
 
+type ConditionContextValue = {
+  subjects: GenericSubjects
+  values: Values
+}
+
 export const ConditionContext = createContext<ConditionContextValue>(
   {} as ConditionContextValue
 )

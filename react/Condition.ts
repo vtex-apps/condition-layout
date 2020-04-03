@@ -4,7 +4,7 @@ import { testConditions } from './modules/conditions'
 import { useCondition } from './ConditionContext'
 
 interface Props {
-  conditions?: Conditions<GenericSubjects>
+  conditions?: Conditions
   matching: MatchType
 }
 

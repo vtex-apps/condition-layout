@@ -41,7 +41,7 @@ describe('validate condition', () => {
 describe('test condition', () => {
   it('returns true if value condition matches', () => {
     const result = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {
         productId: 'product-id-value',
       },
@@ -53,7 +53,7 @@ describe('test condition', () => {
     })
 
     const negatedResult = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {
         productId: 'product-id-value',
       },
@@ -70,7 +70,7 @@ describe('test condition', () => {
 
   it('returns false if value not found', () => {
     const result = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {},
       condition: {
         subject: 'potato' as never,
@@ -84,7 +84,7 @@ describe('test condition', () => {
 
   it('returns true if array condition matches', () => {
     const result = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {
         productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
       },
@@ -95,7 +95,7 @@ describe('test condition', () => {
       },
     })
     const negatedResult = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {
         productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
       },
@@ -112,7 +112,7 @@ describe('test condition', () => {
 
   it("supports custom identifier prop other than 'id'", () => {
     const result = testCondition({
-      availableSubjects: SUBJECTS,
+      subjects: SUBJECTS,
       values: {
         customId: [
           { identifier: 'id1' },

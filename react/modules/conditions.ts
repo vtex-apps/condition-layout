@@ -48,7 +48,7 @@ export const testCondition = <T extends GenericSubjects>({
 }: {
   subjects: T
   values: Record<string, any>
-  condition: Condition<T>
+  condition: Condition
 }) => {
   const subject = subjects[condition.subject]
 
@@ -66,19 +66,19 @@ export const testCondition = <T extends GenericSubjects>({
 
 export const validateConditions = <T extends GenericSubjects>(
   subjects: T,
-  conditions: Conditions<T>
+  conditions: Conditions
 ) => {
-  const valid: Array<Condition<T>> = []
-  const invalid: Array<Condition<T>> = []
+  const valid: Condition[] = []
+  const invalid: Condition[] = []
 
   conditions.forEach(condition => {
     const subject = subjects[condition.subject]
 
     // nullish verb defaults to the default subject type operator (is/contains)
-    const isOperatorValid =
+    const isValidOperator =
       condition.verb == null || condition.verb in VERB_OPERATORS[subject.type]
 
-    const isValid = subject && isOperatorValid
+    const isValid = subject && isValidOperator
 
     if (isValid) {
       valid.push(condition)
@@ -90,16 +90,16 @@ export const validateConditions = <T extends GenericSubjects>(
   return { valid, invalid }
 }
 
-export const testConditions = <T extends GenericSubjects>({
+export const testConditions = ({
   subjects,
   conditions,
   matching,
   values,
 }: {
-  subjects: T
-  conditions: Conditions<T>
+  subjects: GenericSubjects
+  conditions: Conditions
   matching: MatchType
-  values: Values<T>
+  values: Values
 }) => {
   const {
     valid: validConditions,

@@ -17,14 +17,8 @@ interface ArraySubject extends GenericSubject {
 
 type MatchType = 'any' | 'all' | 'none'
 
-type Condition<Subjects = GenericSubjects> =
-  | ValueCondition<Subjects>
-  | ArrayCondition<Subjects>
-
-type Conditions<Subjects> = Array<Condition<Subjects>>
-
-type ValueSubjectKeys<Subjects> = FilterKeys<Subjects, ValueSubject>
-type ArraySubjectKeys<Subjects> = FilterKeys<Subjects, ArraySubject>
+type Condition = ValueCondition | ArrayConditionValueCondition
+type Conditions = Condition[]
 
 type ConditionObject = string | number | null | undefined
 
@@ -40,11 +34,6 @@ interface ArrayCondition {
   object: ConditionObject
 }
 
-type Values<T> = {
-  [P in keyof T]: string | number | Array<{ [key: string]: unknown }>
-}
-
-type ConditionContextValue = {
-  subjects: GenericSubjects
-  values: Values<GenericSubjects>
+type Values = {
+  [key: string]: string | number | Array<{ [key: string]: unknown }>
 }
