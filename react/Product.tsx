@@ -1,8 +1,7 @@
-import { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { useProduct } from 'vtex.product-context'
-// import pick from 'ramda/es/pick'
 
-import { testConditions } from './modules/conditions'
+import { ConditionContext } from './ConditionContext'
 
 const SUBJECTS = {
   productId: {
@@ -27,14 +26,9 @@ const SUBJECTS = {
   },
 } as const
 
-type Subjects = typeof SUBJECTS
+export type ProductSubjects = typeof SUBJECTS
 
-interface Props {
-  conditions?: Conditions<Subjects>
-  matching: Matching
-}
-
-const Product: FC<Props> = ({ children, conditions, matching = 'all' }) => {
+const Product: FC = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
 
   const values = {
@@ -46,30 +40,11 @@ const Product: FC<Props> = ({ children, conditions, matching = 'all' }) => {
     selectedItemId: selectedItem.itemId,
   }
 
-  const matches = useMemo(() => {
-    if (!conditions) return null
-
-    // eslint-disable-next-line no-shadow
-    const { matches } = testConditions({
-      availableSubjects: SUBJECTS,
-      conditions,
-      matching,
-      values,
-    })
-    return matches
-  }, [conditions, matching, values])
-
-  if (!conditions) {
-    // TODO: Handle error better
-    console.warn('Missing conditions')
-    return null
-  }
-
-  if (!matches) {
-    return null
-  }
-
-  return (children as any) ?? null
+  return (
+    <ConditionContext.Provider value={{ values, subjects: SUBJECTS }}>
+      {children}
+    </ConditionContext.Provider>
+  )
 }
 
 export default Product

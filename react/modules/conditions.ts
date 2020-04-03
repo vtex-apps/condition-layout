@@ -42,15 +42,15 @@ const testArrayCondition = (
 }
 
 export const testCondition = <T extends GenericSubjects>({
-  availableSubjects,
+  subjects,
   values,
   condition,
 }: {
-  availableSubjects: T
+  subjects: T
   values: Record<string, any>
   condition: Condition<T>
 }) => {
-  const subject = availableSubjects[condition.subject]
+  const subject = subjects[condition.subject]
 
   if (isValueCondition(subject)) {
     return testValueCondition(values, condition)
@@ -65,14 +65,14 @@ export const testCondition = <T extends GenericSubjects>({
 }
 
 export const validateConditions = <T extends GenericSubjects>(
-  availableSubjects: T,
+  subjects: T,
   conditions: Conditions<T>
 ) => {
   const valid: Array<Condition<T>> = []
   const invalid: Array<Condition<T>> = []
 
   conditions.forEach(condition => {
-    const subject = availableSubjects[condition.subject]
+    const subject = subjects[condition.subject]
 
     // nullish verb defaults to the default subject type operator (is/contains)
     const isOperatorValid =
@@ -91,12 +91,12 @@ export const validateConditions = <T extends GenericSubjects>(
 }
 
 export const testConditions = <T extends GenericSubjects>({
-  availableSubjects,
+  subjects,
   conditions,
   matching,
   values,
 }: {
-  availableSubjects: T
+  subjects: T
   conditions: Conditions<T>
   matching: Matching
   values: Values<T>
@@ -104,7 +104,7 @@ export const testConditions = <T extends GenericSubjects>({
   const {
     valid: validConditions,
     invalid: invalidConditions,
-  } = validateConditions(availableSubjects, conditions)
+  } = validateConditions(subjects, conditions)
 
   if (invalidConditions.length > 0) {
     console.error(
@@ -116,7 +116,7 @@ export const testConditions = <T extends GenericSubjects>({
   }
 
   const results = validConditions.map(condition =>
-    testCondition({ availableSubjects, values, condition })
+    testCondition({ subjects, values, condition })
   )
 
   let matches = results.reduce((acc: boolean | null, conditionMatch) => {

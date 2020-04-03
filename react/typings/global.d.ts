@@ -43,3 +43,8 @@ interface ArrayCondition {
 type Values<T> = {
   [P in keyof T]: string | number | Array<{ [key: string]: unknown }>
 }
+
+type ConditionContextValue = {
+  subjects: GenericSubjects
+  values: Values<GenericSubjects>
+}
