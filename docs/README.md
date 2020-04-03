@@ -1,14 +1,14 @@
-First of all (even before the block's name), its README.md should contain the following sentence at the very beginning:
-
 `📢 Use this project, [contribute](https://github.com/{OrganizationName/{AppName}) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).`
 
-# BLOCK NAME
+# Condition Layout
 
-Under the block's name, you should explain the topic, giving a **brief description** of the **block's functionality** in a store.
+The condition layout app allows to conditionally render a block given certain conditions. The app exports two kinds of block: 
 
-Next, **add media** (either an image of a GIF) with the rendered block, so that users can better understand how the block works in practice. 
+- `condition-layout` and extensions - These blocks are responsible for holding your condition blocks.
+- `condition` - This blocks hold the condition logic and childrens to be displayed given the condition resolves to true.
 
-![Media Placeholder](https://user-images.githubusercontent.com/52087100/71204177-42ca4f80-227e-11ea-89e6-e92e65370c69.png)
+## WIP
+
 
 ## Configuration 
 
@@ -22,33 +22,6 @@ Next, add the **block's props table**:
 
 
 Remember to also **showcase any necessary disclaimer** related to the block in this section, such as the different behavior it may display during its configuration. 
-
-## Modus Operandi *(not mandatory)*
-
-There are scenarios in which a block can behave differently in a store, according to how it was added to the catalog, for example. It's crucial to go through these **behavioral changes** in this section, allowing users to fully understand the **practical application** of the block in their store.
-
-If you feel compelled to give further details about the block, such as it's **relationship with the VTEX admin**, don't hesitate to use this section. 
-
-## Customization
-
-The first thing that should be present in this section is the sentence below, showing users the recipe pertaining to CSS customization in blocks:
-
-`In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).`
-
-Thereafter, you should add a single column table with the available CSS handles for that block:
-
-| CSS Handles |
-| ----------- | 
-| `XXXXX` | 
-| `XXXXX` | 
-| `XXXXX` | 
-| `XXXXX` | 
-| `XXXXX` |
-
-
-If there are none, add the following sentence instead:
-
-`The component still doesn't have CSS Handles for its specific customization.`
 
 ---
 
