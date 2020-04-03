@@ -98,7 +98,7 @@ export const testConditions = <T extends GenericSubjects>({
 }: {
   subjects: T
   conditions: Conditions<T>
-  matching: Matching
+  matching: MatchType
   values: Values<T>
 }) => {
   const {

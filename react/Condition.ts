@@ -5,7 +5,7 @@ import { useCondition } from './ConditionContext'
 
 interface Props {
   conditions?: Conditions<GenericSubjects>
-  matching: Matching
+  matching: MatchType
 }
 
 const Condition: FC<Props> = ({ children, conditions, matching = 'all' }) => {
