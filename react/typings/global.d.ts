@@ -15,7 +15,7 @@ interface ArraySubject extends GenericSubject {
   id?: string
 }
 
-type Matching = 'any' | 'all' | 'none'
+type MatchType = 'any' | 'all' | 'none'
 
 type Condition<Subjects = GenericSubjects> =
   | ValueCondition<Subjects>
