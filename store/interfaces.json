@@ -6,6 +6,10 @@
     "component": "Condition",
     "composition": "children"
   },
+  "condition.else": {
+    "component": "Default",
+    "composition": "children"
+  },
   "condition-layout.product": {
     "component": "Product",
     "composition": "children"
