@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { useConditionContext } from './ConditionContext'
 
-const Default: FC = ({ children }) => {
+const Else: FC = ({ children }) => {
   const { matched } = useConditionContext()
   if (matched !== false) {
     return null
@@ -11,4 +11,4 @@ const Default: FC = ({ children }) => {
   return children as any
 }
 
-export default Default
+export default Else

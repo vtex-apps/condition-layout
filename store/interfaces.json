@@ -7,7 +7,7 @@
     "composition": "children"
   },
   "condition.else": {
-    "component": "Default",
+    "component": "Else",
     "composition": "children"
   },
   "condition-layout.product": {
