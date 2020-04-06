@@ -1,7 +1,7 @@
-import { FC, useMemo } from 'react'
+import { FC, useMemo, useEffect } from 'react'
 
 import { testConditions } from './modules/conditions'
-import { useCondition } from './ConditionContext'
+import { useConditionContext, useConditionDispatch } from './ConditionContext'
 
 interface Props {
   conditions?: Conditions
@@ -9,7 +9,8 @@ interface Props {
 }
 
 const Condition: FC<Props> = ({ children, conditions, match }) => {
-  const { values, subjects } = useCondition()
+  const { values, subjects } = useConditionContext()
+  const dispatch = useConditionDispatch()
 
   const matches = useMemo(() => {
     if (conditions == null || values == null || subjects == null) {
@@ -26,6 +27,13 @@ const Condition: FC<Props> = ({ children, conditions, match }) => {
 
     return matches
   }, [conditions, match, subjects, values])
+
+  useEffect(() => {
+    dispatch({
+      type: 'UPDATE_MATCH',
+      payload: { matches: !!matches },
+    })
+  }, [dispatch, matches])
 
   if (conditions == null) {
     // TODO: Handle error better

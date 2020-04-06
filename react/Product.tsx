@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useProduct } from 'vtex.product-context'
 
-import { ConditionContext } from './ConditionContext'
+import ConditionLayout from './ConditionLayout'
 
 const SUBJECTS = {
   productId: {
@@ -26,8 +26,6 @@ const SUBJECTS = {
   },
 } as const
 
-export type ProductSubjects = typeof SUBJECTS
-
 const Product: FC = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
 
@@ -41,9 +39,9 @@ const Product: FC = ({ children }) => {
   }
 
   return (
-    <ConditionContext.Provider value={{ values, subjects: SUBJECTS }}>
+    <ConditionLayout values={values} subjects={SUBJECTS}>
       {children}
-    </ConditionContext.Provider>
+    </ConditionLayout>
   )
 }
 
