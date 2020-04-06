@@ -1,16 +1,20 @@
-import { testCondition, validateConditions } from '../modules/conditions'
+import {
+  testCondition,
+  validateConditions,
+  testConditions,
+} from '../modules/conditions'
 
 const SUBJECTS = {
   productId: { type: 'value' },
   categoryId: { type: 'value' },
   brandId: { type: 'value' },
   productClusters: { type: 'array', id: 'id' },
-  categoryTree: { type: 'array', id: 'id' },
+  categoryTree: { type: 'array' },
   customId: { type: 'array', id: 'identifier' },
   selectedItemId: { type: 'value' },
 } as const
 
-describe('validate condition', () => {
+describe('single condition', () => {
   it('returns an array of valid and invalid conditions', () => {
     const result = validateConditions(SUBJECTS, [
       { subject: 'productId' },
@@ -36,9 +40,7 @@ describe('validate condition', () => {
       ])
     )
   })
-})
 
-describe('test condition', () => {
   it('returns true if value condition matches', () => {
     const result = testCondition({
       subjects: SUBJECTS,
@@ -73,7 +75,7 @@ describe('test condition', () => {
       subjects: SUBJECTS,
       values: {},
       condition: {
-        subject: 'potato' as never,
+        subject: 'potato',
         verb: 'is',
         object: 'product-id-value',
       },
@@ -89,7 +91,7 @@ describe('test condition', () => {
         productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
       },
       condition: {
-        subject: 'productClusters' as never,
+        subject: 'productClusters',
         verb: 'contains',
         object: 'id2',
       },
@@ -100,7 +102,7 @@ describe('test condition', () => {
         productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
       },
       condition: {
-        subject: 'productClusters' as never,
+        subject: 'productClusters',
         verb: 'does-not-contain',
         object: 'id2',
       },
@@ -108,6 +110,22 @@ describe('test condition', () => {
 
     expect(result).toBe(true)
     expect(negatedResult).toBe(false)
+  })
+
+  it("defaults identifier prop to 'id'", () => {
+    const result = testCondition({
+      subjects: SUBJECTS,
+      values: {
+        categoryTree: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      condition: {
+        subject: 'categoryTree',
+        verb: 'contains',
+        object: 'id2',
+      },
+    })
+
+    expect(result).toBe(true)
   })
 
   it("supports custom identifier prop other than 'id'", () => {
@@ -121,12 +139,190 @@ describe('test condition', () => {
         ],
       },
       condition: {
-        subject: 'customId' as never,
+        subject: 'customId',
         verb: 'contains',
         object: 'id2',
       },
     })
 
     expect(result).toBe(true)
+  })
+})
+
+describe('multiple conditions', () => {
+  it('returns false if no conditions were passed', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'all',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [],
+    })
+    expect(matches).toBe(false)
+  })
+
+  it('returns false if invalid match type found', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      match: 'invalid-match-type',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'product-id-value',
+        },
+      ],
+    })
+    expect(matches).toBe(false)
+  })
+
+  it('returns false if a invalid condition is found', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      values: {
+        productId: 'product-id-value',
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'product-id-value',
+        },
+        {
+          subject: 'productId',
+          verb: 'contains',
+          object: 'product-id-value',
+        },
+      ],
+    })
+    expect(matches).toBe(false)
+  })
+
+  it('returns true if ALL conditions match (all)', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'all',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'product-id-value',
+        },
+        {
+          subject: 'productClusters',
+          verb: 'contains',
+          object: 'id2',
+        },
+      ],
+    })
+    expect(matches).toBe(true)
+  })
+
+  it('returns false if some condition does not match (all)', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'all',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'wrong-value',
+        },
+        {
+          subject: 'productClusters',
+          verb: 'contains',
+          object: 'id2',
+        },
+      ],
+    })
+    expect(matches).toBe(false)
+  })
+
+  it('returns true if at least one condition matches (any)', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'any',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'wrong-value',
+        },
+        {
+          subject: 'productClusters',
+          verb: 'contains',
+          object: 'id2',
+        },
+      ],
+    })
+    expect(matches).toBe(true)
+  })
+
+  it('returns true if NONE condition matches (none)', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'none',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'wrong-value',
+        },
+        {
+          subject: 'productClusters',
+          verb: 'contains',
+          object: 'non-existing',
+        },
+      ],
+    })
+    expect(matches).toBe(true)
+  })
+
+  it('returns false if any condition matches (none)', () => {
+    const { matches } = testConditions({
+      subjects: SUBJECTS,
+      match: 'none',
+      values: {
+        productId: 'product-id-value',
+        productClusters: [{ id: 'id1' }, { id: 'id2' }, { id: 'id3' }],
+      },
+      conditions: [
+        {
+          subject: 'productId',
+          verb: 'is',
+          object: 'product-id-value',
+        },
+        {
+          subject: 'productClusters',
+          verb: 'contains',
+          object: 'non-existing',
+        },
+      ],
+    })
+    expect(matches).toBe(false)
   })
 })

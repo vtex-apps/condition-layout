@@ -93,14 +93,14 @@ export const validateConditions = <T extends GenericSubjects>(
 export const testConditions = ({
   subjects,
   conditions,
-  matching,
+  match = 'all',
   values,
 }: {
   subjects: GenericSubjects
   conditions: Conditions
-  matching: MatchType
+  match?: MatchType
   values: Values
-}) => {
+}): { matches: boolean } => {
   const {
     valid: validConditions,
     invalid: invalidConditions,
@@ -112,7 +112,7 @@ export const testConditions = ({
         .map(({ subject }) => `"${subject}"`)
         .join(', ')}`
     )
-    return { matches: null }
+    return { matches: false }
   }
 
   const results = validConditions.map(condition =>
@@ -120,15 +120,15 @@ export const testConditions = ({
   )
 
   let matches = results.reduce((acc: boolean | null, conditionMatch) => {
-    if (matching === 'all') {
+    if (match === 'all') {
       return (acc ?? true) && conditionMatch
     }
 
-    if (matching === 'any') {
+    if (match === 'any') {
       return (acc ?? false) || conditionMatch
     }
 
-    if (matching === 'none') {
+    if (match === 'none') {
       return (acc ?? true) && !conditionMatch
     }
 

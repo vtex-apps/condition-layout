@@ -5,10 +5,10 @@ import { useCondition } from './ConditionContext'
 
 interface Props {
   conditions?: Conditions
-  matching: MatchType
+  match: MatchType
 }
 
-const Condition: FC<Props> = ({ children, conditions, matching = 'all' }) => {
+const Condition: FC<Props> = ({ children, conditions, match }) => {
   const { values, subjects } = useCondition()
 
   const matches = useMemo(() => {
@@ -20,12 +20,12 @@ const Condition: FC<Props> = ({ children, conditions, matching = 'all' }) => {
     const { matches } = testConditions({
       subjects,
       conditions,
-      matching,
+      match,
       values,
     })
 
     return matches
-  }, [conditions, matching, subjects, values])
+  }, [conditions, match, subjects, values])
 
   if (conditions == null) {
     // TODO: Handle error better

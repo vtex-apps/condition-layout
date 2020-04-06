@@ -1,7 +1,7 @@
 {
   "version": "0.2.2",
   "scripts": {
-    "test": "vtex-test-tools test",
+    "test": "vtex-test-tools test --collect-coverage",
     "lint": "tsc --noEmit && eslint --ext ts,tsx ."
   },
   "dependencies": {

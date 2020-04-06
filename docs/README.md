@@ -35,7 +35,7 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | Prop name    | Type             | Description                                                            |
 | ------------ | ---------------- | ---------------------------------------------------------------------- |
 | `conditions` | `ConditionArray` | A list of conditions to be resolved                                    |
-| `matching`   | `MatchType`      | The condition list match type                                          |
+| `match`      | `MatchType`      | The condition list match type                                          |
 | `children`   | `ReactNode`      | The `children` component(s) to be rendered when the condition matches. |
 
 ### Types
