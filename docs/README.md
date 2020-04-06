@@ -52,21 +52,25 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 
 For subjects of type `value`, there are two verbs available:
 
-- `is` - Checks for equality (default for `value` subjects).
-- `is-not` - Checks for inequality.
+| Type     | Description                                         |
+| -------- | --------------------------------------------------- |
+| `is`     | Checks for equality (default for `value` subjects). |
+| `is-not` | Checks for inequality.                              |
 
 For subjects of type `array`, there are two verbs available:
 
-- `contains` - Checks if the subject's value contains the defined `object` (default for `array` subjects).
-- `does-not-contain` - Checks if the subject's value does NOT contain the defined `object`.
+| Type               | Description                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| `contains`         | Checks if the subject's value contains the defined `object` (default for `array` subjects). |
+| `does-not-contain` | Checks if the subject's value does NOT contain the defined `object`.                        |
 
 #### `MatchType`
 
-| Type   | Description                                                             |
-| ------ | ----------------------------------------------------------------------- |
-| `all`  | Resolves a list of conditions to `true` only if all conditions match.   |
-| `any`  | Resolves a list of conditions to `true` if any of the conditions match. |
-| `none` | Resolves a list of conditions to `true` if NONE condition match.        |
+| Type   | Description                                                                       |
+| ------ | --------------------------------------------------------------------------------- |
+| `all`  | Resolves a list of conditions to `true` only if all conditions match (_default_). |
+| `any`  | Resolves a list of conditions to `true` if any of the conditions match.           |
+| `none` | Resolves a list of conditions to `true` if NONE condition match.                  |
 
 ### Examples
 
