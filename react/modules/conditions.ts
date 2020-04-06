@@ -1,12 +1,6 @@
-const VERB_OPERATORS: Record<string, Record<string, 1>> = {
-  value: {
-    is: 1,
-    'is-not': 1,
-  },
-  array: {
-    contains: 1,
-    'does-not-contain': 1,
-  },
+const VERB_OPERATORS: Record<string, Set<string>> = {
+  value: new Set(['is', 'is-not']),
+  array: new Set(['contains', 'does-not-contain']),
 }
 
 const isValueCondition = (subject: GenericSubject): subject is ValueSubject =>
@@ -76,7 +70,8 @@ export const validateConditions = <T extends GenericSubjects>(
 
     // nullish verb defaults to the default subject type operator (is/contains)
     const isValidOperator =
-      condition.verb == null || condition.verb in VERB_OPERATORS[subject.type]
+      condition.verb == null ||
+      VERB_OPERATORS?.[subject.type].has(condition.verb)
 
     const isValid = subject && isValidOperator
 
