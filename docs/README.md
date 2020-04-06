@@ -10,7 +10,7 @@ The app exports three kinds of block:
 
 - `condition-layout.{context}` - These blocks are responsible for holding your condition blocks and providing the appropriate context.
 - `condition` - This blocks hold the condition logic and childrens to be displayed given the condition resolves to true.
-- `condition.default` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`.
+- `condition.else` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`.
 
 ### `condition-layout`
 

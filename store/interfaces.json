@@ -6,7 +6,7 @@
     "component": "Condition",
     "composition": "children"
   },
-  "condition.default": {
+  "condition.else": {
     "component": "Default",
     "composition": "children"
   },
