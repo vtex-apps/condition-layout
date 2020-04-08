@@ -26,7 +26,7 @@ export function reducer(prevState: ConditionContextValue, action: Actions) {
 
     return {
       ...prevState,
-      matched: !!prevState.matched || action.payload.matches,
+      matched: Boolean(prevState.matched) || action.payload.matches,
     }
   }
 
