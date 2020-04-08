@@ -13,7 +13,7 @@ type Props = {
 
 const ConditionLayout: FC<Props> = ({ children, subjects, values }) => {
   const [state, dispatch] = useReducer(reducer, {
-    matched: null,
+    matched: undefined,
     subjects,
     values,
   })

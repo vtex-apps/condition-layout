@@ -25,11 +25,9 @@ const testArrayCondition = (
   values: Record<string, any[]>,
   condition: ArrayCondition
 ) => {
-  // TODO: prevent potential errors here w invalid subject
-
   const subjectId = subject.id ?? 'id'
-  const ids = values[condition.subject].map(item => String(item[subjectId]))
-  const matches = ids.includes(String(condition.object))
+  const ids = values[condition.subject]?.map(item => String(item[subjectId]))
+  const matches = ids?.includes(String(condition.object))
 
   // TODO: error messages on wrong verbs
   return (condition.verb === 'contains' || !condition.verb) === matches

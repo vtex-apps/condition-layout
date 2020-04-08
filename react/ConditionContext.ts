@@ -7,7 +7,7 @@ type Action<K, V = void> = V extends void ? { type: K } : { type: K } & V
 type Actions = Action<'UPDATE_MATCH', { payload: { matches: boolean } }>
 
 type ConditionContextValue = {
-  matched: null | boolean
+  matched: boolean | undefined
   subjects: GenericSubjects
   values: Values
 }
@@ -26,9 +26,7 @@ export function reducer(prevState: ConditionContextValue, action: Actions) {
 
     return {
       ...prevState,
-      // we use the pipe operator because we want to explicitly consider false values here
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      matched: prevState.matched || action.payload.matches,
+      matched: !!prevState.matched || action.payload.matches,
     }
   }
 
