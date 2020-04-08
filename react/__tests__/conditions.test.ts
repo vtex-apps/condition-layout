@@ -151,7 +151,7 @@ describe('single condition', () => {
 
 describe('multiple conditions', () => {
   it('returns false if no conditions were passed', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'all',
       values: {
@@ -164,7 +164,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns false if invalid match type found', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
@@ -185,7 +185,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns false if a invalid condition is found', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       values: {
         productId: 'product-id-value',
@@ -207,7 +207,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns true if ALL conditions match (all)', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'all',
       values: {
@@ -231,7 +231,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns false if some condition does not match (all)', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'all',
       values: {
@@ -255,7 +255,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns true if at least one condition matches (any)', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'any',
       values: {
@@ -279,7 +279,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns true if NONE condition matches (none)', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'none',
       values: {
@@ -303,7 +303,7 @@ describe('multiple conditions', () => {
   })
 
   it('returns false if any condition matches (none)', () => {
-    const { matches } = testConditions({
+    const matches = testConditions({
       subjects: SUBJECTS,
       match: 'none',
       values: {
