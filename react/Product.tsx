@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { useProduct } from 'vtex.product-context'
 
 import ConditionLayout from './ConditionLayout'
@@ -26,7 +26,7 @@ const SUBJECTS = {
   },
 } as const
 
-const Product: FC = ({ children }) => {
+const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
 
   const values = {
@@ -43,6 +43,10 @@ const Product: FC = ({ children }) => {
       {children}
     </ConditionLayout>
   )
+}
+
+Product.schema = {
+  title: 'admin/editor.condition-layout.wrapper',
 }
 
 export default Product

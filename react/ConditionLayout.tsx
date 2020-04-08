@@ -1,4 +1,4 @@
-import React, { FC, useReducer } from 'react'
+import React, { useReducer } from 'react'
 
 import {
   ConditionDispatchContext,
@@ -11,7 +11,11 @@ type Props = {
   subjects: GenericSubjects
 }
 
-const ConditionLayout: FC<Props> = ({ children, subjects, values }) => {
+const ConditionLayout: StorefrontFunctionComponent<Props> = ({
+  children,
+  subjects,
+  values,
+}) => {
   const [state, dispatch] = useReducer(reducer, {
     matched: undefined,
     subjects,

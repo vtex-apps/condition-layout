@@ -1,14 +1,17 @@
-import { FC } from 'react'
-
 import { useConditionContext } from './ConditionContext'
 
-const Else: FC = ({ children }) => {
+const Else: StorefrontFunctionComponent = ({ children }) => {
   const { matched } = useConditionContext()
   if (matched !== false) {
     return null
   }
 
   return children as any
+}
+
+Else.schema = {
+  title: 'admin/editor.condition-layout.else',
+  type: 'string',
 }
 
 export default Else

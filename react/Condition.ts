@@ -1,4 +1,4 @@
-import { FC, useMemo, useEffect } from 'react'
+import { useMemo, useEffect } from 'react'
 
 import { testConditions } from './modules/conditions'
 import { useConditionContext, useConditionDispatch } from './ConditionContext'
@@ -8,7 +8,11 @@ interface Props {
   match: MatchType
 }
 
-const Condition: FC<Props> = ({ children, conditions, match }) => {
+const Condition: StorefrontFunctionComponent<Props> = ({
+  children,
+  conditions,
+  match,
+}) => {
   const { values, subjects } = useConditionContext()
   const dispatch = useConditionDispatch()
 
@@ -31,7 +35,7 @@ const Condition: FC<Props> = ({ children, conditions, match }) => {
   useEffect(() => {
     dispatch({
       type: 'UPDATE_MATCH',
-      payload: { matches: !!matches },
+      payload: { matches },
     })
   }, [dispatch, matches])
 
@@ -46,6 +50,42 @@ const Condition: FC<Props> = ({ children, conditions, match }) => {
   }
 
   return (children as any) ?? null
+}
+
+Condition.schema = {
+  title: 'admin/editor.condition-layout.condition',
+  type: 'object',
+  properties: {
+    conditions: {
+      title: 'admin/editor.condition-layout.conditions',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          subject: {
+            type: 'string',
+            title: 'admin/editor.condition-layout.subject',
+          },
+          verb: {
+            default: 'is',
+            type: 'string',
+            title: 'admin/editor.condition-layout.verb',
+            enum: ['is', 'is-not', 'contains', 'does-not-contain'],
+          },
+          object: {
+            type: 'string',
+            title: 'admin/editor.condition-layout.object',
+          },
+        },
+      },
+    },
+    match: {
+      default: 'all',
+      enum: ['any', 'none', 'all'],
+      title: 'admin/editor.condition-layout.match',
+      type: 'string',
+    },
+  },
 }
 
 export default Condition
