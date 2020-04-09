@@ -24,7 +24,7 @@
     "component": "ConditionProduct",
     "composition": "children",
     "content": {
-      "$ref": "#/definitions/ConditionProduct"
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionProduct"
     }
   }
 }
