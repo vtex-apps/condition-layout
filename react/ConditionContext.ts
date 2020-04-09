@@ -24,31 +24,30 @@ export function reducer(
   prevState: ConditionContextValue,
   action: Actions
 ): ConditionContextValue {
-  if (action.type === 'SET_VALUES') {
-    return {
-      ...prevState,
-      values: action.payload.values,
+  switch (action.type) {
+    case 'SET_VALUES': {
+      return {
+        ...prevState,
+        values: action.payload.values,
+      }
     }
-  }
 
-  if (action.type === 'UPDATE_MATCH') {
-    const { matches } = action.payload
+    case 'UPDATE_MATCH': {
+      const { matches } = action.payload
 
-    if (prevState.matched === matches || matches == null) {
+      if (prevState.matched === matches || matches == null) {
+        return prevState
+      }
+
+      return {
+        ...prevState,
+        matched: Boolean(prevState.matched) || matches,
+      }
+    }
+
+    default:
       return prevState
-    }
-
-    if (prevState.matched == null) {
-      return { ...prevState, matched: matches }
-    }
-
-    return {
-      ...prevState,
-      matched: Boolean(prevState.matched) || matches,
-    }
   }
-
-  return prevState
 }
 
 export function useConditionContext() {
