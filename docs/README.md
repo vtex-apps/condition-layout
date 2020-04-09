@@ -9,7 +9,7 @@ The condition layout app allows to conditionally render a block given certain co
 The `condition-layout` app exports two kinds of block: `condition-layout.{context}` and `condition.{context}`.
 
 - `condition-layout.{context}` - These blocks are responsible for holding your condition blocks and providing the appropriate context.
-- `condition.{context}` - These blocks hold the condition logic and childrens to be displayed given the condition resolves to true.
+- `condition.{context}` - These blocks hold the condition logic and children to be displayed given the condition resolves to true.
 - `condition.else` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`.
 
 ### `condition-layout`
@@ -20,7 +20,7 @@ You should never use `condition-layout` directly. Make sure to always use a cont
 
 #### `condition-layout.product`
 
-The `condition-layout.product` block provides the subjects below to use in `condition` blocks.
+The `condition-layout.product` block provides the subjects below to use in `condition.{context}` blocks.
 
 | Subject           | Type    | Description                     |
 | ----------------- | ------- | ------------------------------- |

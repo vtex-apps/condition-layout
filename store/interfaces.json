@@ -6,7 +6,7 @@
     "component": "ConditionLayoutProduct",
     "composition": "children",
     "content": {
-      "$ref": "#/definitions/ConditionLayoutProduct"
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionLayoutProduct"
     }
   },
   "condition": {
@@ -17,7 +17,7 @@
     "component": "ConditionElse",
     "composition": "children",
     "content": {
-      "$ref": "#/definitions/ConditionElse"
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionElse"
     }
   },
   "condition.product": {
