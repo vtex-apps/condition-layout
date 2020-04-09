@@ -4,7 +4,9 @@ import Noop from './Noop'
 
 type Action<K, V = void> = V extends void ? { type: K } : { type: K } & V
 
-type Actions = Action<'UPDATE_MATCH', { payload: { matches: boolean | null } }>
+type Actions =
+  | Action<'UPDATE_MATCH', { payload: { matches: boolean | null } }>
+  | Action<'SET_VALUES', { payload: { values: Record<string, any> } }>
 
 type ConditionContextValue = {
   matched: boolean | undefined
@@ -22,9 +24,16 @@ export function reducer(
   prevState: ConditionContextValue,
   action: Actions
 ): ConditionContextValue {
-  const { matches } = action.payload
+  if (action.type === 'SET_VALUES') {
+    return {
+      ...prevState,
+      values: action.payload.values,
+    }
+  }
 
   if (action.type === 'UPDATE_MATCH') {
+    const { matches } = action.payload
+
     if (prevState.matched === matches || matches == null) {
       return prevState
     }
@@ -35,7 +44,7 @@ export function reducer(
 
     return {
       ...prevState,
-      matched: prevState.matched || matches,
+      matched: Boolean(prevState.matched) || matches,
     }
   }
 

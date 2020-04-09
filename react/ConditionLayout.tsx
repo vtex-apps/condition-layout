@@ -5,6 +5,7 @@ import {
   ConditionContext,
   reducer,
 } from './ConditionContext'
+import { useEffectSkipFirstRender } from './modules/useEffectSkipFirstRender'
 
 type Props = {
   values: Values
@@ -21,6 +22,13 @@ const ConditionLayout: StorefrontFunctionComponent<Props> = ({
     subjects,
     values,
   })
+
+  useEffectSkipFirstRender(() => {
+    dispatch({
+      type: 'SET_VALUES',
+      payload: { values },
+    })
+  }, [values])
 
   return (
     <ConditionContext.Provider value={state}>
