@@ -3,13 +3,13 @@ import { useMemo, useEffect } from 'react'
 import { testConditions } from './modules/conditions'
 import { useConditionContext, useConditionDispatch } from './ConditionContext'
 
-interface Props {
+export interface ConditionProps {
   conditions?: Conditions
   match: MatchType
   enabled?: boolean
 }
 
-const Condition: StorefrontFunctionComponent<Props> = ({
+const Condition: StorefrontFunctionComponent<ConditionProps> = ({
   children,
   conditions,
   match,
@@ -62,8 +62,9 @@ Condition.schema = {
   type: 'object',
   properties: {
     enabled: {
+      title: 'admin/editor.condition-layout.enabled.title',
+      description: 'admin/editor.condition-layout.enabled.description',
       default: true,
-      title: 'admin/editor.condition-layout.enabled',
       type: 'boolean',
     },
   },

@@ -6,10 +6,11 @@ The condition layout app allows to conditionally render a block given certain co
 
 ## Configuration
 
-The app exports three kinds of block:
+The `condition-layout` app exports two kinds of block: `condition-layout.{context}` and `condition.{context}`.
 
 - `condition-layout.{context}` - These blocks are responsible for holding your condition blocks and providing the appropriate context.
 - `condition` - This blocks hold the condition logic and childrens to be displayed given the condition resolves to true.
+- `condition.{context}` - Same as `condition` but it provides a better editability via the Site Editor.
 - `condition.else` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`.
 
 ### `condition-layout`
@@ -38,6 +39,10 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | `conditions` | `ConditionArray` | A list of conditions to be resolved                                    |
 | `match`      | `MatchType`      | The condition list match type                                          |
 | `children`   | `ReactNode`      | The `children` component(s) to be rendered when the condition matches. |
+
+#### `condition.product`
+
+Can be used instead of a plain `condition` block. This block provides better editability via the Site Editor.
 
 ### Types
 

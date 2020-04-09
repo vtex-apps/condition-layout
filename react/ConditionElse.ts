@@ -23,7 +23,7 @@ Else.schema = {
   properties: {
     enabled: {
       default: true,
-      title: 'admin/editor.condition-layout.enabled',
+      title: 'admin/editor.condition-layout.enabled.title',
       type: 'boolean',
     },
   },

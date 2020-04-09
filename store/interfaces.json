@@ -2,16 +2,20 @@
   "condition-layout": {
     "component": "Noop"
   },
+  "condition-layout.product": {
+    "component": "ConditionLayoutProduct",
+    "composition": "children"
+  },
   "condition": {
     "component": "Condition",
     "composition": "children"
   },
   "condition.else": {
-    "component": "Else",
+    "component": "ConditionElse",
     "composition": "children"
   },
-  "condition-layout.product": {
-    "component": "Product",
+  "condition.product": {
+    "component": "ConditionProduct",
     "composition": "children"
   }
 }
