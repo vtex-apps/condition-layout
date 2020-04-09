@@ -69,7 +69,7 @@ export const validateConditions = <T extends GenericSubjects>(
     // nullish verb defaults to the default subject type operator (is/contains)
     const isValidOperator =
       condition.verb == null ||
-      VERB_OPERATORS?.[subject.type].has(condition.verb)
+      VERB_OPERATORS[subject?.type]?.has(condition.verb)
 
     const isValid = subject && isValidOperator
 

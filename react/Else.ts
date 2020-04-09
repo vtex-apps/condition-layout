@@ -1,9 +1,16 @@
 import { useConditionContext } from './ConditionContext'
 
-const Else: StorefrontFunctionComponent = ({ children }) => {
+interface Props {
+  enabled?: boolean
+}
+
+const Else: StorefrontFunctionComponent<Props> = ({
+  children,
+  enabled = true,
+}) => {
   const { matched } = useConditionContext()
 
-  if (matched !== false) {
+  if (matched !== false || !enabled) {
     return null
   }
 
