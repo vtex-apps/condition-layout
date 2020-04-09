@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Schemas to components to be able to edit them via Site Editor.
+- `condition.product` block.
+- `enabled` flag for conditions in the site editor.
 
 ## [1.0.1] - 2020-04-08
 ### Fixed

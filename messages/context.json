@@ -9,5 +9,15 @@
   "admin/editor.condition-layout.subject": "Subject",
   "admin/editor.condition-layout.verb": "Verb (operator)",
   "admin/editor.condition-layout.object": "Object",
-  "admin/editor.condition-layout.match": "Match type"
+  "admin/editor.condition-layout.match": "Match type",
+  "admin/editor.condition-layout.product.subject.productId": "Product ID",
+  "admin/editor.condition-layout.product.subject.categoryId": "Category ID",
+  "admin/editor.condition-layout.product.subject.brandId": "Brand ID",
+  "admin/editor.condition-layout.product.subject.productClusters": "Product clusters",
+  "admin/editor.condition-layout.product.subject.categoryTree": "Category tree",
+  "admin/editor.condition-layout.product.subject.selectedItemId": "Selected Item ID",
+  "admin/editor.condition-layout.verb.is": "is",
+  "admin/editor.condition-layout.verb.is-not": "is not",
+  "admin/editor.condition-layout.verb.contains": "contains",
+  "admin/editor.condition-layout.verb.does-not-contain": "does not contain"
 }

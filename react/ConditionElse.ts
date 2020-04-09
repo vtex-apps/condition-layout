@@ -19,14 +19,6 @@ const Else: StorefrontFunctionComponent<Props> = ({
 
 Else.schema = {
   title: 'admin/editor.condition-layout.else',
-  type: 'object',
-  properties: {
-    enabled: {
-      default: true,
-      title: 'admin/editor.condition-layout.enabled.title',
-      type: 'boolean',
-    },
-  },
 }
 
 export default Else

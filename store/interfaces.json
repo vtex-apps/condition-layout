@@ -4,7 +4,10 @@
   },
   "condition-layout.product": {
     "component": "ConditionLayoutProduct",
-    "composition": "children"
+    "composition": "children",
+    "content": {
+      "$ref": "#/definitions/ConditionLayoutProduct"
+    }
   },
   "condition": {
     "component": "Condition",
@@ -12,10 +15,16 @@
   },
   "condition.else": {
     "component": "ConditionElse",
-    "composition": "children"
+    "composition": "children",
+    "content": {
+      "$ref": "#/definitions/ConditionElse"
+    }
   },
   "condition.product": {
     "component": "ConditionProduct",
-    "composition": "children"
+    "composition": "children",
+    "content": {
+      "$ref": "#/definitions/ConditionProduct"
+    }
   }
 }

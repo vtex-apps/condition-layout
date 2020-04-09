@@ -2,7 +2,29 @@ import React from 'react'
 import { useProduct } from 'vtex.product-context'
 
 import ConditionLayout from './ConditionLayout'
-import { PRODUCT_SUBJECTS } from './modules/subjects'
+
+export const PRODUCT_SUBJECTS = {
+  productId: {
+    type: 'value',
+  },
+  categoryId: {
+    type: 'value',
+  },
+  brandId: {
+    type: 'value',
+  },
+  selectedItemId: {
+    type: 'value',
+  },
+  productClusters: {
+    type: 'array',
+    id: 'id',
+  },
+  categoryTree: {
+    type: 'array',
+    id: 'id',
+  },
+} as const
 
 const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
