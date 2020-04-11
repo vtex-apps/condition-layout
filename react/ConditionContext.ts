@@ -5,7 +5,7 @@ import Noop from './Noop'
 type Action<K, V = void> = V extends void ? { type: K } : { type: K } & V
 
 type Actions =
-  | Action<'UPDATE_MATCH', { payload: { matches: boolean | null } }>
+  | Action<'UPDATE_MATCH', { payload: { matches: boolean | undefined } }>
   | Action<'SET_VALUES', { payload: { values: Record<string, any> } }>
 
 type ConditionContextValue = {
