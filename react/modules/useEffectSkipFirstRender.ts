@@ -1,8 +1,8 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, DependencyList, EffectCallback } from 'react'
 
 export const useEffectSkipFirstRender = (
-  fn: React.EffectCallback,
-  deps: React.DependencyList
+  fn: EffectCallback,
+  deps: DependencyList
 ) => {
   const isFirstRender = useRef(true)
 
