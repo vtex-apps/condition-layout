@@ -28,6 +28,9 @@ export function reducer(
     case 'SET_VALUES': {
       return {
         ...prevState,
+        // we need to invalidate the matched property after updating the values
+        // because it's possible for none of the conditions to match the new values
+        matched: undefined,
         values: action.payload.values,
       }
     }
