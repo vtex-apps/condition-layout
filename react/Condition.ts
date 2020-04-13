@@ -1,37 +1,46 @@
-import { FC, useMemo, useEffect } from 'react'
+import { useMemo, useEffect } from 'react'
 
 import { testConditions } from './modules/conditions'
 import { useConditionContext, useConditionDispatch } from './ConditionContext'
 
-interface Props {
+export interface ConditionProps {
   conditions?: Conditions
   match: MatchType
+  enabled?: boolean
 }
 
-const Condition: FC<Props> = ({ children, conditions, match }) => {
+const Condition: StorefrontFunctionComponent<ConditionProps> = ({
+  children,
+  conditions,
+  match,
+  enabled = true,
+}) => {
   const { values, subjects } = useConditionContext()
   const dispatch = useConditionDispatch()
 
   const matches = useMemo(() => {
+    if (!enabled) {
+      return false
+    }
+
     if (conditions == null || values == null || subjects == null) {
       return null
     }
 
-    // eslint-disable-next-line no-shadow
-    const { matches } = testConditions({
+    const hasMatched = testConditions({
       subjects,
       conditions,
       match,
       values,
     })
 
-    return matches
-  }, [conditions, match, subjects, values])
+    return hasMatched
+  }, [conditions, enabled, match, subjects, values])
 
   useEffect(() => {
     dispatch({
       type: 'UPDATE_MATCH',
-      payload: { matches: !!matches },
+      payload: { matches },
     })
   }, [dispatch, matches])
 

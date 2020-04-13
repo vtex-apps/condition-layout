@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { useProduct } from 'vtex.product-context'
 
 import ConditionLayout from './ConditionLayout'
 
-const SUBJECTS = {
+export const PRODUCT_SUBJECTS = {
   productId: {
     type: 'value',
   },
@@ -11,6 +11,9 @@ const SUBJECTS = {
     type: 'value',
   },
   brandId: {
+    type: 'value',
+  },
+  selectedItemId: {
     type: 'value',
   },
   productClusters: {
@@ -21,12 +24,9 @@ const SUBJECTS = {
     type: 'array',
     id: 'id',
   },
-  selectedItemId: {
-    type: 'value',
-  },
 } as const
 
-const Product: FC = ({ children }) => {
+const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
 
   const values = {
@@ -39,10 +39,14 @@ const Product: FC = ({ children }) => {
   }
 
   return (
-    <ConditionLayout values={values} subjects={SUBJECTS}>
+    <ConditionLayout values={values} subjects={PRODUCT_SUBJECTS}>
       {children}
     </ConditionLayout>
   )
+}
+
+Product.schema = {
+  title: 'admin/editor.condition-layout.wrapper.product',
 }
 
 export default Product

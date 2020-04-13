@@ -69,7 +69,7 @@ export const validateConditions = <T extends GenericSubjects>(
     // nullish verb defaults to the default subject type operator (is/contains)
     const isValidOperator =
       condition.verb == null ||
-      VERB_OPERATORS?.[subject.type].has(condition.verb)
+      VERB_OPERATORS[subject?.type]?.has(condition.verb)
 
     const isValid = subject && isValidOperator
 
@@ -93,7 +93,7 @@ export const testConditions = ({
   conditions: Conditions
   match?: MatchType
   values: Values
-}): { matches: boolean } => {
+}): boolean => {
   const {
     valid: validConditions,
     invalid: invalidConditions,
@@ -105,14 +105,14 @@ export const testConditions = ({
         .map(({ subject }) => `"${subject}"`)
         .join(', ')}`
     )
-    return { matches: false }
+    return false
   }
 
   const results = validConditions.map(condition =>
     testCondition({ subjects, values, condition })
   )
 
-  let matches = results.reduce((acc: boolean | null, conditionMatch) => {
+  const matches = results.reduce((acc: boolean | null, conditionMatch) => {
     if (match === 'all') {
       return (acc ?? true) && conditionMatch
     }
@@ -129,9 +129,9 @@ export const testConditions = ({
   }, null)
 
   if (matches == null) {
-    matches = false
-    // TODO: Add error
+    // TODO: Add error?
+    return false
   }
 
-  return { matches }
+  return matches
 }

@@ -2,16 +2,29 @@
   "condition-layout": {
     "component": "Noop"
   },
+  "condition-layout.product": {
+    "component": "ConditionLayoutProduct",
+    "composition": "children",
+    "content": {
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionLayoutProduct"
+    }
+  },
   "condition": {
     "component": "Condition",
     "composition": "children"
   },
   "condition.else": {
-    "component": "Else",
-    "composition": "children"
+    "component": "ConditionElse",
+    "composition": "children",
+    "content": {
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionElse"
+    }
   },
-  "condition-layout.product": {
-    "component": "Product",
-    "composition": "children"
+  "condition.product": {
+    "component": "ConditionProduct",
+    "composition": "children",
+    "content": {
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionProduct"
+    }
   }
 }
