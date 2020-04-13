@@ -24,7 +24,7 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
     }
 
     if (conditions == null || values == null || subjects == null) {
-      return null
+      return undefined
     }
 
     const hasMatched = testConditions({

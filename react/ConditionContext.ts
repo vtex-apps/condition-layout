@@ -4,7 +4,9 @@ import Noop from './Noop'
 
 type Action<K, V = void> = V extends void ? { type: K } : { type: K } & V
 
-type Actions = Action<'UPDATE_MATCH', { payload: { matches: boolean | null } }>
+type Actions =
+  | Action<'UPDATE_MATCH', { payload: { matches: boolean | undefined } }>
+  | Action<'SET_VALUES', { payload: { values: Record<string, any> } }>
 
 type ConditionContextValue = {
   matched: boolean | undefined
@@ -22,24 +24,33 @@ export function reducer(
   prevState: ConditionContextValue,
   action: Actions
 ): ConditionContextValue {
-  const { matches } = action.payload
+  switch (action.type) {
+    case 'SET_VALUES': {
+      return {
+        ...prevState,
+        // we need to invalidate the matched property after updating the values
+        // because it's possible for none of the conditions to match the new values
+        matched: undefined,
+        values: action.payload.values,
+      }
+    }
 
-  if (action.type === 'UPDATE_MATCH') {
-    if (prevState.matched === matches || matches == null) {
+    case 'UPDATE_MATCH': {
+      const { matches } = action.payload
+
+      if (prevState.matched === matches || matches == null) {
+        return prevState
+      }
+
+      return {
+        ...prevState,
+        matched: Boolean(prevState.matched) || matches,
+      }
+    }
+
+    default:
       return prevState
-    }
-
-    if (prevState.matched == null) {
-      return { ...prevState, matched: matches }
-    }
-
-    return {
-      ...prevState,
-      matched: prevState.matched || matches,
-    }
   }
-
-  return prevState
 }
 
 export function useConditionContext() {

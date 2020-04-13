@@ -5,6 +5,7 @@ import {
   ConditionContext,
   reducer,
 } from './ConditionContext'
+import { useEffectSkipFirstRender } from './modules/useEffectSkipFirstRender'
 
 type Props = {
   values: Values
@@ -21,6 +22,16 @@ const ConditionLayout: StorefrontFunctionComponent<Props> = ({
     subjects,
     values,
   })
+
+  // we use a useEffect that skips the first render
+  // because we don't want to update the `values` twice
+  // at component initialization.
+  useEffectSkipFirstRender(() => {
+    dispatch({
+      type: 'SET_VALUES',
+      payload: { values },
+    })
+  }, [values])
 
   return (
     <ConditionContext.Provider value={state}>
