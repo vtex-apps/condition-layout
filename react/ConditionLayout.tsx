@@ -23,6 +23,9 @@ const ConditionLayout: StorefrontFunctionComponent<Props> = ({
     values,
   })
 
+  // we use a useEffect that skips the first render
+  // because we don't want to update the `values` twice
+  // at component initialization.
   useEffectSkipFirstRender(() => {
     dispatch({
       type: 'SET_VALUES',
