@@ -4,21 +4,38 @@
 
 The condition layout app allows to conditionally render a block given certain conditions.
 
+![Screen-Recording-certo](https://user-images.githubusercontent.com/12139385/79379694-a8c99980-7f35-11ea-9f01-7021c6529332.gif)
+
+
 ## Configuration
+
+
+### Step 1 - Adding the Condition Layout app to your theme's dependencies
+
+In your theme's `manifest.json`, add the Product Price app as a dependency:
+
+```json
+"dependencies": {
+  "vtex.product-price": "1.x"
+}
+```
+
+### Step 2 - Adding the Condition Layout's blocks to your theme's templates
 
 The `condition-layout` app exports two kinds of block: `condition-layout.{context}` and `condition.{context}`.
 
 - `condition-layout.{context}` - These blocks are responsible for holding your condition blocks and providing the appropriate context.
 - `condition.{context}` - These blocks hold the condition logic and children to be displayed given the condition resolves to true.
-- `condition.else` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`.
+- `condition.else` - This block can be used to render some content if no `condition` block was matched inside a `condition.layout`. The usage of this block is optional. If no condition is matched and there's no `condition.else` declared, nothing will be shown.
 
-### `condition-layout`
+
+### condition-layout
 
 Each variant of a `condition-layout` is responsible for providing the values to be used in comparisons by its subsequent `condition` blocks.
 
 You should never use `condition-layout` directly. Make sure to always use a context variant, such as `condition-layout.product`.
 
-#### `condition-layout.product`
+#### condition-layout.product
 
 The `condition-layout.product` block provides the subjects below to use in `condition.{context}` blocks.
 
@@ -27,11 +44,11 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | `productId`       | `value` | Id of the current product.      |
 | `categoryId`      | `value` | Id of the current category.     |
 | `brandId`         | `value` | Id of the current brand.        |
-| `selectedItemId`  | `value` | Id of the current selected item |
+| `selectedItemId`  | `value` | Id of the current sku selected  |
 | `productClusters` | `array` | List of product clusters.       |
 | `categoryTree`    | `array` | List of categories.             |
 
-### `condition.{context}`
+### condition.{context}
 
 | Prop name    | Type             | Description                                                            |
 | ------------ | ---------------- | ---------------------------------------------------------------------- |
@@ -41,7 +58,7 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 
 ### Types
 
-#### `ConditionArray`
+#### ConditionArray
 
 | Prop name | Type            | Description                                        |
 | --------- | --------------- | -------------------------------------------------- |
@@ -49,7 +66,7 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | `verb`    | `ConditionVerb` | The condition operator.                            |
 | `object`  | `string`        | The value to be compared with the subject's value. |
 
-#### `ConditionVerb`
+#### ConditionVerb
 
 For subjects of type `value`, there are two verbs available:
 
@@ -65,7 +82,7 @@ For subjects of type `array`, there are two verbs available:
 | `contains`         | Checks if the subject's value contains the defined `object` (default for `array` subjects). |
 | `does-not-contain` | Checks if the subject's value does NOT contain the defined `object`.                        |
 
-#### `MatchType`
+#### MatchType
 
 | Type   | Description                                                                       |
 | ------ | --------------------------------------------------------------------------------- |
@@ -73,7 +90,8 @@ For subjects of type `array`, there are two verbs available:
 | `any`  | Resolves a list of conditions to `true` if any of the conditions match.           |
 | `none` | Resolves a list of conditions to `true` if NONE condition match.                  |
 
-### Examples
+
+## Example
 
 #### Checking for a specific product ID
 
@@ -86,6 +104,7 @@ For subjects of type `array`, there are two verbs available:
     "children": [
         "condition#custom-pdp-12",
         "condition#custom-pdp-20",
+        "condition.else"
     ]
   },
   "condition#custom-pdp-12": {
@@ -112,4 +131,9 @@ For subjects of type `array`, there are two verbs available:
     },
     "children": ["flex-layout.row#custom-pdp-layout-20"]
   },
+  
+  "condition.else": {
+    "children": ["flex-layout.row#default"]
+  }
+  
 ```
