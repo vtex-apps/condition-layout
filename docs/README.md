@@ -22,14 +22,14 @@ You should never use `condition-layout` directly. Make sure to always use a cont
 
 The `condition-layout.product` block provides the subjects below to use in `condition.{context}` blocks.
 
-| Subject           | Type    | Description                     |
-| ----------------- | ------- | ------------------------------- |
-| `productId`       | `value` | Id of the current product.      |
-| `categoryId`      | `value` | Id of the current category.     |
-| `brandId`         | `value` | Id of the current brand.        |
-| `selectedItemId`  | `value` | Id of the current selected item |
-| `productClusters` | `array` | List of product clusters.       |
-| `categoryTree`    | `array` | List of categories.             |
+| Subject           | Type    | Description                           |
+| ----------------- | ------- | ------------------------------------- |
+| `productId`       | `value` | Id of the current product.            |
+| `categoryId`      | `value` | Id of the current category.           |
+| `brandId`         | `value` | Id of the current brand.              |
+| `selectedItemId`  | `value` | Id of the current selected SKU |
+| `productClusters` | `array` | List of product clusters.             |
+| `categoryTree`    | `array` | List of categories.                   |
 
 ### `condition.{context}`
 
