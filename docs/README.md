@@ -27,7 +27,7 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | `productId`       | `value` | Id of the current product.            |
 | `categoryId`      | `value` | Id of the current category.           |
 | `brandId`         | `value` | Id of the current brand.              |
-| `selectedItemId`  | `value` | Id of the current selected item / SKU |
+| `selectedItemId`  | `value` | Id of the current selected SKU |
 | `productClusters` | `array` | List of product clusters.             |
 | `categoryTree`    | `array` | List of categories.                   |
 
