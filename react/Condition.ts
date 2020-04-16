@@ -5,7 +5,7 @@ import { useConditionContext, useConditionDispatch } from './ConditionContext'
 
 export interface ConditionProps {
   conditions?: Conditions
-  match: MatchType
+  match?: MatchType
   enabled?: boolean
 }
 
@@ -42,7 +42,9 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
       type: 'UPDATE_MATCH',
       payload: { matches },
     })
-  }, [dispatch, matches])
+    // we depend on `values` to trigger an update of the context `matched` value
+    // TODO: maybe rewrite this whole thing
+  }, [dispatch, matches, values])
 
   if (conditions == null) {
     // TODO: Handle error better
@@ -54,7 +56,7 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
     return null
   }
 
-  return (children as any) ?? null
+  return (children as never) ?? null
 }
 
 export default Condition

@@ -13,6 +13,7 @@
     "react-intl": "^4.3.1"
   },
   "devDependencies": {
+    "@apollo/react-testing": "^3.1.4",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^25.1.5",
     "@types/node": "^13.11.0",
