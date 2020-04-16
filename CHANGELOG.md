@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- `matched` context value not being recaculated after its invalidation.
+- `matched` context value not being recalculated after its invalidation.
 
 ## [1.1.1] - 2020-04-13
 ### Fixed
