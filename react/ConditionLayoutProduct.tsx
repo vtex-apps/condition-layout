@@ -28,6 +28,7 @@ export const PRODUCT_SUBJECTS = {
 
 const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
+  if (!product) return null
 
   const values = {
     productId: product.productId,
