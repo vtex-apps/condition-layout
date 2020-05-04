@@ -30,7 +30,7 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
 
   // Sometimes it takes a while for useProduct() to return the correct results
-  if ( product == null || selectedItem == null) return null
+  if (product == null || selectedItem == null) return null
 
   const values = {
     productId: product.productId,
