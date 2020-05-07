@@ -21,6 +21,7 @@ const ConditionLayout: StorefrontFunctionComponent<Props> = ({
     matched: undefined,
     subjects,
     values,
+    considerMatchedValue: false,
   })
 
   // we use a useEffect that skips the first render

@@ -12,6 +12,7 @@ type ConditionContextValue = {
   matched: boolean | undefined
   subjects: GenericSubjects
   values: Values
+  considerMatchedValue: boolean
 }
 
 export const ConditionContext = createContext<ConditionContextValue>(
@@ -30,7 +31,7 @@ export function reducer(
         ...prevState,
         // we need to invalidate the matched property after updating the values
         // because it's possible for none of the conditions to match the new values
-        matched: undefined,
+        considerMatchedValue: false,
         values: action.payload.values,
       }
     }
@@ -42,9 +43,14 @@ export function reducer(
         return prevState
       }
 
+      const matchedValue = prevState.considerMatchedValue
+        ? prevState.matched
+        : undefined
+
       return {
         ...prevState,
-        matched: Boolean(prevState.matched) || matches,
+        considerMatchedValue: true,
+        matched: Boolean(matchedValue) || matches,
       }
     }
 
