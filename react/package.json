@@ -1,5 +1,5 @@
 {
-  "version": "1.1.5",
+  "version": "1.1.6",
   "scripts": {
     "test": "vtex-test-tools test --collect-coverage",
     "lint": "tsc --noEmit && eslint --ext ts,tsx ."
