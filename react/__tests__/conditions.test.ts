@@ -10,6 +10,7 @@ const SUBJECTS = {
   brandId: { type: 'value' },
   productClusters: { type: 'array', id: 'id' },
   categoryTree: { type: 'array' },
+  specificationGroups: { type: 'array', name: 'name' },
   customId: { type: 'array', id: 'identifier' },
   selectedItemId: { type: 'value' },
 } as const
@@ -122,6 +123,22 @@ describe('single condition', () => {
         subject: 'categoryTree',
         verb: 'contains',
         object: 'id2',
+      },
+    })
+
+    expect(result).toBe(true)
+  })
+
+  it("defaults identifier prop to 'name'", () => {
+    const result = testCondition({
+      subjects: SUBJECTS,
+      values: {
+        specificationsGroups: [{ name: 'name1' }, { name: 'name2' }, { name: 'name3' }],
+      },
+      condition: {
+        subject: 'specificationGroups',
+        verb: 'contains',
+        object: 'name2',
       },
     })
 
