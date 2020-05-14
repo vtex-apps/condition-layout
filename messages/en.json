@@ -15,7 +15,7 @@
   "admin/editor.condition-layout.product.subject.brandId": "Brand ID",
   "admin/editor.condition-layout.product.subject.productClusters": "Product clusters",
   "admin/editor.condition-layout.product.subject.categoryTree": "Category tree",
-  "admin/editor.condition-layout.product.subject.specificationGroups": "Specifications Groups",
+  "admin/editor.condition-layout.product.subject.properties": "Specifications Property",
   "admin/editor.condition-layout.product.subject.selectedItemId": "Selected Item ID",
   "admin/editor.condition-layout.verb.is": "is",
   "admin/editor.condition-layout.verb.is-not": "is not",

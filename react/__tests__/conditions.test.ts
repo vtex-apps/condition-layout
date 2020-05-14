@@ -10,7 +10,7 @@ const SUBJECTS = {
   brandId: { type: 'value' },
   productClusters: { type: 'array', id: 'id' },
   categoryTree: { type: 'array' },
-  specificationGroups: { type: 'array', name: 'name' },
+  properties: { type: 'array', name: 'name' },
   customId: { type: 'array', id: 'identifier' },
   selectedItemId: { type: 'value' },
 } as const
@@ -133,10 +133,10 @@ describe('single condition', () => {
     const result = testCondition({
       subjects: SUBJECTS,
       values: {
-        specificationsGroups: [{ name: 'name1' }, { name: 'name2' }, { name: 'name3' }],
+        properties: [{ name: 'name1' }, { name: 'name2' }, { name: 'name3' }],
       },
       condition: {
-        subject: 'specificationGroups',
+        subject: 'properties',
         verb: 'contains',
         object: 'name2',
       },
