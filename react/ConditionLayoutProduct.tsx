@@ -24,7 +24,7 @@ export const PRODUCT_SUBJECTS = {
     type: 'array',
     id: 'id',
   },
-  specificationGroups: {
+  properties: {
     type: 'array',
     id: 'name',
   },
@@ -32,7 +32,7 @@ export const PRODUCT_SUBJECTS = {
 
 const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
-  const { productId, categoryId, brandId, productClusters, categoryTree, specificationGroups} =
+  const { productId, categoryId, brandId, productClusters, categoryTree, properties} =
     product ?? {}
   const { itemId: selectedItemId } = selectedItem ?? {}
 
@@ -46,7 +46,7 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
       productClusters,
       categoryTree,
       selectedItemId,
-      specificationGroups
+      properties
     }),
     [
       brandId,
@@ -55,7 +55,7 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
       productClusters,
       productId,
       selectedItemId,
-      specificationGroups
+      properties
     ]
   )
 
