@@ -50,6 +50,7 @@ The `condition-layout.product` block provides the subjects below to use in `cond
 | `selectedItemId`  | `value` | Id of the current selected SKU |
 | `productClusters` | `array` | List of product clusters.             |
 | `categoryTree`    | `array` | List of categories.                   |
+| `properties`      | `array` | List of product-specifications.       |
 
 ### condition.{context}
 

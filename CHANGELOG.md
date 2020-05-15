@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- New prop "properties" enabling one more condition: by product specification.
+
 ## [1.1.6] - 2020-05-08
 ### Fixed
 - Prevent the `ConditionLayout` from rendering nothing after changing the `values` from its context.
