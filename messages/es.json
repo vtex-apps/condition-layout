@@ -15,7 +15,7 @@
   "admin/editor.condition-layout.product.subject.brandId": "ID de marca",
   "admin/editor.condition-layout.product.subject.productClusters": "Agrupaciones de productos",
   "admin/editor.condition-layout.product.subject.categoryTree": "CategoryTree",
-  "admin/editor.condition-layout.product.subject.properties": "Propiedad de especificación",
+  "admin/editor.condition-layout.product.subject.specificationProperties": "Propiedades de especificación",
   "admin/editor.condition-layout.product.subject.selectedItemId": "ID del artículo seleccionado",
   "admin/editor.condition-layout.verb.is": "es",
   "admin/editor.condition-layout.verb.is-not": "no es",
