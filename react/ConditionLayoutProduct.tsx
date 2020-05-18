@@ -32,8 +32,14 @@ export const PRODUCT_SUBJECTS = {
 
 const Product: StorefrontFunctionComponent = ({ children }) => {
   const { product, selectedItem } = useProduct() as any
-  const { productId, categoryId, brandId, productClusters, categoryTree, properties} =
-    product ?? {}
+  const {
+    productId,
+    categoryId,
+    brandId,
+    productClusters,
+    categoryTree,
+    properties,
+  } = product ?? {}
   const { itemId: selectedItemId } = selectedItem ?? {}
 
   // We use a useMemo to modify the a condition layout "values"
@@ -46,7 +52,7 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
       productClusters,
       categoryTree,
       selectedItemId,
-      properties
+      properties,
     }),
     [
       brandId,
@@ -55,7 +61,7 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
       productClusters,
       productId,
       selectedItemId,
-      properties
+      properties,
     ]
   )
 
