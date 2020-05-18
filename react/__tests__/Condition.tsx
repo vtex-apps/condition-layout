@@ -13,7 +13,6 @@ type ProductContext = {
     brandId: string
     productClusters: string[]
     categoryTree: string[]
-    properties: string[]
   }
   selectedItem: {
     itemId: string
@@ -30,7 +29,6 @@ function getMockedProduct({ skuId = '37' }) {
       brandId: 'brandId',
       productClusters: ['productClusters'],
       categoryTree: ['categoryTree'],
-      properties: ['properties'],
     },
     selectedItem: {
       itemId: skuId,
@@ -140,7 +138,6 @@ test('Switches from rendering a matched condition to the else component', () => 
       brandId: 'brandId',
       productClusters: ['productClusters'],
       categoryTree: ['categoryTree'],
-      properties: ['properties'],
     },
     selectedItem: {
       itemId: '370',
