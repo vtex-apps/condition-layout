@@ -56,8 +56,8 @@ If desired, add the `condition.else` block as well. For example:
   },
 + "condition-layout.product": {
 +   "children": [
-+     "condition#custom-pdp-12",
-+     "condition#custom-pdp-20",
++     "condition.product#custom-pdp-12",
++     "condition.product#custom-pdp-20",
 +     "condition.else"
 +   ]
 + },
@@ -74,12 +74,12 @@ Now it is time to configure the `condition.product` block: **use the block's pro
   },
   "condition-layout.product": {
     "children": [
-        "condition#custom-pdp-12",
-        "condition#custom-pdp-20",
+        "condition.product#custom-pdp-12",
+        "condition.product#custom-pdp-20",
         "condition.else"
     ]
   },
-+ "condition#custom-pdp-12": {
++ "condition.product#custom-pdp-12": {
 +   "props": {
 +     "conditions": [
 +       {
@@ -91,7 +91,7 @@ Now it is time to configure the `condition.product` block: **use the block's pro
 +   },
 +   "children": ["flex-layout.row#custom-pdp-layout-12"]
 + },
-+ "condition#custom-pdp-20": {
++ "condition.product#custom-pdp-20": {
 +   "props": {
 +     "conditions": [
 +       {
@@ -113,7 +113,7 @@ According to the example above, whenever users interact with a product whose ID 
 
 If users interact with a product whose ID is not equal to 12, the block that is rendered is the `rich-text#default`.
 
-#### `condition` block props
+#### `condition.{context}` props
 
 | Prop name | Type | Description | Default value |
 | ------------ | ---------------- | -------------------- | -------- |
