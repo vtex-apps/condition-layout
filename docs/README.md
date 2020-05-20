@@ -27,7 +27,7 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 | Block name | Description |
 | -------------- | ----------------------------------------------- |
 | `condition-layout.{context}` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Top level block in which you will specify (replacing the `{context}` value in the block name) which context will be used for providing data to its child block namely `condition`. **Currently, the Condition Layout only works with the product context** therefore the top block must be `condition-layout.product`. |
-| `condition.{context}` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Defines the condition logic and the children blocks that are going to be rendered in case the predefined condition is met. |
+| `condition.{context}` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Defines the condition logic and the children blocks that are going to be rendered in case the predefined condition is met. Remember to replace the `{context}` value for the context name specified in the Condition Layout block (`product`). |
 | `condition.else` | This block is optional and can be used as a child of the `condition-layout.{context}` block. When declared, its children are rendered if no condition was met. In scenarios where no condition was met and the `condition.else` block was not declared, no content will be displayed. |
 
 ### Step 2 - Adding the `condition-layout.{context}` block to your theme's templates
@@ -45,7 +45,9 @@ In the product theme template, add the `condition-layout.{context}` block, repla
   
 ### Step 3 - Configuring the `condition-layout.{context}` block
 
-Once the `condition-layout.product` block was added to the product template, you must declare its children using the `condition` block and, if desired, the `condition.else` block, as shown below:
+Once the `condition-layout.product` block was added to the product template, you must declare its children using the `condition.{context}` block replacing the `{context}` value with `product`.
+
+If desired, add the `condition.else` block as well. For example:
 
 ```diff
 {
@@ -71,9 +73,9 @@ Once the `condition-layout.product` block was added to the product template, you
 | `selectedItemId`  | `value` | Id of the current selected SKU |
 | `productClusters` | `array` | List of product clusters.             |
 | `categoryTree`    | `array` | List of categories.                   |
-| `specificationProperties` | `array` | List of product-specifications. |
+| `specificationProperties` | `array` | List of product specifications. |
 
-Now it is time to configure the `condition`: **use the block's props to define your layout condition** and declare as its child a block of your choosing that will be rendered if this condition is met. For example:
+Now it is time to configure the `condition.product` block: **use the block's props to define your layout condition** and declare as its child a block of your choosing that will be rendered if this condition is met. For example:
 
 ```diff
 {
@@ -146,6 +148,7 @@ If users interact with a product whose ID is not equal to 12, the block that is 
 | `selectedItemId` | `value` | ID of the item being selected by the user on the UI. |
 | `productClusters` | `array` | List of product clusters on the UI. |
 | `categoryTree` | `array` | List of categories on the UI. |
+| `specificationProperties` | `array` | List of product specifications on the UI. |
 
 :information_source: *Since the Condition Layout can only be used with product contexts, only the subjects listed above are needed for the proper functioning of the `condition` block. Remember to choose the subject's value according to the value passed to the `object` prop*.
 
@@ -153,11 +156,11 @@ If users interact with a product whose ID is not equal to 12, the block that is 
 
 In practice, the Condition Layout does not render a block on its own. **The app provides 3 logic blocks**, meaning blocks that lay out the reasoning behind rendering other Store Framework blocks.
 
-The `condition` block is the one that does your store's actual Layout logic and, using the `conditions` and `match` props to set the conditions that blocks must meet to be rendered or not.
+The `condition.{context}` block is the one that does your store's actual Layout logic and, using the `conditions` and `match` props to set the conditions that blocks must meet to be rendered or not.
 
 The `conditions` prop object has 3 other props, namely `subject`, `verb` and `object`, that together define the condition that must be met and how it is going to be validated: the `object` prop from `conditions` compares its value with the values fetched by the subject passed to the `subject` prop. The criteria used for this comparison stems from the value passed in the `verb`. The result being to define whether the condition put forth by the `condition` block and its props is acuatlly valid or not. 
 
-Lastly, the `match` prop decides the necessary number of valid conditions (defined in `condition` blocks) for the layout rendering to actually occur.
+Lastly, the `match` prop decides the necessary number of valid conditions (defined in `condition.{context}` blocks) for the layout rendering to actually occur.
 
 ## Customization
 
