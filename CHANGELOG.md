@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - New `specificationProperties ` enabling one more condition: by product specification.
 
+### Fixed
+- Update app documentation (README.md file)
+
 ## [1.1.6] - 2020-05-08
 ### Fixed
 - Prevent the `ConditionLayout` from rendering nothing after changing the `values` from its context.
