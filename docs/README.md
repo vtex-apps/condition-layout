@@ -27,7 +27,7 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 | Block name | Description |
 | -------------- | ----------------------------------------------- |
 | `condition-layout.{context}` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Top level block in which you will specify (replacing the `{context}` value in the block name) which context will be used for providing data to its child block namely `condition`. **Currently, the Condition Layout only works with the product context** therefore the top block must be `condition-layout.product`. |
-| `condition` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Defines the condition logic and the children blocks that are going to be rendered in case the predefined condition is met. |
+| `condition.{context}` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Defines the condition logic and the children blocks that are going to be rendered in case the predefined condition is met. |
 | `condition.else` | This block is optional and can be used as a child of the `condition-layout.{context}` block. When declared, its children are rendered if no condition was met. In scenarios where no condition was met and the `condition.else` block was not declared, no content will be displayed. |
 
 ### Step 2 - Adding the `condition-layout.{context}` block to your theme's templates
