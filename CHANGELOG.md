@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- New `specificationProperties ` enabling one more condition: by product specification.
+- Product specification condition `specificationProperties`.
 
 ## [1.1.7] - 2020-05-20
 
