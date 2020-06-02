@@ -44,6 +44,7 @@
                           "brandId",
                           "productClusters",
                           "categoryTree",
+                          "specificationProperties",
                           "selectedItemId"
                         ],
                         "enumNames": [
@@ -52,6 +53,7 @@
                           "admin/editor.condition-layout.product.subject.brandId",
                           "admin/editor.condition-layout.product.subject.productClusters",
                           "admin/editor.condition-layout.product.subject.categoryTree",
+                          "admin/editor.condition-layout.product.subject.specificationProperties",
                           "admin/editor.condition-layout.product.subject.selectedItemId"
                         ]
                       },
@@ -70,7 +72,11 @@
                           {
                             "properties": {
                               "subject": {
-                                "enum": ["productClusters", "categoryTree"]
+                                "enum": [
+                                  "productClusters",
+                                  "categoryTree",
+                                  "specificationProperties"
+                                ]
                               },
                               "verb": {
                                 "default": "contains",
