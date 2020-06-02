@@ -13,6 +13,7 @@ type ProductContext = {
     brandId: string
     productClusters: string[]
     categoryTree: string[]
+    properties: Array<{ name: string }>
   }
   selectedItem: {
     itemId: string
@@ -21,7 +22,7 @@ type ProductContext = {
 
 const mockedUseProduct = useProduct as jest.Mock<ProductContext>
 
-function getMockedProduct({ skuId = '37' }) {
+function getMockedProduct({ skuId = '37' }): ProductContext {
   return {
     product: {
       productId: 'productId',
@@ -29,6 +30,7 @@ function getMockedProduct({ skuId = '37' }) {
       brandId: 'brandId',
       productClusters: ['productClusters'],
       categoryTree: ['categoryTree'],
+      properties: [{ name: 'specificationPropoperties' }],
     },
     selectedItem: {
       itemId: skuId,
@@ -138,6 +140,7 @@ test('Switches from rendering a matched condition to the else component', () => 
       brandId: 'brandId',
       productClusters: ['productClusters'],
       categoryTree: ['categoryTree'],
+      properties: [{ name: 'specificationPropoperties' }],
     },
     selectedItem: {
       itemId: '370',

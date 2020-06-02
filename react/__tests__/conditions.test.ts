@@ -12,6 +12,7 @@ const SUBJECTS = {
   categoryTree: { type: 'array' },
   customId: { type: 'array', id: 'identifier' },
   selectedItemId: { type: 'value' },
+  specificationProperties: { type: 'array', id: 'name' },
 } as const
 
 describe('single condition', () => {
