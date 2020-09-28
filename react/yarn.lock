@@ -4781,17 +4781,17 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.7.1/public/@types/vtex.product-context":
-  version "0.7.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.7.1/public/@types/vtex.product-context#2476a5831bdd066e4ce99e0a004480b0ee445007"
+"vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.1/public/@types/vtex.product-context":
+  version "0.9.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.1/public/@types/vtex.product-context#827912b5cc2a63a51825397152dee60ff578aaf0"
 
-"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.98.0/public/@types/vtex.render-runtime":
-  version "8.98.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.98.0/public/@types/vtex.render-runtime#a2e1d054b6bc2d9c1581ec9964c73a5280460aba"
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.1/public/@types/vtex.render-runtime":
+  version "8.122.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.1/public/@types/vtex.render-runtime#d790c20d157b42a08f1b90085e1347a52b87441e"
 
-"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.112.27/public/@types/vtex.styleguide":
-  version "9.112.27"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.112.27/public/@types/vtex.styleguide#30fa53650c1bb08e25d2252d7c3af4285daccd95"
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.129.1/public/@types/vtex.styleguide":
+  version "9.129.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.129.1/public/@types/vtex.styleguide#f35f3bb9646cff6ee595cf70cf70239118329221"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"

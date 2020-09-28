@@ -23,8 +23,8 @@
     "@vtex/test-tools": "^3.1.0",
     "apollo-client": "^2.6.8",
     "typescript": "3.8.3",
-    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.7.1/public/@types/vtex.product-context",
-    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.98.0/public/@types/vtex.render-runtime",
-    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.112.27/public/@types/vtex.styleguide"
+    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.1/public/@types/vtex.product-context",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.1/public/@types/vtex.render-runtime",
+    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.129.1/public/@types/vtex.styleguide"
   }
 }
