@@ -139,6 +139,7 @@ If users interact with a product whose ID is not equal to 12, the block that is 
 | `productClusters` | `array` | List of product clusters on the UI. |
 | `categoryTree` | `array` | List of categories on the UI. |
 | `specificationProperties` | `array` | List of product specifications. |
+| `areAllVariationsSelected` | `value` | `true` if every possible visible variations were selected, otherwise `false`. |
 
 :information_source: *Since the Condition Layout can only be used with product contexts, only the subjects listed above are needed for the proper functioning of the `condition` block. Remember to choose the subject's value according to the value passed to the `object` prop*.
 
