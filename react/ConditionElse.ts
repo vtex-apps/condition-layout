@@ -8,9 +8,9 @@ const Else: StorefrontFunctionComponent<Props> = ({
   children,
   enabled = true,
 }) => {
-  const { matched } = useConditionContext()
+  const { matched: ctxMatch } = useConditionContext()
 
-  if (matched !== false || !enabled) {
+  if (ctxMatch !== false || !enabled) {
     return null
   }
 

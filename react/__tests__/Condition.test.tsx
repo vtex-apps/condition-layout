@@ -5,6 +5,7 @@ import { render } from '@vtex/test-tools/react'
 import ConditionLayout from '../ConditionLayoutProduct'
 import ConditionProduct from '../ConditionProduct'
 import ConditionElse from '../ConditionElse'
+import { ConditionContext, ConditionDispatchContext } from '../ConditionContext'
 
 type ProductContext = {
   product: {
@@ -184,4 +185,42 @@ test('Switches from rendering the else component to a matched condition componen
 
   expect(queryByText(/Hooray!/)).toBeTruthy()
   expect(queryByText(/Oh no!/)).toBeFalsy()
+})
+
+test('Prevents Condition from rendering alongside Else when transitioning from different match values', () => {
+  // When a certain Condition match value is updated, there's a moment of unsynchonicity between it and the `matches` from the context
+  // This test guarantees that we won't have both Condition(s) and Else rendered at the same time
+  // in between-state
+  const layout = (
+    <ConditionContext.Provider
+      value={{
+        matched: false,
+        subjects: {
+          selectedItemId: {
+            type: 'value',
+          },
+        },
+        values: {
+          selectedItemId: '37',
+        },
+        considerMatchedValue: false,
+      }}
+    >
+      <ConditionProduct
+        conditions={[
+          {
+            subject: 'selectedItemId',
+            verb: 'is',
+            object: '37',
+          },
+        ]}
+      >
+        Should not render!
+      </ConditionProduct>
+    </ConditionContext.Provider>
+  )
+
+  const { queryByText } = render(layout)
+
+  expect(queryByText(/Should not render!/)).not.toBeInTheDocument()
 })
