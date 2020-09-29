@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `areAllVariationsSelected` subject to `condition.product`.
 
+### Fixed
+- Prevent `condition.else` and other condition blocks to be rendered at the same time.
+
 ### Changed
 - Invalid condition error will only appear in the `development` environment.
 

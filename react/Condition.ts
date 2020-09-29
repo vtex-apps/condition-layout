@@ -15,10 +15,10 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
   match,
   enabled = true,
 }) => {
-  const { values, subjects } = useConditionContext()
+  const { values, subjects, matched: ctxMatch } = useConditionContext()
   const dispatch = useConditionDispatch()
 
-  const matches = useMemo(() => {
+  const localMatch = useMemo(() => {
     if (!enabled) {
       return false
     }
@@ -27,12 +27,7 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
       return undefined
     }
 
-    const hasMatched = testConditions({
-      subjects,
-      conditions,
-      match,
-      values,
-    })
+    const hasMatched = testConditions({ subjects, conditions, match, values })
 
     return hasMatched
   }, [conditions, enabled, match, subjects, values])
@@ -40,19 +35,21 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
   useEffect(() => {
     dispatch({
       type: 'UPDATE_MATCH',
-      payload: { matches },
+      payload: { matches: localMatch },
     })
     // we depend on `values` to trigger an update of the context `matched` value
     // TODO: maybe rewrite this whole thing
-  }, [dispatch, matches, values])
+  }, [dispatch, localMatch, values])
 
   if (conditions == null) {
     // TODO: Handle error better
     console.warn('Missing conditions')
+
     return null
   }
 
-  if (!matches) {
+  // We use ctxMatch to prevent having both condition.xxx and condition.else blocks rendered at the same time.
+  if (!ctxMatch || !localMatch) {
     return null
   }
 
