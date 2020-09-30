@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* Typings for `render-runtime` */
 declare module 'vtex.render-runtime' {
   import { Component, ComponentType, ReactElement, ReactType } from 'react'
@@ -25,7 +26,7 @@ declare module 'vtex.render-runtime' {
   }
 
   export const ChildBlock: ComponentType<ChildBlockProps>
-  export const useChildBlock = function ({ id: string }): object {}
+  export function useChildBlock({ id: string }): object {}
 
   export const Helmet: ReactElement
   export const Link: ReactType

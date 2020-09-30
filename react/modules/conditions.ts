@@ -16,7 +16,6 @@ const testValueCondition = (
   const value = values[condition.subject]
   const matches = String(value) === String(condition.object)
 
-  // TODO: error messages on wrong verbs
   return (condition.verb === 'is' || !condition.verb) === matches
 }
 
@@ -26,7 +25,7 @@ const testArrayCondition = (
   condition: ArrayCondition
 ) => {
   const subjectId = subject.id ?? 'id'
-  const ids = values[condition.subject]?.map(item => String(item[subjectId]))
+  const ids = values[condition.subject]?.map((item) => String(item[subjectId]))
   const matches = ids?.includes(String(condition.object))
 
   // TODO: error messages on wrong verbs
@@ -63,7 +62,7 @@ export const validateConditions = <T extends GenericSubjects>(
   const valid: Condition[] = []
   const invalid: Condition[] = []
 
-  conditions.forEach(condition => {
+  conditions.forEach((condition) => {
     const subject = subjects[condition.subject]
 
     // nullish verb defaults to the default subject type operator (is/contains)
@@ -99,16 +98,17 @@ export const testConditions = ({
     invalid: invalidConditions,
   } = validateConditions(subjects, conditions)
 
-  if (invalidConditions.length > 0) {
+  if (process.env.NODE_ENV !== 'production' && invalidConditions.length > 0) {
     console.error(
       `[condition-layout] One or more invalid conditions were provided: ${invalidConditions
         .map(({ subject }) => `"${subject}"`)
         .join(', ')}`
     )
+
     return false
   }
 
-  const results = validConditions.map(condition =>
+  const results = validConditions.map((condition) =>
     testCondition({ subjects, values, condition })
   )
 

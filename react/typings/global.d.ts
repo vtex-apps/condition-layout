@@ -1,3 +1,7 @@
+type NoUndefinedField<T> = {
+  [P in keyof T]-?: Exclude<T[P], undefined>
+}
+
 type GenericSubject = {
   type: string
 }
@@ -35,5 +39,5 @@ interface ArrayCondition {
 }
 
 type Values = {
-  [key: string]: string | number | Array<{ [key: string]: unknown }>
+  [key: string]: string | number | boolean | Array<{ [key: string]: unknown }>
 }

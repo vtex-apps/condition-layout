@@ -97,6 +97,7 @@ describe('single condition', () => {
         object: 'id2',
       },
     })
+
     const negatedResult = testCondition({
       subjects: SUBJECTS,
       values: {
@@ -161,13 +162,14 @@ describe('multiple conditions', () => {
       },
       conditions: [],
     })
+
     expect(matches).toBe(false)
   })
 
   it('returns false if invalid match type found', () => {
     const matches = testConditions({
       subjects: SUBJECTS,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       match: 'invalid-match-type',
       values: {
@@ -182,6 +184,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(false)
   })
 
@@ -204,6 +207,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(false)
   })
 
@@ -228,6 +232,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(true)
   })
 
@@ -252,6 +257,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(false)
   })
 
@@ -276,6 +282,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(true)
   })
 
@@ -300,6 +307,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(true)
   })
 
@@ -324,6 +332,7 @@ describe('multiple conditions', () => {
         },
       ],
     })
+
     expect(matches).toBe(false)
   })
 })

@@ -28,10 +28,18 @@ export const PRODUCT_SUBJECTS = {
     type: 'array',
     id: 'name',
   },
+  areAllVariationsSelected: {
+    type: 'value',
+  },
 } as const
 
 const Product: StorefrontFunctionComponent = ({ children }) => {
-  const { product, selectedItem } = useProduct() as any
+  const {
+    product,
+    selectedItem,
+    skuSelector: { areAllVariationsSelected = false } = {},
+  } = useProduct() ?? {}
+
   const {
     productId,
     categoryId,
@@ -40,12 +48,13 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
     categoryTree,
     properties: specificationProperties,
   } = product ?? {}
+
   const { itemId: selectedItemId } = selectedItem ?? {}
 
-  // We use a useMemo to modify the a condition layout "values"
+  // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
-  const values = useMemo(
-    () => ({
+  const values = useMemo(() => {
+    const bag = {
       productId,
       categoryId,
       brandId,
@@ -53,17 +62,21 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
       categoryTree,
       selectedItemId,
       specificationProperties,
-    }),
-    [
-      brandId,
-      categoryId,
-      categoryTree,
-      productClusters,
-      productId,
-      selectedItemId,
-      specificationProperties,
-    ]
-  )
+      areAllVariationsSelected,
+    }
+
+    // We use `NoUndefinedField` to remove optionality + undefined values from the type
+    return bag as NoUndefinedField<typeof bag>
+  }, [
+    brandId,
+    categoryId,
+    categoryTree,
+    productClusters,
+    productId,
+    selectedItemId,
+    specificationProperties,
+    areAllVariationsSelected,
+  ])
 
   // Sometimes it takes a while for useProduct() to return the correct results
   if (values.selectedItemId == null || values.productId == null) {
