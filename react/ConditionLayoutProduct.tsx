@@ -1,39 +1,113 @@
 import React, { useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
 
-import ConditionLayout from './ConditionLayout'
+import { validateConditions } from './modules/conditions'
+import type { NoUndefinedField, MatchType, Condition } from './types'
 
-export const PRODUCT_SUBJECTS = {
-  productId: {
-    type: 'value',
-  },
-  categoryId: {
-    type: 'value',
-  },
-  brandId: {
-    type: 'value',
-  },
-  selectedItemId: {
-    type: 'value',
-  },
-  productClusters: {
-    type: 'array',
-    id: 'id',
-  },
-  categoryTree: {
-    type: 'array',
-    id: 'id',
-  },
-  specificationProperties: {
-    type: 'array',
-    id: 'name',
-  },
-  areAllVariationsSelected: {
-    type: 'value',
-  },
-} as const
+type Props = {
+  matchType: MatchType
+  conditions: Condition[]
+  Else?: React.ComponentType
+  Then?: React.ComponentType
+}
 
-const Product: StorefrontFunctionComponent = ({ children }) => {
+type SubjectBag = {
+  productId: string
+  categoryId: string
+  brandId: string
+  productClusters: Array<{ id: string }>
+  categoryTree: Array<{ id: string }>
+  selectedItemId: string
+  // todo: fix the type of `values``` after fixing in product-context
+  specificationProperties: Array<{ name: string; values: string }>
+  areAllVariationsSelected: boolean
+}
+
+export const HANDLERS = {
+  productId({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: { productId: string }
+  }) {
+    return String(values.productId) === String(args?.productId)
+  },
+  categoryId({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: {
+      categoryId: string
+    }
+  }) {
+    return String(values.categoryId) === String(args?.categoryId)
+  },
+  brandId({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: {
+      brandId: string
+    }
+  }) {
+    return String(values.brandId) === String(args?.brandId)
+  },
+  selectedItemId({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: { selectedItemId: string }
+  }) {
+    return String(values.selectedItemId) === String(args?.selectedItemId)
+  },
+  areAllVariationsSelected({ values }: { values: SubjectBag }) {
+    return values.areAllVariationsSelected
+  },
+  productClusters({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: { id: string }
+  }) {
+    return Boolean(
+      values.productClusters.find(({ id }) => String(id) === String(args?.id))
+    )
+  },
+  categoryTree({ values, args }: { values: SubjectBag; args: { id: string } }) {
+    return Boolean(
+      values.categoryTree.find(({ id }) => String(id) === String(args?.id))
+    )
+  },
+  specificationProperties({
+    values,
+    args,
+  }: {
+    values: SubjectBag
+    args: { name: string; value?: string }
+  }) {
+    const specification = values.specificationProperties.find(
+      ({ name }) => name === args?.name
+    )
+
+    if (specification == null) return false
+    if (args?.value == null) return Boolean(specification)
+
+    return specification.values.includes(String(args?.value))
+  },
+}
+
+const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
+  Else,
+  Then,
+  matchType,
+  conditions,
+  children,
+}) => {
   const {
     product,
     selectedItem,
@@ -83,15 +157,30 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
     return null
   }
 
-  return (
-    <ConditionLayout values={values} subjects={PRODUCT_SUBJECTS}>
-      {children}
-    </ConditionLayout>
-  )
+  const result = validateConditions({
+    matchType,
+    conditions,
+    values,
+    handlers: HANDLERS,
+  })
+
+  if (result) {
+    if (Then) {
+      return <Then />
+    }
+
+    return <>{children}</>
+  }
+
+  if (Else) {
+    return <Else />
+  }
+
+  return null
 }
 
-Product.schema = {
+ConditionLayoutProduct.schema = {
   title: 'admin/editor.condition-layout.wrapper.product',
 }
 
-export default Product
+export default ConditionLayoutProduct

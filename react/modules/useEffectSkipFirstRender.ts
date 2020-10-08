@@ -9,8 +9,10 @@ export const useEffectSkipFirstRender = (
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false
+
       return
     }
+
     return fn()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
