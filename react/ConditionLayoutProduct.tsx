@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
 
-import { validateConditions } from './modules/conditions'
+import ConditionLayout from './ConditionLayout'
 import type { NoUndefinedField, MatchType, Condition } from './types'
 
 type Props = {
@@ -157,26 +157,18 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     return null
   }
 
-  const result = validateConditions({
-    matchType,
-    conditions,
-    values,
-    handlers: HANDLERS,
-  })
-
-  if (result) {
-    if (Then) {
-      return <Then />
-    }
-
-    return <>{children}</>
-  }
-
-  if (Else) {
-    return <Else />
-  }
-
-  return null
+  return (
+    <ConditionLayout
+      Else={Else}
+      Then={Then}
+      matchType={matchType}
+      conditions={conditions}
+      values={values}
+      handlers={HANDLERS}
+    >
+      {children}
+    </ConditionLayout>
+  )
 }
 
 ConditionLayoutProduct.schema = {

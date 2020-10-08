@@ -1,12 +1,12 @@
 import { Condition, MatchType } from '../types'
 
 export function validateConditions({
-  matchType,
+  matchType = 'all',
   conditions,
   values,
   handlers,
 }: {
-  matchType: MatchType
+  matchType?: MatchType
   conditions: Condition[]
   values: Record<string, unknown>
   handlers: Record<string, unknown>
