@@ -4,7 +4,7 @@ import { validateConditions } from './modules/conditions'
 import type { MatchType, Condition } from './types'
 
 type Props = {
-  matchType: MatchType
+  matchType?: MatchType
   conditions: Condition[]
   Else?: React.ComponentType
   Then?: React.ComponentType
@@ -15,11 +15,11 @@ type Props = {
 const ConditionLayout: FC<Props> = ({
   Else,
   Then,
-  matchType,
   conditions,
   children,
   values,
   handlers,
+  matchType = 'all',
 }) => {
   const result = validateConditions({ matchType, conditions, values, handlers })
 

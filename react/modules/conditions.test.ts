@@ -10,7 +10,7 @@
 //   handlers: Record<string, unknown>
 // }) {
 
-import { validateConditions } from '../modules/conditions'
+import { validateConditions } from './conditions'
 import { Condition } from '../types'
 
 const handlers = {

@@ -29,10 +29,6 @@ export function validateConditions({
 
     const conditionMatch = handler({ values, args })
 
-    if (matchType === 'all') {
-      return (acc ?? true) && conditionMatch
-    }
-
     if (matchType === 'any') {
       return (acc ?? false) || conditionMatch
     }
@@ -41,7 +37,8 @@ export function validateConditions({
       return (acc ?? true) && !conditionMatch
     }
 
-    return null
+    // matchType === all
+    return (acc ?? true) && conditionMatch
   }, null)
 
   return matches

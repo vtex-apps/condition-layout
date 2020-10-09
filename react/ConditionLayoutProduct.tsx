@@ -1,95 +1,68 @@
 import React, { useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
+import type { Product, Item } from 'vtex.product-context/react/ProductTypes'
 
 import ConditionLayout from './ConditionLayout'
-import type { NoUndefinedField, MatchType, Condition } from './types'
+import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 
 type Props = {
-  matchType: MatchType
-  conditions: Condition[]
+  conditions: Array<Condition<keyof SubjectValues>>
+  matchType?: MatchType
   Else?: React.ComponentType
   Then?: React.ComponentType
 }
 
-type SubjectBag = {
-  productId: string
-  categoryId: string
-  brandId: string
-  productClusters: Array<{ id: string }>
-  categoryTree: Array<{ id: string }>
-  selectedItemId: string
+type SubjectValues = {
+  productId: Product['productId']
+  categoryId: Product['categoryId']
+  brandId: Product['brandId']
+  productClusters: Product['productClusters']
+  categoryTree: Product['categoryTree']
+  selectedItemId: Item['itemId']
   // todo: fix the type of `values``` after fixing in product-context
-  specificationProperties: Array<{ name: string; values: string }>
+  specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
 }
 
-export const HANDLERS = {
-  productId({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: { productId: string }
-  }) {
-    return String(values.productId) === String(args?.productId)
+type SubjectArgs = {
+  productId: { id: string }
+  categoryId: { id: string }
+  brandId: { id: string }
+  productClusters: { id: string }
+  categoryTree: { id: string }
+  selectedItemId: { id: string }
+  // todo: fix the type of `values``` after fixing in product-context
+  specificationProperties: { name: string; value?: string }
+  areAllVariationsSelected: undefined
+}
+
+export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
+  productId({ values, args }) {
+    return String(values.productId) === String(args?.id)
   },
-  categoryId({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: {
-      categoryId: string
-    }
-  }) {
-    return String(values.categoryId) === String(args?.categoryId)
+  categoryId({ values, args }) {
+    return String(values.categoryId) === String(args?.id)
   },
-  brandId({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: {
-      brandId: string
-    }
-  }) {
-    return String(values.brandId) === String(args?.brandId)
+  brandId({ values, args }) {
+    return String(values.brandId) === String(args?.id)
   },
-  selectedItemId({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: { selectedItemId: string }
-  }) {
-    return String(values.selectedItemId) === String(args?.selectedItemId)
+  selectedItemId({ values, args }) {
+    return String(values.selectedItemId) === String(args?.id)
   },
-  areAllVariationsSelected({ values }: { values: SubjectBag }) {
+  areAllVariationsSelected({ values }) {
     return values.areAllVariationsSelected
   },
-  productClusters({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: { id: string }
-  }) {
+  productClusters({ values, args }) {
     return Boolean(
       values.productClusters.find(({ id }) => String(id) === String(args?.id))
     )
   },
-  categoryTree({ values, args }: { values: SubjectBag; args: { id: string } }) {
+  categoryTree({ values, args }) {
     return Boolean(
       values.categoryTree.find(({ id }) => String(id) === String(args?.id))
     )
   },
-  specificationProperties({
-    values,
-    args,
-  }: {
-    values: SubjectBag
-    args: { name: string; value?: string }
-  }) {
+  specificationProperties({ values, args }) {
     const specification = values.specificationProperties.find(
       ({ name }) => name === args?.name
     )
