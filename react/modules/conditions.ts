@@ -15,6 +15,7 @@ export function validateConditions({
     const { subject, arguments: args } = condition
     const handler = handlers[subject]
 
+    // istanbul ignore next
     if (typeof handler !== 'function') {
       if (process.env.NODE_ENV !== 'production') {
         console.error(

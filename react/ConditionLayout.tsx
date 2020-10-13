@@ -6,10 +6,10 @@ import type { MatchType, Condition } from './types'
 type Props = {
   matchType?: MatchType
   conditions: Condition[]
-  Else?: React.ComponentType
-  Then?: React.ComponentType
   values: Record<string, unknown>
   handlers: Record<string, unknown>
+  Else?: React.ComponentType
+  Then?: React.ComponentType
 }
 
 const ConditionLayout: FC<Props> = ({

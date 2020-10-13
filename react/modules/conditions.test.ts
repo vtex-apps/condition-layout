@@ -1,15 +1,3 @@
-// export function validateConditions({
-//   matchType,
-//   conditions,
-//   values,
-//   handlers,
-// }: {
-//   matchType: MatchType
-//   conditions: Condition[]
-//   values: Record<string, unknown>
-//   handlers: Record<string, unknown>
-// }) {
-
 import { validateConditions } from './conditions'
 import { Condition } from '../types'
 

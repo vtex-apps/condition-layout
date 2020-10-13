@@ -4,16 +4,22 @@ export type NoUndefinedField<T> = {
 
 export type MatchType = 'any' | 'all' | 'none'
 
-export type Condition<Subjects = string> = {
-  subject: Subjects
-  arguments: Record<string, string | number | boolean | null | unknown[]>
-}
-
 export type Handler<Values, Args> = (o: {
   values: Values
   args: Args
 }) => boolean
 
+export type Condition<Subjects = unknown, Args = unknown> = Args extends Record<
+  keyof Subjects,
+  unknown
+>
+  ? {
+      [K in keyof Subjects]: Args[K] extends undefined
+        ? { subject: K }
+        : { subject: K; arguments: Args[K] }
+    }[keyof Subjects]
+  : { subject: string; arguments?: unknown }
+
 export type Handlers<Subjects, Args extends Record<keyof Subjects, unknown>> = {
-  [key in keyof Subjects]: Handler<Subjects, Args[key]>
+  [K in keyof Subjects]: Handler<Subjects, Args[K]>
 }

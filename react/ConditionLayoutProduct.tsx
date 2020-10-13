@@ -6,7 +6,7 @@ import ConditionLayout from './ConditionLayout'
 import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 
 type Props = {
-  conditions: Array<Condition<keyof SubjectValues>>
+  conditions: Array<Condition<SubjectValues, SubjectArgs>>
   matchType?: MatchType
   Else?: React.ComponentType
   Then?: React.ComponentType
@@ -19,7 +19,6 @@ type SubjectValues = {
   productClusters: Product['productClusters']
   categoryTree: Product['categoryTree']
   selectedItemId: Item['itemId']
-  // todo: fix the type of `values``` after fixing in product-context
   specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
 }
@@ -31,7 +30,6 @@ type SubjectArgs = {
   productClusters: { id: string }
   categoryTree: { id: string }
   selectedItemId: { id: string }
-  // todo: fix the type of `values``` after fixing in product-context
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
 }
