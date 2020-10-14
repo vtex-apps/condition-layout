@@ -19,7 +19,7 @@ const ConditionLayout: FC<Props> = ({
   children,
   values,
   handlers,
-  matchType = 'all',
+  matchType,
 }) => {
   const result = validateConditions({ matchType, conditions, values, handlers })
 

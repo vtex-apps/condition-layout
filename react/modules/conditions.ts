@@ -19,7 +19,7 @@ export function validateConditions({
     if (typeof handler !== 'function') {
       if (process.env.NODE_ENV !== 'production') {
         console.error(
-          `Invalid subject "${subject}}". Must be one of "${Object.keys(
+          `Invalid subject "${subject}". Must be one of "${Object.keys(
             handlers
           ).join(', ')}".`
         )

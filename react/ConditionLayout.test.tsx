@@ -3,6 +3,7 @@ import React from 'react'
 import { render } from '@vtex/test-tools/react'
 
 import ConditionLayout from './ConditionLayout'
+import type { Condition } from './types'
 
 test('Renders a condition that resolves to true', () => {
   const { queryByText } = render(
@@ -215,4 +216,278 @@ test('Switches from rendering the else component to a matched condition componen
   rerender(layout)
   expect(queryByText(/Hooray!/)).toBeInTheDocument()
   expect(queryByText(/Oh no!/)).not.toBeInTheDocument()
+})
+
+describe('multiple conditions', () => {
+  describe('matchType: all', () => {
+    it('returns true for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'correct',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'correct',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="all"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).toBeInTheDocument()
+    })
+
+    it('returns false for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'correct',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'wrong',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="all"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).not.toBeInTheDocument()
+    })
+  })
+
+  describe('matchType: any', () => {
+    // simple 'any' conditions are the same as 'all' conditions
+
+    it('returns true for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'wrong',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'correct',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="any"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).toBeInTheDocument()
+    })
+
+    it('returns false for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'wrong',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'wrong',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="any"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).not.toBeInTheDocument()
+    })
+  })
+
+  describe('matchType: none', () => {
+    it('returns true for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'wrong',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'wrong',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="none"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).toBeInTheDocument()
+    })
+
+    it('returns false for a composed condition', () => {
+      const handlers = {
+        potatoId({ values, args }: unknown) {
+          return values.potatoId === args.potatoId
+        },
+        kiwiId({ values, args }: unknown) {
+          return values.kiwiId === args.kiwiId
+        },
+      }
+
+      const conditions: Condition[] = [
+        {
+          subject: 'potatoId',
+          arguments: {
+            potatoId: 'wrong',
+          },
+        },
+        {
+          subject: 'kiwiId',
+          arguments: {
+            kiwiId: 'correct',
+          },
+        },
+      ]
+
+      const values = {
+        potatoId: 'correct',
+        kiwiId: 'correct',
+      }
+
+      const { queryByText } = render(
+        <ConditionLayout
+          matchType="none"
+          conditions={conditions}
+          handlers={handlers}
+          values={values}
+        >
+          Hooray!
+        </ConditionLayout>
+      )
+
+      expect(queryByText(/Hooray!/)).not.toBeInTheDocument()
+    })
+  })
 })
