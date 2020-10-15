@@ -12,7 +12,7 @@ export function validateConditions({
   handlers: Record<string, unknown>
 }) {
   const matches = conditions.reduce((acc: boolean | null, condition) => {
-    const { subject, arguments: args } = condition
+    const { subject, arguments: args, toBe = true } = condition
     const handler = handlers[subject]
 
     // istanbul ignore next
@@ -28,7 +28,7 @@ export function validateConditions({
       return acc
     }
 
-    const conditionMatch = handler({ values, args })
+    const conditionMatch = handler({ values, args }) === toBe
 
     if (matchType === 'any') {
       return (acc ?? false) || conditionMatch

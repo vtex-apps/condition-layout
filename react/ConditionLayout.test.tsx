@@ -26,6 +26,28 @@ test('Renders a condition that resolves to true', () => {
   expect(queryByText(/Hooray!/)).toBeInTheDocument()
 })
 
+test('Renders a condition that resolves to false with toBe: false', () => {
+  const { queryByText } = render(
+    <ConditionLayout
+      conditions={[
+        {
+          subject: 'selectedItemId',
+          arguments: { id: '100' },
+          toBe: false,
+        },
+      ]}
+      handlers={{
+        selectedItemId: ({ args }: any) => args.id === '37',
+      }}
+      values={{}}
+    >
+      Hooray!
+    </ConditionLayout>
+  )
+
+  expect(queryByText(/Hooray!/)).toBeInTheDocument()
+})
+
 test('Renders the Then slot if a condition resolves to true', () => {
   const ThenSlot = () => <>Hooray!</>
 

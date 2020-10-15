@@ -9,17 +9,18 @@ export type Handler<Values, Args> = (o: {
   args: Args
 }) => boolean
 
-export type Condition<Subjects = unknown, Args = unknown> = Args extends Record<
-  keyof Subjects,
-  unknown
->
+type SameProps<T> = Record<keyof T, unknown>
+
+export type Condition<Subjects = unknown, Args = unknown> = {
+  toBe?: boolean
+} & (Args extends SameProps<Subjects>
   ? {
       [K in keyof Subjects]: Args[K] extends undefined
         ? { subject: K }
         : { subject: K; arguments: Args[K] }
     }[keyof Subjects]
-  : { subject: string; arguments?: unknown }
+  : { subject: string; arguments?: unknown })
 
-export type Handlers<Subjects, Args extends Record<keyof Subjects, unknown>> = {
+export type Handlers<Subjects, Args extends SameProps<Subjects>> = {
   [K in keyof Subjects]: Handler<Subjects, Args[K]>
 }
