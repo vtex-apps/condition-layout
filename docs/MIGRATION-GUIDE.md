@@ -136,7 +136,7 @@ The above condition can be rewritten as:
           "subject": "specificationProperties",
           "arguments": {
             "name": "Material"
-            // could also check for its value
+            // Optional: could also check for its value
             // "value": "Leather"
           }
         }
