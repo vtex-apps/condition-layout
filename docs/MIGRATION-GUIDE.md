@@ -92,7 +92,7 @@ The same block structure above can now be rewritten as:
         }
       ]
     },
-    "Then": ["flex-layout.row#custom-pdp-layout-20"],
+    "Then": "flex-layout.row#custom-pdp-layout-20",
     "Else": "flex-layout.row#default"
   }
 }
@@ -125,7 +125,7 @@ In **`2.x.x`**, the aforementioned grammar was replaced with a pair of `subject`
 
 The above condition can be rewritten as:
 
-```json
+```jsonc
 {
   "condition.product": {
     "props": {
