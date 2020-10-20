@@ -23,10 +23,10 @@ The rewriting of this app aimed to provide a clearer logic when setting the cond
 
 The changes included in the app upgrade are, namely:
 
-- Block structure
-- Props' syntax
-- Negative conditions
-
+- [Block structure](#block-structure)
+- [Prop's syntax](#props-syntax)
+- [Negative conditions](#negative-conditions)
+  
 ### Block structure
 
 In the **`1.x.x`** version, the `condition-layout` app exports three different types of blocks for your store theme:
