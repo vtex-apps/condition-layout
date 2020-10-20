@@ -8,7 +8,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-As the name implies, the Condition Layout app allows a block to be rendered if certain conditions are met.
+The Condition Layout app allows a component to be rendered in your store if predefined conditions are met.
 
 ![Screen-Recording-certo](https://user-images.githubusercontent.com/12139385/79379694-a8c99980-7f35-11ea-9f01-7021c6529332.gif)
 
@@ -30,9 +30,9 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `condition-layout.product` | Defines the condition logic and the children blocks that are going to be rendered in case the predefined conditions are met. |
 
-### Step 2 - Adding the `condition-layout.{context}` block to your theme's templates
+### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
-In the product theme template, add the `condition-layout.{context}` block, replacing the `{context}` value with `product`. For example:
+In the product theme template, add the `condition-layout.product` block as a children. For example:
 
 ```
 {
@@ -41,11 +41,15 @@ In the product theme template, add the `condition-layout.{context}` block, repla
   },
 ```
 
-:warning: _You should never use `condition-layout` directly. Make sure to always use it with the context variant, such as `condition-layout.product`._
+:warning: _Never use `condition-layout` directly. Make sure to always use it with the context variant, such as `condition-layout.product`._
 
 ### Step 3 - Defining the desired conditions
 
-Now it is time to configure the `condition-layout.product` block: **use the block's props to define your layout condition** and declare as its child a block of your choosing that will be rendered if this condition is met. For example:
+Now it is time to configure the `condition-layout.product` block!
+
+**Use the block's props to define your layout condition**. You can also declare as the children the `condition-layout.product`'s children some blocks of your choosing to be rendered if the condition is met. 
+
+For example:
 
 ```diff
 {
@@ -68,47 +72,41 @@ Now it is time to configure the `condition-layout.product` block: **use the bloc
 + },
 ```
 
-According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered.
+:information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*
 
-If users interact with a product whose ID is not equal to 12, the block that is rendered is the `flex-layout.row#default`.
+| Prop name    | Type     | Description  | Default value |
+| ------------ | -------- | ------------ | ------------- |
+| `conditions` | `object` | List of desired conditions. | `undefined`   |
+| `match`      | `enum`   | Layout rendering criteria. Possible values are: `all` (all conditions must be matched in order to render the layout), `any` (at least one of the conditions must be matched in order to render the layout) or `none` (no conditions must be matched in order to render the layout). | `all`         |
+| `Then`       | `block`  | Name of the block to be rendered if the conditions are met. If no value is defined, the blocks declared as children of `condition-layout.product` will be rendered instead.  | `undefined`   |
+| `Else`       | `block`  | Name of the block to be rendered if the conditions are not met. | `undefined`   |
 
-#### `condition-layout.{context}` props
+- **`conditions` object:**
 
-| Prop name    | Type     | Description                                                                                                                                                                                                                                                       | Default value |
-| ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `conditions` | `object` | List of desired conditions.                                                                                                                                                                                                                                       | `undefined`   |
-| `match`      | `enum`   | Layout rendering criteria. Possible values are: `all` (all conditions must be matched in order to be rendered), `any` (at least one of the conditions must be matched in order to be rendered) or `none` (no conditions must be matched in order to be rendered). | `all`         |
-| `Then`       | `block`  | Name of the block to be rendered when the conditions match. If not defined, `children` is used.                                                                                                                                                                   | `undefined`   |
-| `Else`       | `block`  | Name of the block to be rendered when the conditions do not match.                                                                                                                                                                                                | `undefined`   |
+| Prop name   | Type      | Description | Default value |
+| ----------- | --------- | ----------- | ------------- |
+| `subject`   | `string`  | Defines, according to the product context where the block in declared in, which data is needed from the UI to validate the value chosen in the `object` prop. Check below the possible values for this prop. | `undefined`   |
+| `arguments` | `object`  | Defines the condition parameters. Notice: this prop value varies according to the value set to the `subject` prop. Check below the table for the `subject`'s possible values and their expected arguments. | `undefined`   |
+| `toBe`      | `boolean` | Whether the data fetched in the `subject` prop must met the predefined conditions to render the new layout (`true`) or not (`false`). | `true` |
 
-**`conditions` prop's object:**
+Possible values for the `subject` prop:
 
-| Prop name   | Type      | Description                                                                                                                                                                                                                                                                                                  | Default value |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `subject`   | `string`  | A subject is a similar data fetched from a given context. When passed as a value to this prop, the subject will be used to identify which data is needed from the UI to validate the value chosen in the `object` prop. Check below the possible value for the subject prop provided by the product context. | `undefined`   |
-| `arguments` | `string`  | An object that configures the condition parameters.                                                                                                                                                                                                                                                          | `undefined`   |
-| `toBe`      | `boolean` | The expected result of the condition.                                                                                                                                                                                                                                                                        | `true`        |
-
-##### `condition-layout.product`
-
-- Possible `subject` prop's values provided by the `product` context:
-
-| Subject                    | Description                                                                                               | Arguments                                                                                                    |
-| -------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `productId`                | Product's IDs displayed on the UI.                                                                        | `{ id: string }`                                                                                             |
-| `categoryId`               | Category's IDs displayed on the UI.                                                                       | `{ id: string }`                                                                                             |
-| `brandId`                  | Brand's IDs displayed on the UI.                                                                          | `{ id: string }`                                                                                             |
-| `selectedItemId`           | ID of the item being selected by the user on the UI.                                                      | `{ id: string }`                                                                                             |
-| `productClusters`          | List of product clusters on the UI.                                                                       | `{ id: string }`                                                                                             |
-| `categoryTree`             | List of categories on the UI.                                                                             | `{ id: string }`                                                                                             |
-| `specificationProperties`  | List of product specifications.                                                                           | `{ name: string, value?: string }`. Value is optional, if omitted, only the specification `name` is checked. |
-| `areAllVariationsSelected` | Whether all product variations available on the page were selected by the user (`true`) or not (`false`). | No arguments.                                                                                                |
+| Subject                    | Description            | Arguments      |
+| -------------------------- | ---------------------- | -------------- |
+| `productId`                | Product's IDs currently displayed on the UI.  | `{ id: string }` |
+| `categoryId`               | Category's IDs currently displayed on the UI. | `{ id: string }` |
+| `brandId`                  | Brand's IDs currently displayed on the UI.    | `{ id: string }` |
+| `selectedItemId`           | ID of the item currently selected by the user.   | `{ id: string }` |
+| `productClusters`          | List of product clusters currently displayed on the UI.   | `{ id: string }` |
+| `categoryTree`             | List of categories currentluy displayed on the UI.   | `{ id: string }`  |
+| `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Notice: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
+| `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 
 ## Modus Operandi
 
-The `condition-layout.{context}` uses the `conditions` and `match` props to set the conditions that blocks must meet to be rendered or not.
+The `condition-layout.product` uses the `conditions` and `match` props to set the conditions that blocks must meet to be rendered or not.
 
-The `conditions` object has two props, namely `subject` and `arguments`, that together define one condition that must match. Each `subject` has an underlying validation method executed whenever its `subject` is used. The `arguments` object can be considered arguments being sent to the underlying method.
+The `conditions` object has two props, namely `subject` and `arguments`, that together define one condition that must be met. Each `subject` has an underlying validation method executed whenever its `subject` is used. The `arguments` object can be considered arguments being sent to the underlying method.
 
 Lastly, the `match` prop decides the necessary number of valid conditions (defined in `condition-layout.{context}` blocks) for the layout rendering to actually occur.
 
