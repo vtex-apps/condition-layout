@@ -1,8 +1,8 @@
 # Migration guide
 
-If you're currently using the Condition Layout in its `1.x.x` version, the following guide aims to help you to perform a version upgrade, migrating your store theme to the latest version of the app (`2.x.x`).
+If you're currently using the Condition Layout in its **`1.x.x`** version, the following guide aims to help you to perform a **version upgrade**, migrating your store theme to the latest version of the app (**`2.x.x`**).
 
-If you’re using the former version, you can still find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md). Do not forget to also access the [Condition Layout current documentation](https://github.com/vtex-apps/condition-layout/tree/master/docs/README.md) for its `2.x.x` version. 
+If you’re using the former version, you can still find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md). Do not forget to also access the [**Condition Layout current documentation**](https://github.com/vtex-apps/condition-layout/tree/master/docs/README.md) for its `2.x.x` version. 
 
 :information_source: *Although support for the former version is still granted, we strongly recommend you to update your store theme with the app's newest version in order to keep up with the components' evolution.*
 
@@ -22,7 +22,7 @@ The changes included in the app upgrade are, namely:
   
 ### Block structure
 
-In the **`1.x.x`** version, the `condition-layout` app exports three different types of blocks for your store theme:
+In the `1.x.x` version, the `condition-layout` app exports three different types of blocks for your store theme:
 
 - `condition-layout.product` - Wraps the desired `condition.product` blocks.
 - `condition.product` - Defines the desired conditions to be met.
