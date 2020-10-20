@@ -1,14 +1,3 @@
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [Overview](#overview)
-  - [Block structure](#block-structure)
-  - [Prop's syntax](#props-syntax)
-  - [Negative conditions](#negative-conditions)
-
-<!-- /code_chunk_output -->
-
 # Migration guide
 
 If you're currently using the Condition Layout in its `1.x.x` version, the following guide aims to help you to perform a version upgrade, migrating your store theme to the latest version of the app (`2.x.x`).
@@ -23,9 +12,13 @@ The rewriting of this app aimed to provide a clearer logic when setting the cond
 
 The changes included in the app upgrade are, namely:
 
+<!-- code_chunk_output -->
+
 - [Block structure](#block-structure)
 - [Prop's syntax](#props-syntax)
 - [Negative conditions](#negative-conditions)
+
+<!-- /code_chunk_output -->
   
 ### Block structure
 
