@@ -14,6 +14,8 @@ The Condition Layout app allows a component to be rendered in your store if pred
 
 ## Configuration
 
+:warning: ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).*
+
 ### Step 1 - Adding the Condition Layout app to your theme's dependencies
 
 In your theme's `manifest.json`, add the Condition Layout app as a dependency:
