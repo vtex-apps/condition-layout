@@ -106,11 +106,11 @@ Possible values for the `subject` prop:
 
 ## Modus Operandi
 
-The `condition-layout.product` uses the `conditions` and `match` props to set the conditions that blocks must meet to be rendered or not.
+The `condition-layout.product` mainly uses the `match` and `conditions` props to set, respectively, the criteria and the conditions that blocks must meet to be rendered or not.
 
-The `conditions` object has two props, namely `subject` and `arguments`, that together define one condition that must be met. Each `subject` has an underlying validation method executed whenever its `subject` is used. The `arguments` object can be considered arguments being sent to the underlying method.
+The `conditions` prop, in turn, does not rely on any automatic grammar to define the desired conditions. Instead, it relies on its two props, namely `subject` and `arguments`, that together define which condition must be met by using an underlying data validation method (with specific arguments) according to the UI behavior.
 
-Lastly, the `match` prop decides the necessary number of valid conditions (defined in `condition-layout.{context}` blocks) for the layout rendering to actually occur.
+Lastly, the `match` prop has the responsibility for deciding the necessary number of valid conditions for the layout rendering to actually occur.
 
 ## Customization
 
