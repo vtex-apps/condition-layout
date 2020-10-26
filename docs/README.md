@@ -116,7 +116,7 @@ Lastly, the `match` prop has the responsibility for deciding the necessary numbe
 
 The Condition Layout merely establishes a logic to render other blocks. Therefore, the app doesn't have CSS Handles for its specific customization.
 
-Instead, you should use the Handles of the child blocks chosen for rendering.
+Instead, you should use its child block's Handles.
 
 <!-- DOCS-IGNORE:start -->
 
