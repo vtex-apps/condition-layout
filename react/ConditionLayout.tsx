@@ -1,46 +1,41 @@
-import React, { useReducer } from 'react'
+import React, { FC } from 'react'
 
-import {
-  ConditionDispatchContext,
-  ConditionContext,
-  reducer,
-} from './ConditionContext'
-import { useEffectSkipFirstRender } from './modules/useEffectSkipFirstRender'
+import { validateConditions } from './modules/conditions'
+import type { MatchType, Condition } from './types'
 
 type Props = {
-  values: Values
-  subjects: GenericSubjects
+  matchType?: MatchType
+  conditions: Condition[]
+  values: Record<string, unknown>
+  handlers: Record<string, unknown>
+  Else?: React.ComponentType
+  Then?: React.ComponentType
 }
 
-const ConditionLayout: StorefrontFunctionComponent<Props> = ({
+const ConditionLayout: FC<Props> = ({
+  Else,
+  Then,
+  conditions,
   children,
-  subjects,
   values,
+  handlers,
+  matchType,
 }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    matched: undefined,
-    subjects,
-    values,
-    considerMatchedValue: false,
-  })
+  const result = validateConditions({ matchType, conditions, values, handlers })
 
-  // we use a useEffect that skips the first render
-  // because we don't want to update the `values` twice
-  // at component initialization.
-  useEffectSkipFirstRender(() => {
-    dispatch({
-      type: 'SET_VALUES',
-      payload: { values },
-    })
-  }, [values])
+  if (result) {
+    if (Then) {
+      return <Then />
+    }
 
-  return (
-    <ConditionContext.Provider value={state}>
-      <ConditionDispatchContext.Provider value={dispatch}>
-        {children}
-      </ConditionDispatchContext.Provider>
-    </ConditionContext.Provider>
-  )
+    return <>{children}</>
+  }
+
+  if (Else) {
+    return <Else />
+  }
+
+  return null
 }
 
 export default ConditionLayout

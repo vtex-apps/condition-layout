@@ -1,39 +1,84 @@
 import React, { useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
+import type { Product, Item } from 'vtex.product-context/react/ProductTypes'
 
 import ConditionLayout from './ConditionLayout'
+import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 
-export const PRODUCT_SUBJECTS = {
-  productId: {
-    type: 'value',
-  },
-  categoryId: {
-    type: 'value',
-  },
-  brandId: {
-    type: 'value',
-  },
-  selectedItemId: {
-    type: 'value',
-  },
-  productClusters: {
-    type: 'array',
-    id: 'id',
-  },
-  categoryTree: {
-    type: 'array',
-    id: 'id',
-  },
-  specificationProperties: {
-    type: 'array',
-    id: 'name',
-  },
-  areAllVariationsSelected: {
-    type: 'value',
-  },
-} as const
+type Props = {
+  conditions: Array<Condition<SubjectValues, SubjectArgs>>
+  matchType?: MatchType
+  Else?: React.ComponentType
+  Then?: React.ComponentType
+}
 
-const Product: StorefrontFunctionComponent = ({ children }) => {
+type SubjectValues = {
+  productId: Product['productId']
+  categoryId: Product['categoryId']
+  brandId: Product['brandId']
+  productClusters: Product['productClusters']
+  categoryTree: Product['categoryTree']
+  selectedItemId: Item['itemId']
+  specificationProperties: Product['properties']
+  areAllVariationsSelected: boolean
+}
+
+type SubjectArgs = {
+  productId: { id: string }
+  categoryId: { id: string }
+  brandId: { id: string }
+  productClusters: { id: string }
+  categoryTree: { id: string }
+  selectedItemId: { id: string }
+  specificationProperties: { name: string; value?: string }
+  areAllVariationsSelected: undefined
+}
+
+export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
+  productId({ values, args }) {
+    return String(values.productId) === String(args?.id)
+  },
+  categoryId({ values, args }) {
+    return String(values.categoryId) === String(args?.id)
+  },
+  brandId({ values, args }) {
+    return String(values.brandId) === String(args?.id)
+  },
+  selectedItemId({ values, args }) {
+    return String(values.selectedItemId) === String(args?.id)
+  },
+  areAllVariationsSelected({ values }) {
+    return values.areAllVariationsSelected
+  },
+  productClusters({ values, args }) {
+    return Boolean(
+      values.productClusters.find(({ id }) => String(id) === String(args?.id))
+    )
+  },
+  categoryTree({ values, args }) {
+    return Boolean(
+      values.categoryTree.find(({ id }) => String(id) === String(args?.id))
+    )
+  },
+  specificationProperties({ values, args }) {
+    const specification = values.specificationProperties.find(
+      ({ name }) => name === args?.name
+    )
+
+    if (specification == null) return false
+    if (args?.value == null) return Boolean(specification)
+
+    return specification.values.includes(String(args?.value))
+  },
+}
+
+const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
+  Else,
+  Then,
+  matchType,
+  conditions,
+  children,
+}) => {
   const {
     product,
     selectedItem,
@@ -84,14 +129,21 @@ const Product: StorefrontFunctionComponent = ({ children }) => {
   }
 
   return (
-    <ConditionLayout values={values} subjects={PRODUCT_SUBJECTS}>
+    <ConditionLayout
+      Else={Else}
+      Then={Then}
+      matchType={matchType}
+      conditions={conditions}
+      values={values}
+      handlers={HANDLERS}
+    >
       {children}
     </ConditionLayout>
   )
 }
 
-Product.schema = {
+ConditionLayoutProduct.schema = {
   title: 'admin/editor.condition-layout.wrapper.product',
 }
 
-export default Product
+export default ConditionLayoutProduct
