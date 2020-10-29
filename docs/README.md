@@ -68,9 +68,9 @@ For example:
 +         }
 +       },
 +     ]
++     "Then": "flex-layout.row#custom-pdp-layout-12",
++     "Else": "flex-layout.row#default"
 +   },
-+   "Then": "flex-layout.row#custom-pdp-layout-12",
-+   "Else": "flex-layout.row#default"
 + },
 ```
 
