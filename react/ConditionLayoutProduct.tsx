@@ -21,7 +21,7 @@ type SubjectValues = {
   selectedItemId: Item['itemId']
   specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
-  sellers: Item['sellers']
+  isProductAvailable: boolean
 }
 
 type SubjectArgs = {
@@ -33,7 +33,7 @@ type SubjectArgs = {
   selectedItemId: { id: string }
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
-  sellers: { isProductAvailable: boolean }
+  isProductAvailable: boolean
 }
 
 export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
@@ -72,12 +72,8 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
 
     return specification.values.includes(String(args?.value))
   },
-  sellers({ values, args }){
-    const isProductAvailable = values.sellers.filter(
-      (seller) => seller.commertialOffer.AvailableQuantity > 0
-    )
-
-    return isProductAvailable.length > 0 === args.isProductAvailable
+  isProductAvailable({ values }){
+    return values.isProductAvailable
   },
 }
 
@@ -104,6 +100,10 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
   } = product ?? {}
 
   const { itemId: selectedItemId, sellers } = selectedItem ?? {}
+  const sellersWithProductAvailable = sellers?.filter(
+    (sellers) => sellers.commertialOffer.AvailableQuantity > 0
+  )
+  const isProductAvailable = !!sellersWithProductAvailable && sellersWithProductAvailable.length > 0
 
   // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
@@ -117,7 +117,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       selectedItemId,
       specificationProperties,
       areAllVariationsSelected,
-      sellers,
+      isProductAvailable,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -131,7 +131,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     selectedItemId,
     specificationProperties,
     areAllVariationsSelected,
-    sellers,
+    isProductAvailable,
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results
