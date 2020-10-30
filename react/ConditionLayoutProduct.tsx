@@ -78,7 +78,7 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
     )
 
     return isProductAvailable.length > 0 === args.isProductAvailable
-  }
+  },
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
@@ -117,7 +117,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       selectedItemId,
       specificationProperties,
       areAllVariationsSelected,
-      sellers
+      sellers,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -131,7 +131,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     selectedItemId,
     specificationProperties,
     areAllVariationsSelected,
-    sellers
+    sellers,
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results
