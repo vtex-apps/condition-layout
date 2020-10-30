@@ -103,9 +103,9 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
   const sellersWithProductAvailable = sellers?.filter(
     (seller) => seller.commertialOffer.AvailableQuantity > 0
   )
+
   const isProductAvailable =
-    !!sellersWithProductAvailable &&
-    sellersWithProductAvailable.length > 0
+    !!sellersWithProductAvailable && sellersWithProductAvailable.length > 0
 
   // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
