@@ -103,7 +103,7 @@ Possible values for the `subject` prop:
 | `categoryTree`             | List of categories currentluy displayed on the UI.   | `{ id: string }`  |
 | `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Notice: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
-| `sellers`                  | List of sellers to product availabilty verification.  | `{ isProductAvailable: boolean }` |
+| `sellers`                  | List of sellers to product availabilty verification.  | No arguments are expected. |
 
 ## Modus Operandi
 
