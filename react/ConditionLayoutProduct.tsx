@@ -21,6 +21,7 @@ type SubjectValues = {
   selectedItemId: Item['itemId']
   specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
+  sellers: Item['sellers']
 }
 
 type SubjectArgs = {
@@ -32,6 +33,7 @@ type SubjectArgs = {
   selectedItemId: { id: string }
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
+  sellers: { isProductAvailable: boolean }
 }
 
 export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
@@ -70,6 +72,13 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
 
     return specification.values.includes(String(args?.value))
   },
+  sellers({values, args}){
+    const isProductAvailable = values.sellers.filter(
+      seller => seller.commertialOffer.AvailableQuantity > 0
+    )
+
+    return isProductAvailable.length > 0 === args.isProductAvailable
+  }
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
@@ -94,7 +103,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     properties: specificationProperties,
   } = product ?? {}
 
-  const { itemId: selectedItemId } = selectedItem ?? {}
+  const { itemId: selectedItemId, sellers } = selectedItem ?? {}
 
   // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
@@ -108,6 +117,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       selectedItemId,
       specificationProperties,
       areAllVariationsSelected,
+      sellers
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -121,6 +131,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     selectedItemId,
     specificationProperties,
     areAllVariationsSelected,
+    sellers
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results
