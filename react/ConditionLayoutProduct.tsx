@@ -72,9 +72,9 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
 
     return specification.values.includes(String(args?.value))
   },
-  sellers({values, args}){
+  sellers({ values, args }){
     const isProductAvailable = values.sellers.filter(
-      seller => seller.commertialOffer.AvailableQuantity > 0
+      (seller) => seller.commertialOffer.AvailableQuantity > 0
     )
 
     return isProductAvailable.length > 0 === args.isProductAvailable
