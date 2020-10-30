@@ -72,7 +72,7 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
 
     return specification.values.includes(String(args?.value))
   },
-  isProductAvailable({ values }){
+  isProductAvailable({ values }) {
     return values.isProductAvailable
   },
 }
@@ -101,9 +101,11 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
 
   const { itemId: selectedItemId, sellers } = selectedItem ?? {}
   const sellersWithProductAvailable = sellers?.filter(
-    (sellers) => sellers.commertialOffer.AvailableQuantity > 0
+    (seller) => seller.commertialOffer.AvailableQuantity > 0
   )
-  const isProductAvailable = !!sellersWithProductAvailable && sellersWithProductAvailable.length > 0
+  const isProductAvailable =
+    !!sellersWithProductAvailable &&
+    sellersWithProductAvailable.length > 0
 
   // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
