@@ -33,7 +33,7 @@ type SubjectArgs = {
   selectedItemId: { id: string }
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
-  isProductAvailable: boolean
+  isProductAvailable: undefined
 }
 
 export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
