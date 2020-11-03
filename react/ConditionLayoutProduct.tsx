@@ -75,13 +75,11 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
   isProductAvailable({ values }) {
     const { isProductAvailable: sellers } = values
 
-    const sellersWithProductAvailable = sellers?.filter(
+    const isAvailable = sellers?.some(
       (seller) => seller.commertialOffer.AvailableQuantity > 0
     )
 
-    return (
-      !!sellersWithProductAvailable && sellersWithProductAvailable.length > 0
-    )
+    return Boolean(isAvailable)
   },
 }
 
