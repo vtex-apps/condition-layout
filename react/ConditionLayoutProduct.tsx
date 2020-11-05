@@ -6,13 +6,13 @@ import ConditionLayout from './ConditionLayout'
 import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 
 type Props = {
-  conditions: Array<Condition<SubjectValues, SubjectArgs>>
+  conditions: Array<Condition<ContextValues, HandlerArguments>>
   matchType?: MatchType
   Else?: React.ComponentType
   Then?: React.ComponentType
 }
 
-type SubjectValues = {
+type ContextValues = {
   productId: Product['productId']
   categoryId: Product['categoryId']
   brandId: Product['brandId']
@@ -21,10 +21,10 @@ type SubjectValues = {
   selectedItemId: Item['itemId']
   specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
-  isProductAvailable: Item['sellers']
+  sellers: Item['sellers']
 }
 
-type SubjectArgs = {
+type HandlerArguments = {
   productId: { id: string }
   categoryId: { id: string }
   brandId: { id: string }
@@ -36,7 +36,7 @@ type SubjectArgs = {
   isProductAvailable: undefined
 }
 
-export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
+export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   productId({ values, args }) {
     return String(values.productId) === String(args?.id)
   },
@@ -73,7 +73,7 @@ export const HANDLERS: Handlers<SubjectValues, SubjectArgs> = {
     return specification.values.includes(String(args?.value))
   },
   isProductAvailable({ values }) {
-    const { isProductAvailable: sellers } = values
+    const { sellers } = values
 
     const isAvailable = sellers?.some(
       (seller) => seller.commertialOffer.AvailableQuantity > 0
@@ -105,12 +105,11 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     properties: specificationProperties,
   } = product ?? {}
 
-  const { itemId: selectedItemId, sellers: isProductAvailable } =
-    selectedItem ?? {}
+  const { itemId: selectedItemId, sellers } = selectedItem ?? {}
 
   // We use a useMemo to modify the condition layout "values"
   // only when some of the context props change.
-  const values = useMemo(() => {
+  const values = useMemo<ContextValues>(() => {
     const bag = {
       productId,
       categoryId,
@@ -120,7 +119,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       selectedItemId,
       specificationProperties,
       areAllVariationsSelected,
-      isProductAvailable,
+      sellers,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -134,7 +133,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     selectedItemId,
     specificationProperties,
     areAllVariationsSelected,
-    isProductAvailable,
+    sellers,
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results

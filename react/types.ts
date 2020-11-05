@@ -4,11 +4,6 @@ export type NoUndefinedField<T> = {
 
 export type MatchType = 'any' | 'all' | 'none'
 
-export type Handler<Values, Args> = (o: {
-  values: Values
-  args: Args
-}) => boolean
-
 type SameProps<T> = Record<keyof T, unknown>
 
 export type Condition<Subjects = unknown, Args = unknown> = {
@@ -21,6 +16,11 @@ export type Condition<Subjects = unknown, Args = unknown> = {
     }[keyof Subjects]
   : { subject: string; arguments?: unknown })
 
-export type Handlers<Subjects, Args extends SameProps<Subjects>> = {
-  [K in keyof Subjects]: Handler<Subjects, Args[K]>
+export type Handler<Values, Args> = (o: {
+  values: Values
+  args: Args
+}) => boolean
+
+export type Handlers<Values, Args> = {
+  [K in keyof Args]: Handler<Values, Args[K]>
 }
