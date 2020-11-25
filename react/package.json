@@ -21,7 +21,7 @@
     "@types/react": "^16.9.49",
     "@vtex/test-tools": "^3.3.2",
     "apollo-client": "^2.6.10",
-    "typescript": "4.0.3",
+    "typescript": "3.9.7",
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.1/public/@types/vtex.product-context",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.1/public/@types/vtex.render-runtime",
     "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.129.1/public/@types/vtex.styleguide"
