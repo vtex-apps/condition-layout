@@ -153,6 +153,24 @@ The `conditions` prop object has 3 other props, namely `subject`, `verb` and `ob
 
 Lastly, the `match` prop decides the necessary number of valid conditions (defined in `condition.{context}` blocks) for the layout rendering to actually occur.
 
+### Note on server-side rendering
+
+This version doesn't properly support SSR--we recommend using the version 2.x.
+
+However, we've added an option on this version for allowing SSR of the "then" cases: you can enable it on your workspace via the VTEX Toolbelt command:
+
+```
+$ vtex settings set vtex.store conditionLayoutV1Behaviour then-bias
+```
+
+This is recommended for simple conditions, where the majority of cases fall under the `then` case, and where the fail scenario is OK.
+
+To disable it, you can run:
+
+```
+$ vtex settings set vtex.store conditionLayoutV1Behaviour default
+```
+
 ## Customization
 
 The Condition Layout merely establishes a logic to render other blocks. Therefore, the app doesn't have CSS Handles for its specific customization.

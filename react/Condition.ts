@@ -1,4 +1,5 @@
 import { useMemo, useEffect } from 'react'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { testConditions } from './modules/conditions'
 import { useConditionContext, useConditionDispatch } from './ConditionContext'
@@ -15,6 +16,9 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
   match,
   enabled = true,
 }) => {
+  const { getSettings } = useRuntime()
+  const { conditionLayoutV1Behaviour } = getSettings('vtex.store')
+
   const { values, subjects, matched: ctxMatch } = useConditionContext()
   const dispatch = useConditionDispatch()
 
@@ -48,8 +52,14 @@ const Condition: StorefrontFunctionComponent<ConditionProps> = ({
     return null
   }
 
+  /** If the behaviour is set to `then-bias`, it renders the "then" case(s) on SSR if the condition matches,
+   * and might flip the result on the client depending on the result from the context.
+   * Otherwise, none of the conditions are rendered on SSR.
+   * Should be set if the condition is simple, the "then" result is the most common, and the fail scenario is ok */
+  const thenBias = conditionLayoutV1Behaviour === 'then-bias' 
+
   // We use ctxMatch to prevent having both condition.xxx and condition.else blocks rendered at the same time.
-  if (!ctxMatch || !localMatch) {
+  if ((!thenBias && !ctxMatch) || !localMatch) {
     return null
   }
 
