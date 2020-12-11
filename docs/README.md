@@ -79,7 +79,7 @@ For example:
 | Prop name    | Type     | Description  | Default value |
 | ------------ | -------- | ------------ | ------------- |
 | `conditions` | `object` | List of desired conditions. | `undefined`   |
-| `match`      | `enum`   | Layout rendering criteria. Possible values are: `all` (all conditions must be matched in order to render the layout), `any` (at least one of the conditions must be matched in order to render the layout) or `none` (no conditions must be matched in order to render the layout). | `all`         |
+| `matchType`      | `enum`   | Layout rendering criteria. Possible values are: `all` (all conditions must be matched in order to render the layout), `any` (at least one of the conditions must be matched in order to render the layout) or `none` (no conditions must be matched in order to render the layout). | `all`         |
 | `Then`       | `block`  | Name of the block to be rendered if the conditions are met. If no value is defined, the blocks declared as children of `condition-layout.product` will be rendered instead.  | `undefined`   |
 | `Else`       | `block`  | Name of the block to be rendered if the conditions are not met. | `undefined`   |
 
@@ -107,11 +107,11 @@ Possible values for the `subject` prop:
 
 ## Modus Operandi
 
-The `condition-layout.product` mainly uses the `match` and `conditions` props to set, respectively, the criteria and the conditions that blocks must meet to be rendered or not.
+The `condition-layout.product` mainly uses the `matchType` and `conditions` props to set, respectively, the criteria and the conditions that blocks must meet to be rendered or not.
 
 The `conditions` prop, in turn, does not rely on any automatic grammar to define the desired conditions. Instead, it relies on its two props, namely `subject` and `arguments`, that together define which condition must be met by using an underlying data validation method (with specific arguments) according to the UI behavior.
 
-Lastly, the `match` prop has the responsibility for deciding the necessary number of valid conditions for the layout rendering to actually occur.
+Lastly, the `matchType` prop has the responsibility for deciding the necessary number of valid conditions for the layout rendering to actually occur.
 
 ## Customization
 
