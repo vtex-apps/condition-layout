@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- matchType instead of match in docs
+- `matchType` instead of match in docs
+
+### Added
+- Document usage limitation of `categoryTree`.
 
 ## [2.1.1] - 2020-11-05
 ### Changed
