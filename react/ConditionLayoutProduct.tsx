@@ -59,7 +59,7 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   },
   categoryTree({ values, args }) {
     return Boolean(
-      values.categoryTree.find(({ id }) => String(id) === String(args?.id))
+      values?.categoryTree?.find(({ id }) => String(id) === String(args?.id))
     )
   },
   specificationProperties({ values, args }) {
