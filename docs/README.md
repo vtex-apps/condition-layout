@@ -65,7 +65,7 @@ For example:
 +           "id": "12"
 +         }
 +       },
-+     ]
++     ],
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
 +   },
