@@ -34,6 +34,7 @@ type HandlerArguments = {
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
   isProductAvailable: undefined
+  isSellersMoreThan: { quantity: number }
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -81,6 +82,13 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
 
     return Boolean(isAvailable)
   },
+  isSellersMoreThan({ values, args }) {
+    const { sellers } = values
+
+    const isMoreThen = sellers.length > args?.quantity
+
+    return Boolean(isMoreThen)
+  }
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
