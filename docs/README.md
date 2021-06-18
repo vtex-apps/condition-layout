@@ -28,7 +28,8 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 
 | Block name                 | Description                                                                                                                  |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `condition-layout.product` | Defines the condition logic and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.product` | Defines the condition logic on the product context and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.binding` | Defines the condition logic on the current binding and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 
 ### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
@@ -89,7 +90,7 @@ For example:
 | `arguments` | `object`  | Defines the condition parameters. Notice: this prop value varies according to the value set to the `subject` prop. Check below the table for the `subject`'s possible values and their expected arguments. | `undefined`   |
 | `toBe`      | `boolean` | Whether the data fetched in the `subject` prop must met the predefined conditions to render the new layout (`true`) or not (`false`). | `true` |
 
-Possible values for the `subject` prop:
+Possible values for the `subject` prop: (`condition-layout.product`)
 
 | Subject                    | Description            | Arguments      |
 | -------------------------- | ---------------------- | -------------- |
@@ -102,6 +103,12 @@ Possible values for the `subject` prop:
 | `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Notice: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
+
+Possible values for the `subject` prop: (`condition-layout.binding`)
+
+| Subject                    | Description            | Arguments      |
+| -------------------------- | ---------------------- | -------------- |
+| `bindingId`                | ID of the current store binding.  | `{ id: string }` |
 
 ## Modus Operandi
 
