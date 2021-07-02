@@ -90,7 +90,7 @@ For example:
 | `arguments` | `object`  | Defines the condition parameters. Notice: this prop value varies according to the value set to the `subject` prop. Check below the table for the `subject`'s possible values and their expected arguments. | `undefined`   |
 | `toBe`      | `boolean` | Whether the data fetched in the `subject` prop must met the predefined conditions to render the new layout (`true`) or not (`false`). | `true` |
 
-Possible values for the `subject` prop: (`condition-layout.product`)
+Possible values for the `condition-layout.product`'s `subject` prop:
 
 | Subject                    | Description            | Arguments      |
 | -------------------------- | ---------------------- | -------------- |
