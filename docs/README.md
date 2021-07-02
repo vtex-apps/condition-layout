@@ -104,12 +104,11 @@ Possible values for the `condition-layout.product`'s `subject` prop:
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
 
-Possible values for the `subject` prop: (`condition-layout.binding`)
+Possible values for the` condition-layout.binding`'s `subject` prop:
 
-| Subject                    | Description            | Arguments      |
-| -------------------------- | ---------------------- | -------------- |
-| `bindingId`                | ID of the current store binding.  | `{ id: string }` |
-
+| Subject | Description | Arguments |
+| -------- | ------------ | ---------- |
+| `bindingId` | ID of the desired store binding.  | `{ id: string }` |
 ## Modus Operandi
 
 The `condition-layout.product` mainly uses the `matchType` and `conditions` props to set, respectively, the criteria and the conditions that blocks must meet to be rendered or not.
