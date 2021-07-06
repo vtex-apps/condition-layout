@@ -85,14 +85,16 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   isSellersMoreThan({ values, args }) {
     const { sellers } = values
 
-    const productAvailable = sellers?.filter(seller => (
-      seller.commertialOffer.AvailableQuantity > 0
-    ))
+    const productAvailable = sellers?.filter(
+      (seller) => seller.commertialOffer.AvailableQuantity > 0
+    )
 
-    const isMoreThen = sellers?.length > args?.quantity && productAvailable.length > args?.quantity
+    const isMoreThen =
+      sellers?.length > args?.quantity &&
+      productAvailable.length > args?.quantity
 
-    return Boolean(isMoreThen)
-  }
+    return isMoreThen
+  },
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
