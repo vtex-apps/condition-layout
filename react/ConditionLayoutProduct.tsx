@@ -89,11 +89,11 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
       (seller) => seller.commertialOffer.AvailableQuantity > 0
     )
 
-    const isMoreThen =
+    const isMoreThan =
       sellers?.length > args?.quantity &&
       productAvailable.length > args?.quantity
 
-    return isMoreThen
+    return isMoreThan
   },
 }
 
