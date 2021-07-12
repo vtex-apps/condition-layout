@@ -141,6 +141,7 @@ Possible values for the` condition-layout.binding`'s `subject` prop:
 | Subject | Description | Arguments |
 | -------- | ------------ | ---------- |
 | `bindingId` | ID of the desired store binding.  | `{ id: string }` |
+
 ## Modus Operandi
 
 The `condition-layout.product` mainly uses the `matchType` and `conditions` props to set, respectively, the criteria and the conditions that blocks must meet to be rendered or not.
