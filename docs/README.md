@@ -48,7 +48,8 @@ Or the `condition-layout.binding` block, for example:
 {
   "store.product": {
     "children": ["condition-layout.binding"]
-  },
+  }
+}
 ```
 
 :warning: _Never use `condition-layout` directly. Make sure to always use it with the context variant, such as `condition-layout.product`._
@@ -74,12 +75,12 @@ For example:
 +         "arguments": {
 +           "id": "12"
 +         }
-+       },
++       }
 +     ]
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
-+   },
-+ },
++   }
++ }
 ```
 
 Or for `condition-layout.binding`:
@@ -96,13 +97,12 @@ Or for `condition-layout.binding`:
 +         "arguments": {
 +           "id": "13fb71d0-binding-code-here-87h9c28h9013"
 +         }
-+       },
++       }
 +     ]
 +     "Then": "flex-layout.row#just-for-this-binding",
 +     "Else": "flex-layout.row#for-other-bindings"
-+   },
-+ },
-},
++   }
++ }
 ```
 
 :information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*

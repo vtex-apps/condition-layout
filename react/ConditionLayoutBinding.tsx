@@ -32,11 +32,8 @@ const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
   conditions,
   children,
 }) => {
-
   const { 
-    binding: {
-      id: bindingId
-    }
+    binding: { id: bindingId },
   } = useRuntime()
 
   const values = useMemo<ContextValues>(() => {
@@ -46,9 +43,7 @@ const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
     return bag as NoUndefinedField<typeof bag>
-  }, [
-    bindingId,
-  ])
+  }, [bindingId])
 
   return (
     <ConditionLayout
