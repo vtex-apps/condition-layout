@@ -43,7 +43,8 @@ In the product theme template, add the `condition-layout.product` block as a chi
 ```
 
 Or the `condition-layout.binding` block, for example:
-```
+
+```json
 {
   "store.product": {
     "children": ["condition-layout.binding"]
