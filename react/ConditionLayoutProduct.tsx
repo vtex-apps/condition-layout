@@ -84,18 +84,15 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     return Boolean(isAvailable)
   },
   isBestPrice({ values }) {
-    const { sellers } = values
-    const { priceRange } = values
+    const { sellers, priceRange } = values
 
-    const sellerDefault = sellers.filter(
-      seller => seller.sellerDefault
-    )[0]
+    const [sellerDefault] = sellers.filter((seller) => seller.sellerDefault)
 
     const bestPrice = priceRange.sellingPrice.lowPrice
     const currentPrice = sellerDefault?.commertialOffer.Price
 
-    return Boolean(currentPrice == bestPrice);
-  }
+    return Boolean(currentPrice === bestPrice)
+  },
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
@@ -118,7 +115,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     productClusters,
     categoryTree,
     properties: specificationProperties,
-    priceRange
+    priceRange,
   } = product ?? {}
 
   const { itemId: selectedItemId, sellers } = selectedItem ?? {}
@@ -136,7 +133,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       specificationProperties,
       areAllVariationsSelected,
       sellers,
-      priceRange
+      priceRange,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -151,7 +148,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     specificationProperties,
     areAllVariationsSelected,
     sellers,
-    priceRange
+    priceRange,
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results
