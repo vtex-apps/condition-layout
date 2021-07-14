@@ -89,9 +89,7 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
       (seller) => seller.commertialOffer.AvailableQuantity > 0
     )
 
-    const isMoreThan =
-      sellers?.length > args?.quantity &&
-      productAvailable.length > args?.quantity
+    const isMoreThan = productAvailable?.length > args?.quantity
 
     return isMoreThan
   },
