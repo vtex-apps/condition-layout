@@ -84,6 +84,7 @@ For example:
 ```
 
 Or for `condition-layout.binding`:
+
 ```diff
 {
   "store.product": {
