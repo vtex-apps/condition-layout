@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { useRuntime } from 'vtex.render-runtime'
+import type { ComponentType } from 'react'
 
 import ConditionLayout from './ConditionLayout'
 import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
@@ -7,8 +8,8 @@ import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 type Props = {
   conditions: Array<Condition<ContextValues, HandlerArguments>>
   matchType?: MatchType
-  Else?: React.ComponentType
-  Then?: React.ComponentType
+  Else?: ComponentType
+  Then?: ComponentType
 }
 
 type ContextValues = {
