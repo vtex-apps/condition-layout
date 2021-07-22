@@ -28,7 +28,8 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 
 | Block name                 | Description                                                                                                                  |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `condition-layout.product` | Defines the condition logic and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.product` | Defines the condition logic on the product context and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.category` | Defines the condition logic on the current category page or department page and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 
 ### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
@@ -40,6 +41,16 @@ In the product theme template, add the `condition-layout.product` block as a chi
     "children": ["condition-layout.product"]
   },
 ```
+
+Or the `condition-layout.category` block, for example:
+
+ ```json
+ {
+   "store.search#my-category-page": {
+     "children": ["condition-layout.category"]
+   }
+ }
+ ```
 
 :warning: _Never use `condition-layout` directly. Make sure to always use it with the context variant, such as `condition-layout.product`._
 
@@ -64,13 +75,43 @@ For example:
 +         "arguments": {
 +           "id": "12"
 +         }
-+       },
++       }
 +     ]
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
-+   },
-+ },
++   }
++ }
 ```
+
+Or for `condition-layout.category`:
+
+ ```diff
+ {
+   "store.product": {
+     "children": ["condition-layout.category#cond42"]
+   },
+   "condition-layout.category#cond42": {
+ +   "props": {
+ +     "conditions": [
+ +       {
+ +         "subject": "departmentId",
+ +         "arguments": {
+ +           "ids": ["1", "42"]
+ +         }
+ +       }
+ +       {
+ +         "subject": "categoryId",
+ +         "arguments": {
+ +           "ids": ["301", "304"]
+ +         }
+ +       }
+ +     ]
+ +     "matchType": "any",
+ +     "Then": "flex-layout.row#just-for-this-category-or-department",
+ +     "Else": "flex-layout.row#for-other-category-or-department"
+ +   }
+ + }
+ ```
 
 :information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*
 
@@ -102,6 +143,12 @@ Possible values for the `subject` prop:
 | `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Notice: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
+
+Possible values for the `condition-layout.category`'s `subject` prop:
+| Subject                    | Description            | Arguments      |
+| -------------------------- | ---------------------- | -------------- |
+| `categoryId`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
+| `departmentId`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
 
 ## Modus Operandi
 
