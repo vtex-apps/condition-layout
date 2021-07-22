@@ -12,5 +12,9 @@
   "condition-layout.binding": {
     "component": "ConditionLayoutBinding",
     "composition": "children"
+  },
+  "condition-layout.category": {
+    "component": "ConditionLayoutCategory",
+    "composition": "children"
   }
 }
