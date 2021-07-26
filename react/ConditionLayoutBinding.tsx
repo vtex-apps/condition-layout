@@ -33,7 +33,7 @@ const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
   conditions,
   children,
 }) => {
-  const { 
+  const {
     binding: { id: bindingId },
   } = useRuntime()
 
