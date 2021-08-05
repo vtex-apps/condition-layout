@@ -128,13 +128,13 @@ Or for `condition-layout.category`:
  +   "props": {
  +     "conditions": [
  +       {
- +         "subject": "departmentId",
+ +         "subject": "department",
  +         "arguments": {
  +           "ids": ["1", "42"]
  +         }
  +       }
  +       {
- +         "subject": "categoryId",
+ +         "subject": "category",
  +         "arguments": {
  +           "ids": ["301", "304"]
  +         }
@@ -188,8 +188,8 @@ Possible values for the` condition-layout.binding`'s `subject` prop:
 Possible values for the `condition-layout.category`'s `subject` prop:
 | Subject                    | Description            | Arguments      |
 | -------------------------- | ---------------------- | -------------- |
-| `categoryId`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
-| `departmentId`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
+| `category`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
+| `department`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
 
 ## Modus Operandi
 

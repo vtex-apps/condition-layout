@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.2.0] - 2021-07-28
 ### Added
 - `ConditionLayoutBinding` component. 
-
  
 ## [2.1.3] - 2021-01-27
 ### Fixed

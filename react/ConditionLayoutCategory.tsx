@@ -5,39 +5,38 @@ import { useRuntime } from 'vtex.render-runtime'
 import ConditionLayout from './ConditionLayout'
 import type { NoUndefinedField, MatchType, Condition, Handlers } from './types'
 
-type Props = {
+interface Props {
   conditions: Array<Condition<ContextValues, HandlerArguments>>
   matchType?: MatchType
   Else?: ComponentType
   Then?: ComponentType
 }
 
-type ContextValues = {
-  id: string,
+interface ContextValues {
+  [key: string]: string
+  id: string
   type: 'category' | 'department'
 }
 
-type HandlerArguments = {
-  categoryId: { ids: string[] }
-  departmentId: { ids: string[] }
+interface HandlerArguments {
+  category: { ids: string[] }
+  department: { ids: string[] }
 }
 
-const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
-  categoryId({ values, args }) {
-    if(values.type === 'category') {
-
-      return args.ids.includes(values.id)
+const handlersMap: Handlers<ContextValues, HandlerArguments> = {
+  category({ values, args }) {
+    if(values.type !== 'category') {
+      return false; 
     }
-
-    return false; 
+    
+    return args.ids.includes(values.id)
   },
-  departmentId({ values, args }) {
-    if(values.type === 'department') {
-      
-      return args.ids.includes(values.id)
+  department({ values, args }) {
+    if(values.type !== 'department') {
+      return false;
     }
-
-    return false;
+    
+    return args.ids.includes(values.id)
   },
 }
 
@@ -49,7 +48,7 @@ const ConditionLayoutCategory: StorefrontFunctionComponent<Props> = ({
   children,
 }) => {
   const { 
-    route: { pageContext: { id, type} },
+    route: { pageContext: { id, type } },
   } = useRuntime()
 
   const values = useMemo<ContextValues>(() => {
@@ -68,7 +67,7 @@ const ConditionLayoutCategory: StorefrontFunctionComponent<Props> = ({
       matchType={matchType}
       conditions={conditions}
       values={values}
-      handlers={HANDLERS}
+      handlers={handlersMap}
     >
       {children}
     </ConditionLayout>
