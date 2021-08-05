@@ -25,17 +25,17 @@ interface HandlerArguments {
 
 const handlersMap: Handlers<ContextValues, HandlerArguments> = {
   category({ values, args }) {
-    if(values.type !== 'category') {
-      return false; 
+    if (values.type !== 'category') {
+      return false
     }
-    
+
     return args.ids.includes(values.id)
   },
   department({ values, args }) {
-    if(values.type !== 'department') {
-      return false;
+    if (values.type !== 'department') {
+      return false
     }
-    
+
     return args.ids.includes(values.id)
   },
 }
@@ -47,13 +47,16 @@ const ConditionLayoutCategory: StorefrontFunctionComponent<Props> = ({
   conditions,
   children,
 }) => {
-  const { 
-    route: { pageContext: { id, type } },
+  const {
+    route: {
+      pageContext: { id, type },
+    },
   } = useRuntime()
 
   const values = useMemo<ContextValues>(() => {
     const bag = {
-      id, type
+      id,
+      type,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
