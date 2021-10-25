@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Best price condition `isBestPrice`
 ## [2.3.0] - 2021-08-02
 ### Added
 - Seller quantity condition `hasMoreSellersThan` 
