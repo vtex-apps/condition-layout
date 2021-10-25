@@ -28,7 +28,8 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 
 | Block name                 | Description                                                                                                                  |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `condition-layout.product` | Defines the condition logic and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.product` | Defines the condition logic on the product context and the children blocks that are going to be rendered in case the predefined conditions are met. |
+| `condition-layout.binding` | Defines the condition logic on the current binding and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 
 ### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
@@ -39,6 +40,16 @@ In the product theme template, add the `condition-layout.product` block as a chi
   "store.product": {
     "children": ["condition-layout.product"]
   },
+```
+
+Or the `condition-layout.binding` block, for example:
+
+```json
+{
+  "store.product": {
+    "children": ["condition-layout.binding"]
+  }
+}
 ```
 
 :warning: _Never use `condition-layout` directly. Make sure to always use it with the context variant, such as `condition-layout.product`._
@@ -64,12 +75,35 @@ For example:
 +         "arguments": {
 +           "id": "12"
 +         }
-+       },
++       }
 +     ]
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
-+   },
-+ },
++   }
++ }
+```
+
+Or for `condition-layout.binding`:
+
+```diff
+{
+  "store.product": {
+    "children": ["condition-layout.binding#cond42"]
+  },
+  "condition-layout.binding#cond42": {
++   "props": {
++     "conditions": [
++       {
++         "subject": "bindingId",
++         "arguments": {
++           "id": "13fb71d0-binding-code-here-87h9c28h9013"
++         }
++       }
++     ]
++     "Then": "flex-layout.row#just-for-this-binding",
++     "Else": "flex-layout.row#for-other-bindings"
++   }
++ }
 ```
 
 :information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*
@@ -89,7 +123,7 @@ For example:
 | `arguments` | `object`  | Defines the condition parameters. Notice: this prop value varies according to the value set to the `subject` prop. Check below the table for the `subject`'s possible values and their expected arguments. | `undefined`   |
 | `toBe`      | `boolean` | Whether the data fetched in the `subject` prop must met the predefined conditions to render the new layout (`true`) or not (`false`). | `true` |
 
-Possible values for the `subject` prop:
+Possible values for the `condition-layout.product`'s `subject` prop:
 
 | Subject                    | Description            | Arguments      |
 | -------------------------- | ---------------------- | -------------- |
@@ -103,6 +137,13 @@ Possible values for the `subject` prop:
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
 | `isBestPrice` | Whether the current product has the best price | No arguments are expected. |
+| `hasMoreSellersThan`                  | Whether the quantity of sellers for the product is more than argument passed.  | `{ quantity: number }`|
+
+Possible values for the` condition-layout.binding`'s `subject` prop:
+
+| Subject | Description | Arguments |
+| -------- | ------------ | ---------- |
+| `bindingId` | ID of the desired store binding.  | `{ id: string }` |
 
 ## Modus Operandi
 

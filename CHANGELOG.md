@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Best price condition `isBestPrice`
+## [2.3.0] - 2021-08-02
+### Added
+- Seller quantity condition `hasMoreSellersThan` 
+
+## [2.2.0] - 2021-07-28
+### Added
+- `ConditionLayoutBinding` component. 
 
 ## [2.1.3] - 2021-01-27
 ### Fixed

@@ -35,7 +35,7 @@ type HandlerArguments = {
   specificationProperties: { name: string; value?: string }
   areAllVariationsSelected: undefined
   isProductAvailable: undefined
-  isBestPrice: undefined
+  hasMoreSellersThan: { quantity: number }
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -92,6 +92,17 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     const currentPrice = sellerDefault?.commertialOffer.Price
 
     return currentPrice === bestPrice
+  },
+  hasMoreSellersThan({ values, args }) {
+    const { sellers } = values
+
+    const productAvailable = sellers?.filter(
+      (seller) => seller.commertialOffer.AvailableQuantity > 0
+    )
+
+    const isMoreThan = productAvailable?.length > args?.quantity
+
+    return isMoreThan
   },
 }
 

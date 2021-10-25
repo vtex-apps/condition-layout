@@ -8,5 +8,9 @@
     "content": {
       "$ref": "app:vtex.condition-layout#/definitions/ConditionLayoutProduct"
     }
+  },
+  "condition-layout.binding": {
+    "component": "ConditionLayoutBinding",
+    "composition": "children"
   }
 }
