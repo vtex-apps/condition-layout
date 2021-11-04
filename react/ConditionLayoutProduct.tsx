@@ -22,6 +22,7 @@ type ContextValues = {
   specificationProperties: Product['properties']
   areAllVariationsSelected: boolean
   sellers: Item['sellers']
+  items: Product['items']
 }
 
 type HandlerArguments = {
@@ -35,6 +36,7 @@ type HandlerArguments = {
   areAllVariationsSelected: undefined
   isProductAvailable: undefined
   hasMoreSellersThan: { quantity: number }
+  hasMoreSKUsThan: { quantity: number }
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -93,6 +95,9 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
 
     return isMoreThan
   },
+  hasMoreSKUsThan({ values: { items }, args }) {
+    return items?.length > args?.quantity
+  },
 }
 
 const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
@@ -115,6 +120,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     productClusters,
     categoryTree,
     properties: specificationProperties,
+    items,
   } = product ?? {}
 
   const { itemId: selectedItemId, sellers } = selectedItem ?? {}
@@ -132,6 +138,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       specificationProperties,
       areAllVariationsSelected,
       sellers,
+      items,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -146,6 +153,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     specificationProperties,
     areAllVariationsSelected,
     sellers,
+    items,
   ])
 
   // Sometimes it takes a while for useProduct() to return the correct results

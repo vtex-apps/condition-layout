@@ -137,6 +137,7 @@ Possible values for the `condition-layout.product`'s `subject` prop:
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
 | `hasMoreSellersThan`                  | Whether the quantity of sellers for the product is more than argument passed.  | `{ quantity: number }`|
+| `hasMoreSKUsThan`                  | Whether the quantity of sku's for the product is more than argument passed.  | `{ quantity: number }`|
 
 Possible values for the` condition-layout.binding`'s `subject` prop:
 
