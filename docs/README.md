@@ -186,6 +186,7 @@ Possible values for the` condition-layout.binding`'s `subject` prop:
 | `bindingId` | ID of the desired store binding.  | `{ id: string }` |
 
 Possible values for the `condition-layout.category`'s `subject` prop:
+
 | Subject                    | Description            | Arguments      |
 | -------------------------- | ---------------------- | -------------- |
 | `category`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
