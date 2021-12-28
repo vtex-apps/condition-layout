@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- the callout about the new version of Condition Layout.
+
 ## [2.3.0] - 2021-08-02
 ### Added
 - Seller quantity condition `hasMoreSellersThan` 
