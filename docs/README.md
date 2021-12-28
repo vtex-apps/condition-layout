@@ -1,4 +1,7 @@
 📢 Use this project, [contribute](https://github.com/vtex-apps/condition-layout) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
+>⚠️
+>
+> ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).
 
 # Condition Layout
 
@@ -11,8 +14,6 @@ The Condition Layout app allows a component to be rendered in your store if pred
 ![Screen-Recording-certo](https://user-images.githubusercontent.com/12139385/79379694-a8c99980-7f35-11ea-9f01-7021c6529332.gif)
 
 ## Configuration
-
-:warning: ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).*
 
 ### Step 1 - Adding the Condition Layout app to your theme's dependencies
 
