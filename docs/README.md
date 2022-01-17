@@ -31,6 +31,7 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `condition-layout.product` | Defines the condition logic on the product context and the children blocks that are going to be rendered in case the predefined conditions are met. |
 | `condition-layout.binding` | Defines the condition logic on the current binding and the children blocks that are going to be rendered in case the predefined conditions are met.  |
+| `condition-layout.category` | Defines the condition logic on the current category page or department page and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 
 ### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
@@ -49,6 +50,16 @@ Or the `condition-layout.binding` block, for example:
 {
   "store.product": {
     "children": ["condition-layout.binding"]
+  }
+}
+```
+
+Or the `condition-layout.category` block, for example:
+
+```json
+{
+  "store.search#my-category-page": {
+    "children": ["condition-layout.category"]
   }
 }
 ```
@@ -107,6 +118,36 @@ Or for `condition-layout.binding`:
 + }
 ```
 
+Or for `condition-layout.category`:
+
+ ```diff
+ {
+   "store.product": {
+     "children": ["condition-layout.category#cond42"]
+   },
+   "condition-layout.category#cond42": {
+ +   "props": {
+ +     "conditions": [
+ +       {
+ +         "subject": "department",
+ +         "arguments": {
+ +           "ids": ["1", "42"]
+ +         }
+ +       }
+ +       {
+ +         "subject": "category",
+ +         "arguments": {
+ +           "ids": ["301", "304"]
+ +         }
+ +       }
+ +     ]
+ +     "matchType": "any",
+ +     "Then": "flex-layout.row#just-for-this-category-or-department",
+ +     "Else": "flex-layout.row#for-other-category-or-department"
+ +   }
+ + }
+ ```
+
 :information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*
 
 | Prop name    | Type     | Description  | Default value |
@@ -144,6 +185,13 @@ Possible values for the` condition-layout.binding`'s `subject` prop:
 | Subject | Description | Arguments |
 | -------- | ------------ | ---------- |
 | `bindingId` | ID of the desired store binding.  | `{ id: string }` |
+
+Possible values for the `condition-layout.category`'s `subject` prop:
+
+| Subject                    | Description            | Arguments      |
+| -------------------------- | ---------------------- | -------------- |
+| `category`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
+| `department`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
 
 ## Modus Operandi
 
