@@ -88,7 +88,7 @@ For example:
 +           "id": "12"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
 +   }
@@ -111,7 +111,7 @@ Or for `condition-layout.binding`:
 +           "id": "13fb71d0-binding-code-here-87h9c28h9013"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#just-for-this-binding",
 +     "Else": "flex-layout.row#for-other-bindings"
 +   }
@@ -133,14 +133,14 @@ Or for `condition-layout.category`:
  +         "arguments": {
  +           "ids": ["1", "42"]
  +         }
- +       }
+ +       },
  +       {
  +         "subject": "category",
  +         "arguments": {
  +           "ids": ["301", "304"]
  +         }
  +       }
- +     ]
+ +     ],
  +     "matchType": "any",
  +     "Then": "flex-layout.row#just-for-this-category-or-department",
  +     "Else": "flex-layout.row#for-other-category-or-department"
