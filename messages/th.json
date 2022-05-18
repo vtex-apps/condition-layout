@@ -13,7 +13,7 @@
   "admin/editor.condition-layout.product.subject.productId": "ID ผลิตภัณฑ์",
   "admin/editor.condition-layout.product.subject.categoryId": "ID หมวดหมู่",
   "admin/editor.condition-layout.product.subject.brandId": "ID แบรนด์",
-  "admin/editor.condition-layout.product.subject.productClusters": "กลุ่มผลิตภัณฑ์ที่คล้ายกัน",
+  "admin/editor.condition-layout.product.subject.productClusters": "กลุ่มผลิตภัณฑ์",
   "admin/editor.condition-layout.product.subject.categoryTree": "ผังหมวดหมู่",
   "admin/editor.condition-layout.product.subject.specificationProperties": "คุณสมบัติข้อมูลจำเพาะ",
   "admin/editor.condition-layout.product.subject.selectedItemId": "ID สินค้าที่เลือก",
