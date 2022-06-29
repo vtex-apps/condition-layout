@@ -18,7 +18,8 @@
   "dependencies": {
     "vtex.styleguide": "9.x",
     "vtex.product-context": "0.x",
-    "vtex.store-resources": "0.x"
+    "vtex.store-resources": "0.x",
+    "vtex.session-client": "1.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

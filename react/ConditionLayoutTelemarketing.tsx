@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import type { ComponentType } from 'react'
-import useSession from './hooks/useSession'
+import { useFullSession } from 'vtex.session-client'
 
 import ConditionLayout from './ConditionLayout'
 import type { MatchType, Condition, Handlers, NoUndefinedField } from './types'
@@ -33,13 +33,15 @@ const ConditionLayoutTelemarketing: StorefrontFunctionComponent<Props> = ({
   conditions,
   children,
 }) => {
+  const { data } = useFullSession()
 
-  const { getSession } = useSession() ?? {}
-  const { impersonable } = getSession ?? {}
+  const impersonable = Boolean(
+    data?.session?.namespaces?.impersonate?.canImpersonate?.value
+  )
 
   const values = useMemo<ContextValues>(() => {
     const bag = {
-      impersonable
+      impersonable,
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
@@ -61,5 +63,3 @@ const ConditionLayoutTelemarketing: StorefrontFunctionComponent<Props> = ({
 }
 
 export default ConditionLayoutTelemarketing
-
-
