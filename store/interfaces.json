@@ -16,5 +16,9 @@
   "condition-layout.category": {
     "component": "ConditionLayoutCategory",
     "composition": "children"
+  },  
+  "condition-layout.telemarketing": {
+    "component": "ConditionLayoutTelemarketing",
+    "composition": "children"
   }
 }

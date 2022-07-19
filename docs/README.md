@@ -32,6 +32,7 @@ You are now able to use all blocks that are exported by the `condition-layout` a
 | `condition-layout.product` | Defines the condition logic on the product context and the children blocks that are going to be rendered in case the predefined conditions are met. |
 | `condition-layout.binding` | Defines the condition logic on the current binding and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 | `condition-layout.category` | Defines the condition logic on the current category page or department page and the children blocks that are going to be rendered in case the predefined conditions are met.  |
+| `condition-layout.telemarketing` | Defines the condition logic on the user role (telemarketing) and the children blocks that are going to be rendered in case the predefined conditions are met.  |
 
 ### Step 2 - Adding the `condition-layout.product` block to your theme's templates
 
@@ -147,6 +148,28 @@ Or for `condition-layout.category`:
  +   }
  + }
  ```
+Or for `condition-layout.telemarketing`:
+
+```diff
+{
+  "store.product": {
+    "children": ["condition-layout.telemarketing#show-block"]
+  },
+  "condition-layout.telemarketing#show-block": {
++   "props": {
++     "conditions": [
++       {
++         "subject": "impersonable",
++         "arguments": {
++           "value": true
++         }
++       }
++     ]
++     "Then": "flex-layout.row#just-for-telemarketers",
++     "Else": "flex-layout.row#for-other-user-roles"
++   }
++ }
+```
 
 :information_source: *According to the example above, whenever users interact with a product whose ID is equal to 12, the block `flex-layout.row#custom-pdp-layout-12` is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is the `flex-layout.row#default`.*
 
@@ -192,6 +215,12 @@ Possible values for the `condition-layout.category`'s `subject` prop:
 | -------------------------- | ---------------------- | -------------- |
 | `category`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
 | `department`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
+
+Possible values for the` condition-layout.telemarketing`'s `subject` prop:
+
+| Subject | Description | Arguments |
+| -------- | ------------ | ---------- |
+| `impersonable` | Value of the impersonable setting.  | `{ value: boolean }` |
 
 ## Modus Operandi
 
