@@ -20,5 +20,9 @@
   "admin/editor.condition-layout.verb.is": "es",
   "admin/editor.condition-layout.verb.is-not": "no es",
   "admin/editor.condition-layout.verb.contains": "contiene",
-  "admin/editor.condition-layout.verb.does-not-contain": "no contiene"
+  "admin/editor.condition-layout.verb.does-not-contain": "no contiene",
+  "admin/editor.condition-layout-binding.condition": "Bloque de condición Binding",
+  "admin/editor.condition-layout-binding.conditions": "Condiciones Binding",
+  "admin/editor.condition-layout-binding.subject.bindingId": "BindingId seleccionado",
+  "admin/editor.condition-layout-binding.subject.salesChannel": "Sales Channel seleccionado"
 }

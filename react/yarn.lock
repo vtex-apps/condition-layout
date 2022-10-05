@@ -5373,17 +5373,25 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.2/public/@types/vtex.product-context":
-  version "0.9.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.2/public/@types/vtex.product-context#f4387e4b4ec59cf7e63b8f68202426a279693dd1"
+"vtex.condition-layout@https://gbo--beautycounterqa.myvtex.com/_v/private/typings/linked/v1/vtex.condition-layout@2.6.0+build1664999427/public/@types/vtex.condition-layout":
+  version "2.6.0"
+  resolved "https://gbo--beautycounterqa.myvtex.com/_v/private/typings/linked/v1/vtex.condition-layout@2.6.0+build1664999427/public/@types/vtex.condition-layout#a212df6a80f08ef91021142a9f149adfeefdf219"
+
+"vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context":
+  version "0.10.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context#c5e2a97b404004681ee12f4fff7e6b62157786cc"
 
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.2/public/@types/vtex.render-runtime":
   version "8.122.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.122.2/public/@types/vtex.render-runtime#fa235be2fa6995d12f03f92b20dd3eebb4f3c5fb"
 
-"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.132.1/public/@types/vtex.styleguide":
-  version "9.132.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.132.1/public/@types/vtex.styleguide#d564344a8c50fa14a78bcd290e02afb0bc492c0f"
+"vtex.session-client@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.session-client@1.0.2/public/@types/vtex.session-client":
+  version "1.0.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.session-client@1.0.2/public/@types/vtex.session-client#239ac9935a59699e62e1509f844de81544ed0877"
+
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.3/public/@types/vtex.styleguide":
+  version "9.146.3"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.3/public/@types/vtex.styleguide#05558160f29cd8f4aefe419844a4bd66e2b3fdbb"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
