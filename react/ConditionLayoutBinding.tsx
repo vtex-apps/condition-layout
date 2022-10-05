@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
 import { useRuntime } from 'vtex.render-runtime'
+import { useFullSession } from 'vtex.session-client'
+
 import type { ComponentType } from 'react'
 
 import ConditionLayout from './ConditionLayout'
@@ -14,16 +16,24 @@ type Props = {
 
 type ContextValues = {
   bindingId: string
+  salesChannel: string
 }
 
 type HandlerArguments = {
   bindingId: { id: string }
+  salesChannel: { id: string[] }
 }
 
 const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   bindingId({ values, args }) {
     return String(values.bindingId) === String(args?.id)
   },
+  salesChannel({ values, args }) {
+    console.log('handler salesChannel values', values)
+    console.log('handler salesChannel args.ids', args.id)
+
+    return args.id.includes(values.salesChannel)
+  }
 }
 
 const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
@@ -37,14 +47,24 @@ const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
     binding: { id: bindingId },
   } = useRuntime()
 
+  const { data } = useFullSession()
+  const salesChannel = data?.session?.namespaces?.store?.channel?.value
+
+  console.log({ salesChannel })
+
   const values = useMemo<ContextValues>(() => {
     const bag = {
       bindingId,
+      salesChannel
     }
 
     // We use `NoUndefinedField` to remove optionality + undefined values from the type
     return bag as NoUndefinedField<typeof bag>
-  }, [bindingId])
+  }, [bindingId, salesChannel])
+
+  if (values.salesChannel == null) {
+    return null
+  }
 
   return (
     <ConditionLayout
