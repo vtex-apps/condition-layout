@@ -29,8 +29,7 @@ const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     return String(values.bindingId) === String(args?.id)
   },
   salesChannel({ values, args }) {
-    console.log('handler salesChannel values', values)
-    console.log('handler salesChannel args.ids', args.id)
+    console.log('salesChannel selected', args.id)
 
     return args.id.includes(values.salesChannel)
   }
@@ -50,7 +49,7 @@ const ConditionLayoutBinding: StorefrontFunctionComponent<Props> = ({
   const { data } = useFullSession()
   const salesChannel = data?.session?.namespaces?.store?.channel?.value
 
-  console.log({ salesChannel })
+  console.log("salesChannel of the session", salesChannel)
 
   const values = useMemo<ContextValues>(() => {
     const bag = {
