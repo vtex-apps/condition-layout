@@ -215,6 +215,7 @@ Possible values for the `condition-layout.category`'s `subject` prop:
 | -------------------------- | ---------------------- | -------------- |
 | `category`               | Category's IDs currently displayed on the UI.    | `{ ids: string[] }` |
 | `department`             | Department's IDs currently displayed on the UI.  | `{ ids: string[] }` |
+| `subcategory`             | Subcategory's IDs currently displayed on the UI.  | `{ ids: string[] }` |
 
 Possible values for the` condition-layout.telemarketing`'s `subject` prop:
 
