@@ -15,22 +15,16 @@ interface Props {
 interface ContextValues {
   [key: string]: string
   id: string
-  type: 'category' | 'department'
+  type: 'department' | 'category' | 'subcategory'
 }
 
 interface HandlerArguments {
-  category: { ids: string[] }
   department: { ids: string[] }
+  category: { ids: string[] }
+  subcategory: { ids: string[] }
 }
 
 const handlersMap: Handlers<ContextValues, HandlerArguments> = {
-  category({ values, args }) {
-    if (values.type !== 'category') {
-      return false
-    }
-
-    return args.ids.includes(values.id)
-  },
   department({ values, args }) {
     if (values.type !== 'department') {
       return false
@@ -38,6 +32,20 @@ const handlersMap: Handlers<ContextValues, HandlerArguments> = {
 
     return args.ids.includes(values.id)
   },
+  category({ values, args }) {
+    if (values.type !== 'category') {
+      return false
+    }
+
+    return args.ids.includes(values.id)
+  },
+  subcategory({ values, args }) {
+    if (values.type !== 'subcategory') {
+      return false
+    }
+
+    return args.ids.includes(values.id)
+  }
 }
 
 const ConditionLayoutCategory: StorefrontFunctionComponent<Props> = ({
