@@ -35,6 +35,7 @@ type HandlerArguments = {
   areAllVariationsSelected: undefined
   isProductAvailable: undefined
   hasMoreSellersThan: { quantity: number }
+  sellerId: { ids: string[] }
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -92,6 +93,19 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     const isMoreThan = productAvailable?.length > args?.quantity
 
     return isMoreThan
+  },
+  sellerId({ values, args }) {
+    const { sellers } = values
+
+    const availableSellers = sellers?.filter(
+      (seller) => seller.commertialOffer.AvailableQuantity > 0
+    )
+
+    const matchSellers = availableSellers?.some((availableSeller) =>
+      args?.ids?.includes(availableSeller.sellerId)
+    )
+
+    return matchSellers
   },
 }
 
