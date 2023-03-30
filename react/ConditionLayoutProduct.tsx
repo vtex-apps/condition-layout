@@ -35,7 +35,7 @@ type HandlerArguments = {
   areAllVariationsSelected: undefined
   isProductAvailable: undefined
   hasMoreSellersThan: { quantity: number }
-  hasBestPrice: { value: boolean }
+  hasBestPrice: { value: boolean } | undefined
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -97,9 +97,10 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   hasBestPrice({ values, args }) {
     const { ListPrice, Price } = values.sellers[0].commertialOffer
 
+    const expected = args?.value ?? true
     const hasDiscount = ListPrice !== Price
 
-    return hasDiscount === args.value
+    return hasDiscount === expected
   },
 }
 
