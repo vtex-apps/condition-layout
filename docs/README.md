@@ -203,6 +203,7 @@ Possible values for the `condition-layout.product`'s `subject` prop:
 | `isProductAvailable`                  | Whether the product is available (`true`) or not (`false`).  | No arguments are expected. |
 | `hasMoreSellersThan`                  | Whether the quantity of sellers for the product is more than argument passed.  | `{ quantity: number }`|
 | `sellerId`                            | Whether any of the sellers of the product are included in the list of IDs passed.  | `{ ids: string[] }`|
+| `price`                            | Whether selling price matches the defined _greater than_ and _less than_ conditions. If either argument is ommitted, it will not be checked.  | `{ greaterThan?: number, lessThan?: number }`|
 
 Possible values for the` condition-layout.binding`'s `subject` prop:
 
