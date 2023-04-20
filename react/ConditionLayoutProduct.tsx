@@ -36,6 +36,10 @@ type HandlerArguments = {
   isProductAvailable: undefined
   hasMoreSellersThan: { quantity: number }
   sellerId: { ids: string[] }
+  price: {
+    greaterThan?: number
+    lessThan?: number
+  }
 }
 
 export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
@@ -106,6 +110,20 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     )
 
     return matchSellers
+  },
+  price({ values, args }) {
+    const {
+      sellers: [{ commertialOffer }],
+    } = values
+
+    const { greaterThan, lessThan } = args
+    const price = commertialOffer.Price
+
+    // Both default to true if unset.
+    const matchesGreater = greaterThan ? price > greaterThan : true
+    const matchesLess = lessThan ? price < lessThan : true
+
+    return matchesGreater && matchesLess
   },
 }
 
