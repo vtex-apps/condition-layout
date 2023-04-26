@@ -96,7 +96,12 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     return isMoreThan
   },
   hasBestPrice({ values, args }) {
-    const { ListPrice, Price } = values.sellers[0].commertialOffer
+    const {
+      commertialOffer: { ListPrice, Price },
+    } =
+      values.sellers.find(({ sellerDefault }) => sellerDefault) ??
+      // Falls back to first seller, if no default is found.
+      values.sellers[0]
 
     const expected = args?.value ?? true
     const hasDiscount = ListPrice !== Price
