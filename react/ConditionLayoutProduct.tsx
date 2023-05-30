@@ -57,7 +57,7 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   },
   productClusters({ values, args }) {
     return Boolean(
-      values.productClusters.find(({ id }) => String(id) === String(args?.id))
+      values.productClusters?.find(({ id }) => String(id) === String(args?.id))
     )
   },
   categoryTree({ values, args }) {
@@ -66,7 +66,7 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     )
   },
   specificationProperties({ values, args }) {
-    const specification = values.specificationProperties.find(
+    const specification = values.specificationProperties?.find(
       ({ name }) => name === args?.name
     )
 
@@ -99,7 +99,7 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
     const {
       commertialOffer: { ListPrice, Price },
     } =
-      values.sellers.find(({ sellerDefault }) => sellerDefault) ??
+      values.sellers?.find(({ sellerDefault }) => sellerDefault) ??
       // Falls back to first seller, if no default is found.
       values.sellers[0]
 
