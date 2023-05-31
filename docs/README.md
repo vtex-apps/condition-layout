@@ -204,6 +204,7 @@ Possible values for the `condition-layout.product`'s `subject` prop:
 | `hasMoreSellersThan`                  | Whether the quantity of sellers for the product is more than argument passed.  | `{ quantity: number }`|
 | `hasBestPrice`                  | Whether the product is being given a discount on its list price.  | `{ value: boolean }` or no arguments. |
 | `sellerId`                            | Whether any of the sellers of the product are included in the list of IDs passed.  | `{ ids: string[] }`|
+| `price`                            | Whether selling price matches the defined _greater than_ and _less than_ conditions. If either argument is ommitted, it will not be checked.  | `{ greaterThan?: number, lessThan?: number }`|
 
 Possible values for the` condition-layout.binding`'s `subject` prop:
 
