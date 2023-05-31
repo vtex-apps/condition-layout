@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "condition-layout",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "title": "IO Base Component",
   "description": "IO Base component",
   "defaultLocale": "pt-BR",
