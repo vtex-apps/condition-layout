@@ -45,7 +45,8 @@
                           "productClusters",
                           "categoryTree",
                           "specificationProperties",
-                          "selectedItemId"
+                          "selectedItemId",
+                          "salesChannel"
                         ],
                         "enumNames": [
                           "admin/editor.condition-layout.product.subject.productId",
@@ -54,7 +55,8 @@
                           "admin/editor.condition-layout.product.subject.productClusters",
                           "admin/editor.condition-layout.product.subject.categoryTree",
                           "admin/editor.condition-layout.product.subject.specificationProperties",
-                          "admin/editor.condition-layout.product.subject.selectedItemId"
+                          "admin/editor.condition-layout.product.subject.selectedItemId",
+                          "admin/editor.condition-layout.product.subject.selectedSalesChannel"
                         ]
                       },
                       "verb": {
@@ -75,7 +77,8 @@
                                 "enum": [
                                   "productClusters",
                                   "categoryTree",
-                                  "specificationProperties"
+                                  "specificationProperties",
+                                  "salesChannel"
                                 ]
                               },
                               "verb": {
@@ -95,7 +98,110 @@
                                   "productId",
                                   "categoryId",
                                   "brandId",
-                                  "selectedItemId"
+                                  "selectedItemId",
+                                  "salesChannel"
+                                ]
+                              },
+                              "verb": {
+                                "default": "is",
+                                "enum": ["is", "is-not"],
+                                "enumNames": [
+                                  "admin/editor.condition-layout.verb.is",
+                                  "admin/editor.condition-layout.verb.is-not"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ConditionLayoutBinding": {
+      "title": "admin/editor.condition-layout-binding.condition",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "title": "admin/editor.condition-layout.enabled.title",
+          "description": "admin/editor.condition-layout.enabled.description",
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "dependencies": {
+        "enabled": {
+          "oneOf": [
+            {
+              "properties": {
+                "enabled": {
+                  "enum": [true]
+                },
+                "match": {
+                  "default": "all",
+                  "enum": ["any", "none", "all"],
+                  "title": "admin/editor.condition-layout.match",
+                  "type": "string"
+                },
+                "conditions": {
+                  "title": "admin/editor.condition-layout-binding.conditions",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subject": {
+                        "default": "",
+                        "type": "string",
+                        "title": "admin/editor.condition-layout.subject",
+                        "enum": [
+                          "bindingId",
+                          "salesChannel"
+                        ],
+                        "enumNames": [
+                          "admin/editor.condition-layout-binding.subject.bindingId",
+                          "admin/editor.condition-layout-binding.subject.salesChannel"
+                        ]
+                      },
+                      "verb": {
+                        "type": "string",
+                        "title": "admin/editor.condition-layout.verb"
+                      },
+                      "object": {
+                        "type": "string",
+                        "title": "admin/editor.condition-layout.object"
+                      }
+                    },
+                    "dependencies": {
+                      "subject": {
+                        "oneOf": [
+                          {
+                            "properties": {
+                              "subject": {
+                                "enum": [
+                                  "salesChannel"
+                                ]
+                              },
+                              "verb": {
+                                "default": "contains",
+                                "enum": ["contains", "does-not-contain"],
+                                "enumNames": [
+                                  "admin/editor.condition-layout.verb.contains",
+                                  "admin/editor.condition-layout.verb.does-not-contain"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "properties": {
+                              "subject": {
+                                "enum": [
+                                  "bindingId",
+                                  "salesChannel"
                                 ]
                               },
                               "verb": {

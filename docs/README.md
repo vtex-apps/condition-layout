@@ -71,7 +71,7 @@ Or the `condition-layout.category` block, for example:
 
 Now it is time to configure the `condition-layout.product` block!
 
-**Use the block's props to define your layout condition**. You can also declare as the children the `condition-layout.product`'s children some blocks of your choosing to be rendered if the condition is met. 
+**Use the block's props to define your layout condition**. You can also declare as the children the `condition-layout.product`'s children some blocks of your choosing to be rendered if the condition is met.
 
 For example:
 
@@ -210,6 +210,7 @@ Possible values for the` condition-layout.binding`'s `subject` prop:
 | Subject | Description | Arguments |
 | -------- | ------------ | ---------- |
 | `bindingId` | ID of the desired store binding.  | `{ id: string }` |
+| `salesChannel` | IDs of the desired sales channel.  | `{ id: string[] }` |
 
 Possible values for the `condition-layout.category`'s `subject` prop:
 
@@ -251,6 +252,7 @@ Thanks goes out to these wonderful people:
   <tr>
     <td align="center"><a href="https://github.com/LucasCastroAcctGlobal"><img src="https://avatars0.githubusercontent.com/u/55210107?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LucasCastroAcctGlobal</b></sub></a><br /><a href="https://github.com/vtex-apps/condition-layout/commits?author=LucasCastroAcctGlobal" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vini-lima-acct"><img src="https://avatars.githubusercontent.com/u/78028684?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vini-lima-acct</b></sub></a><br /><a href="https://github.com/vtex-apps/condition-layout/commits?author=vini-lima-acct" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/germanBonacchi"><img src="https://avatars.githubusercontent.com/u/55905671?v=4" width="100px;" alt=""/><br /><sub><b>Germán Bonacchi</b></sub></a><br /><a href="https://github.com/vtex-apps/condition-layout/commits?author=germanBonacchi" title="Code">💻</a></td>
   </tr>
 </table>
 

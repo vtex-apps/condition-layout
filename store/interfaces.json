@@ -11,12 +11,15 @@
   },
   "condition-layout.binding": {
     "component": "ConditionLayoutBinding",
-    "composition": "children"
+    "composition": "children",
+    "content": {
+      "$ref": "app:vtex.condition-layout#/definitions/ConditionLayoutBinding"
+    }
   },
   "condition-layout.category": {
     "component": "ConditionLayoutCategory",
     "composition": "children"
-  },  
+  },
   "condition-layout.telemarketing": {
     "component": "ConditionLayoutTelemarketing",
     "composition": "children"
