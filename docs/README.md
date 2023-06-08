@@ -197,6 +197,7 @@ Possible values for the `condition-layout.product`'s `subject` prop:
 | `brandId`                  | Brand's IDs currently displayed on the UI.    | `{ id: string }` |
 | `selectedItemId`           | ID of the item currently selected by the user.   | `{ id: string }` |
 | `productClusters`          | List of product clusters currently displayed on the UI.   | `{ id: string }` |
+| `productClusterHighlights` | Product's clusters highlights currently displayed on the UI.   | `{ id: string }` |
 | `categoryTree`             | List of categories currently displayed on the UI. **Note:** only available in the Product Detail Page.   | `{ id: string }`  |
 | `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Notice: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
 | `areAllVariationsSelected` | Whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
