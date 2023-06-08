@@ -17,6 +17,7 @@ type ContextValues = {
   categoryId: Product['categoryId']
   brandId: Product['brandId']
   productClusters: Product['productClusters']
+  clusterHighlights: Product['clusterHighlights']
   categoryTree: Product['categoryTree']
   selectedItemId: Item['itemId']
   specificationProperties: Product['properties']
@@ -29,6 +30,7 @@ type HandlerArguments = {
   categoryId: { id: string }
   brandId: { id: string }
   productClusters: { id: string }
+  productClusterHighlights: { id: string }
   categoryTree: { id: string }
   selectedItemId: { id: string }
   specificationProperties: { name: string; value?: string }
@@ -58,6 +60,11 @@ export const HANDLERS: Handlers<ContextValues, HandlerArguments> = {
   productClusters({ values, args }) {
     return Boolean(
       values.productClusters?.find(({ id }) => String(id) === String(args?.id))
+    )
+  },
+  productClusterHighlights({ values, args }) {
+    return values.clusterHighlights?.some(
+      ({ id }) => String(id) === String(args?.id)
     )
   },
   categoryTree({ values, args }) {
@@ -141,6 +148,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     categoryId,
     brandId,
     productClusters,
+    clusterHighlights,
     categoryTree,
     properties: specificationProperties,
   } = product ?? {}
@@ -155,6 +163,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
       categoryId,
       brandId,
       productClusters,
+      clusterHighlights,
       categoryTree,
       selectedItemId,
       specificationProperties,
@@ -169,6 +178,7 @@ const ConditionLayoutProduct: StorefrontFunctionComponent<Props> = ({
     categoryId,
     categoryTree,
     productClusters,
+    clusterHighlights,
     productId,
     selectedItemId,
     specificationProperties,
