@@ -65,13 +65,13 @@ Or the `condition-layout.category` block. For example:
 }
 ```
 
-> ⚠️ _Never use `condition-layout` directly. Always use it with a context variant, such as `condition-layout.product`._
+>⚠️ Never use `condition-layout` directly. Always use it with a context variant, such as `condition-layout.product`.
 
 ### Step 3 - Defining the desired conditions
 
 Now it is time to configure the `condition-layout.product` block!
 
-**Use the block props to define your layout condition**. You can also declare the children of `condition-layout.product` as conditions using blocks of your choice that will be rendered if the condition is met.
+**Use the block props to define your layout condition**. You can also declare blocks of your choice as children of `condition-layout.product`. These children blocks will be rendered if the condition is met.
 
 For example:
 
@@ -172,39 +172,39 @@ Or for `condition-layout.telemarketing`:
 + }
 ```
 
-> ℹ️ *In the example above, whenever users interact with a product whose ID is equal to 12, the `flex-layout.row#custom-pdp-layout-12` block is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is `flex-layout.row#default`.*
+>ℹ️ In the example above, whenever users interact with a product whose ID is equal to 12, the `flex-layout.row#custom-pdp-layout-12` block is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is `flex-layout.row#default`.
 
-| Prop name    | Type     | Description                                                                                                                                                                                                                                   | Default value |
-| ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `conditions` | `object` | List of desired conditions.                                                                                                                                                                                                                   | `undefined`   |
-| `matchType`  | `enum`   | Layout rendering criteria. Possible values are: `all` (all conditions must be met to render the layout), `any` (at least one of the conditions must be met to render the layout), or `none` (no conditions must be met to render the layout). | `all`         |
-| `Then`       | `block`  | Name of the block to be rendered if the conditions are met. If no value is defined, the blocks declared as children of `condition-layout.product` will be rendered instead.                                                                   | `undefined`   |
-| `Else`       | `block`  | Name of the block to be rendered if the conditions are not met.                                                                                                                                                                               | `undefined`   |
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `conditions` | `object` | List of desired conditions. | `undefined`   |
+| `matchType`  | `enum` | Layout rendering criteria. Possible values are: `all` (all conditions must be met to render the layout), `any` (at least one of the conditions must be met to render the layout), or `none` (no conditions must be met to render the layout). | `all` |
+| `Then` | `block`  | Name of the block to be rendered if the conditions are met. If no value is defined, the blocks declared as children of `condition-layout.product` will be rendered instead. | `undefined`   |
+| `Else` | `block`  | Name of the block to be rendered if the conditions are not met. | `undefined`   |
 
 - **`conditions` object:**
 
-| Prop name   | Type      | Description                                                                                                                                                                                                                    | Default value |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `subject`   | `string`  | Defines, based on the product context where the block is declared, which information is needed from the UI to validate the value chosen in the `object` prop. See below the possible values for this prop.                     | `undefined`   |
-| `arguments` | `object`  | Defines the condition parameters. Note that the value of this prop varies depending on the value set for the `subject` prop. See below the table with the possible values for the `subject` prop and their expected arguments. | `undefined`   |
-| `toBe`      | `boolean` | Determines whether the data fetched in the `subject` prop must meet the predefined conditions to render the new layout (`true`) or not (`false`).                                                                              | `true`        |
+| Prop name   | Type | Description | Default value |
+| - | - | - | - |
+| `subject` | `string` | Defines, based on the product context where the block is declared, which information is needed from the UI to validate the value chosen in the `object` prop. See below the possible values for this prop. | `undefined` |
+| `arguments` | `object`  | Defines the condition parameters. Note that the value of this prop varies depending on the value set for the `subject` prop. See below the table with the possible values for the `subject` prop and their expected arguments. | `undefined` |
+| `toBe` | `boolean` | Determines whether the data fetched in the `subject` prop must meet the predefined conditions to render the new layout (`true`) or not (`false`). | `true` |
 
 Possible values for `subject` prop of the `condition-layout.product` block:
 
-| Subject                    | Description                                                                                                                  | Arguments                                                                                                                               |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `productId`                | Product IDs currently displayed on the UI.                                                                                   | `{ id: string }`                                                                                                                        |
-| `categoryId`               | Category IDs currently displayed on the UI.                                                                                  | `{ id: string }`                                                                                                                        |
-| `brandId`                  | Brand IDs currently displayed on the UI.                                                                                     | `{ id: string }`                                                                                                                        |
-| `selectedItemId`           | ID of the item currently selected by the user.                                                                               | `{ id: string }`                                                                                                                        |
-| `productClusters`          | List of product clusters currently displayed on the UI.                                                                      | `{ id: string }`                                                                                                                        |
-| `categoryTree`             | List of categories currently displayed on the UI. **Note:** Only available on the Product Detail Page.                       | `{ id: string }`                                                                                                                        |
-| `specificationProperties`  | List of product specifications currently displayed on the UI.                                                                | `{ name: string, value: string }`. Note: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
-| `areAllVariationsSelected` | Determines whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected.                                                                                                              |
-| `isProductAvailable`       | Determines whether the product is available (`true`) or not (`false`).                                                       | No arguments are expected.                                                                                                              |
-| `hasMoreSellersThan`       | Determines whether the number of sellers for a product is greater than the argument passed.                                  | `{ quantity: number }`                                                                                                                  |
-| `hasBestPrice`                  | Whether the product is being given a discount on its list price.  | `{ value: boolean }` or no arguments. |
-| `sellerId`                            | Whether any of the sellers of the product are included in the list of IDs passed.  | `{ ids: string[] }`|
+| Subject | Description | Arguments |
+| - | - | - |
+| `productId` | Product IDs currently displayed on the UI. | `{ id: string }` |
+| `categoryId` | Category IDs currently displayed on the UI. | `{ id: string }` |
+| `brandId` | Brand IDs currently displayed on the UI. | `{ id: string }` |
+| `selectedItemId` | ID of the item currently selected by the user. | `{ id: string }` |
+| `productClusters` | List of product clusters currently displayed on the UI. | `{ id: string }` |
+| `categoryTree` | List of categories currently displayed on the UI. **Note:** Only available on the Product Detail Page. | `{ id: string }` |
+| `specificationProperties`  | List of product specifications currently displayed on the UI. | `{ name: string, value: string }`. Note: `value` is an optional prop. If omitted, only the specification name (`name`) will be checked. |
+| `areAllVariationsSelected` | Determines whether all product variations currently available on the UI were selected by the user (`true`) or not (`false`). | No arguments are expected. |
+| `isProductAvailable` | Determines whether the product is available (`true`) or not (`false`).                                                       | No arguments are expected. |
+| `hasMoreSellersThan` | Determines whether the number of sellers for a product is greater than the argument passed. | `{ quantity: number }` |
+| `hasBestPrice` | Whether the product is being given a discount on its list price.  | `{ value: boolean }` or no arguments. |
+| `sellerId` | Whether any of the sellers of the product are included in the list of IDs passed.  | `{ ids: string[] }` |
 
 Possible values for the `subject` prop of the `condition-layout.binding` block:
 
