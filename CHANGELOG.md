@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixes of i18n on readme.md
+
 ## [2.8.1] - 2023-05-31
 ### Fixed
 - Condition Product not considering async values from products
