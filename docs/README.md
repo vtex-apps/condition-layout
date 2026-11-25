@@ -219,6 +219,8 @@ Possible values for the `subject` prop of the `condition-layout.binding` block:
 | ----------- | -------------------------------- | ---------------- |
 | `bindingId` | ID of the desired store binding. | `{ id: string }` |
 
+>ℹ️ `condition-layout.binding` compares only the store binding ID (`bindingId`). It does not change when the sales channel changes, for example with `?sc=` on a store that has a single binding, so it cannot show different content per sales channel.
+
 Possible values for the `subject` prop of the `condition-layout.category` block:
 
 | Subject      | Description                                   | Arguments           |
