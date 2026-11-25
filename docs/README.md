@@ -5,6 +5,8 @@
 
 # Condition Layout
 
+[<i class="fa-brands fa-github"></i> Source code](https://github.com/vtex-apps/condition-layout)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -38,11 +40,12 @@ You can now use all blocks exported by the `condition-layout` app. See the full 
 
 In the product theme template, add the `condition-layout.product` block as a child. For example:
 
-```
+```json
 {
   "store.product": {
     "children": ["condition-layout.product"]
-  },
+  }
+}
 ```
 
 Or the `condition-layout.binding` block. For example:
@@ -89,11 +92,12 @@ For example:
 +           "id": "12"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
 +   }
 + }
+}
 ```
 
 Or for `condition-layout.binding`:
@@ -112,11 +116,12 @@ Or for `condition-layout.binding`:
 +           "id": "13fb71d0-binding-code-here-87h9c28h9013"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#just-for-this-binding",
 +     "Else": "flex-layout.row#for-other-bindings"
 +   }
 + }
+}
 ```
 
 Or for `condition-layout.category`:
@@ -134,19 +139,20 @@ Or for `condition-layout.category`:
  +         "arguments": {
  +           "ids": ["1", "42"]
  +         }
- +       }
+ +       },
  +       {
  +         "subject": "category",
  +         "arguments": {
  +           "ids": ["301", "304"]
  +         }
  +       }
- +     ]
+ +     ],
  +     "matchType": "any",
  +     "Then": "flex-layout.row#just-for-this-category-or-department",
  +     "Else": "flex-layout.row#for-other-category-or-department"
  +   }
  + }
+ }
  ```
 
 Or for `condition-layout.telemarketing`:
@@ -165,11 +171,12 @@ Or for `condition-layout.telemarketing`:
 +           "value": true
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#just-for-telemarketers",
 +     "Else": "flex-layout.row#for-other-user-roles"
 +   }
 + }
+}
 ```
 
 >ℹ️ In the example above, whenever users interact with a product whose ID is equal to 12, the `flex-layout.row#custom-pdp-layout-12` block is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is `flex-layout.row#default`.
