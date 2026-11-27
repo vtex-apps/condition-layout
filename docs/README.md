@@ -1,9 +1,9 @@
-📢 Use this project, [contribute](https://github.com/vtex-apps/condition-layout) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
->⚠️
->
-> ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).
+﻿📢 Use this project, [contribute](https://github.com/vtex-apps/condition-layout) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
+>⚠️ ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).
 
 # Condition Layout
+
+[<i class="fa-brands fa-github"></i> Source code](https://github.com/vtex-apps/condition-layout)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
@@ -38,11 +38,12 @@ You can now use all blocks exported by the `condition-layout` app. See the full 
 
 In the product theme template, add the `condition-layout.product` block as a child. For example:
 
-```
+```json
 {
   "store.product": {
     "children": ["condition-layout.product"]
-  },
+  }
+}
 ```
 
 Or the `condition-layout.binding` block. For example:
@@ -89,11 +90,12 @@ For example:
 +           "id": "12"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#custom-pdp-layout-12",
 +     "Else": "flex-layout.row#default"
 +   }
 + }
+}
 ```
 
 Or for `condition-layout.binding`:
@@ -112,42 +114,44 @@ Or for `condition-layout.binding`:
 +           "id": "13fb71d0-binding-code-here-87h9c28h9013"
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#just-for-this-binding",
 +     "Else": "flex-layout.row#for-other-bindings"
 +   }
 + }
+}
 ```
 
 Or for `condition-layout.category`:
 
- ```diff
- {
-   "store.product": {
-     "children": ["condition-layout.category#cond42"]
-   },
-   "condition-layout.category#cond42": {
- +   "props": {
- +     "conditions": [
- +       {
- +         "subject": "department",
- +         "arguments": {
- +           "ids": ["1", "42"]
- +         }
- +       }
- +       {
- +         "subject": "category",
- +         "arguments": {
- +           "ids": ["301", "304"]
- +         }
- +       }
- +     ]
- +     "matchType": "any",
- +     "Then": "flex-layout.row#just-for-this-category-or-department",
- +     "Else": "flex-layout.row#for-other-category-or-department"
- +   }
- + }
- ```
+```diff
+{
+  "store.product": {
+    "children": ["condition-layout.category#cond42"]
+  },
+  "condition-layout.category#cond42": {
++   "props": {
++     "conditions": [
++       {
++         "subject": "department",
++         "arguments": {
++           "ids": ["1", "42"]
++         }
++       },
++       {
++         "subject": "category",
++         "arguments": {
++           "ids": ["301", "304"]
++         }
++       }
++     ],
++     "matchType": "any",
++     "Then": "flex-layout.row#just-for-this-category-or-department",
++     "Else": "flex-layout.row#for-other-category-or-department"
++   }
++ }
+}
+```
 
 Or for `condition-layout.telemarketing`:
 
@@ -165,11 +169,12 @@ Or for `condition-layout.telemarketing`:
 +           "value": true
 +         }
 +       }
-+     ]
++     ],
 +     "Then": "flex-layout.row#just-for-telemarketers",
 +     "Else": "flex-layout.row#for-other-user-roles"
 +   }
 + }
+}
 ```
 
 >ℹ️ In the example above, whenever users interact with a product whose ID is equal to 12, the `flex-layout.row#custom-pdp-layout-12` block is rendered. If users interact with a product whose ID is not equal to 12, the rendered block is `flex-layout.row#default`.
@@ -211,6 +216,8 @@ Possible values for the `subject` prop of the `condition-layout.binding` block:
 | Subject     | Description                      | Arguments        |
 | ----------- | -------------------------------- | ---------------- |
 | `bindingId` | ID of the desired store binding. | `{ id: string }` |
+
+>ℹ️ `condition-layout.binding` compares only the store binding ID (`bindingId`). If your store has a single binding, changing the sales channel (for example, with `?sc=`) doesn't change the result, so you can't use this block to show different content per sales channel.
 
 Possible values for the `subject` prop of the `condition-layout.category` block:
 

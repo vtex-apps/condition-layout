@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Syntax errors in the JSON examples of the README (missing commas and closing braces).
+
 ### Changed
 
-- Update GitHub actions/cache to v4
+- Add a note to the README about the `condition-layout.binding` limitation with sales channels.
+- Add a source code link to the README.
 
 ## [2.8.2] - 2023-06-30
 
