@@ -1,7 +1,5 @@
-📢 Use this project, [contribute](https://github.com/vtex-apps/condition-layout) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
->⚠️
->
-> ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).
+﻿📢 Use this project, [contribute](https://github.com/vtex-apps/condition-layout) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
+>⚠️ ***Condition Layout app v1 has been deprecated in favor of Condition Layout app v2**. Although support for the former version is still granted, we strongly recommend you to access the [Migration Guide](https://github.com/vtex-apps/condition-layout/tree/master/docs/MIGRATION-GUIDE.md) and update your store theme with the app's newest version in order to keep up with the components' evolution. If you’re still using the former version, you can find its documentation [here](https://github.com/vtex-apps/condition-layout/tree/master/docs/v1-DOC.md).
 
 # Condition Layout
 
@@ -126,34 +124,34 @@ Or for `condition-layout.binding`:
 
 Or for `condition-layout.category`:
 
- ```diff
- {
-   "store.product": {
-     "children": ["condition-layout.category#cond42"]
-   },
-   "condition-layout.category#cond42": {
- +   "props": {
- +     "conditions": [
- +       {
- +         "subject": "department",
- +         "arguments": {
- +           "ids": ["1", "42"]
- +         }
- +       },
- +       {
- +         "subject": "category",
- +         "arguments": {
- +           "ids": ["301", "304"]
- +         }
- +       }
- +     ],
- +     "matchType": "any",
- +     "Then": "flex-layout.row#just-for-this-category-or-department",
- +     "Else": "flex-layout.row#for-other-category-or-department"
- +   }
- + }
- }
- ```
+```diff
+{
+  "store.product": {
+    "children": ["condition-layout.category#cond42"]
+  },
+  "condition-layout.category#cond42": {
++   "props": {
++     "conditions": [
++       {
++         "subject": "department",
++         "arguments": {
++           "ids": ["1", "42"]
++         }
++       },
++       {
++         "subject": "category",
++         "arguments": {
++           "ids": ["301", "304"]
++         }
++       }
++     ],
++     "matchType": "any",
++     "Then": "flex-layout.row#just-for-this-category-or-department",
++     "Else": "flex-layout.row#for-other-category-or-department"
++   }
++ }
+}
+```
 
 Or for `condition-layout.telemarketing`:
 
@@ -219,7 +217,7 @@ Possible values for the `subject` prop of the `condition-layout.binding` block:
 | ----------- | -------------------------------- | ---------------- |
 | `bindingId` | ID of the desired store binding. | `{ id: string }` |
 
->ℹ️ `condition-layout.binding` compares only the store binding ID (`bindingId`). It does not change when the sales channel changes, for example with `?sc=` on a store that has a single binding, so it cannot show different content per sales channel.
+>ℹ️ `condition-layout.binding` compares only the store binding ID (`bindingId`). If your store has a single binding, changing the sales channel (for example, with `?sc=`) doesn't change the result, so you can't use this block to show different content per sales channel.
 
 Possible values for the `subject` prop of the `condition-layout.category` block:
 
